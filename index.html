@@ -204,20 +204,145 @@
     .footer-links { display: flex; gap: 20px; font-size: .8rem; color: #555; }
     .footer-links a:hover { color: var(--accent); }
 
+    /* ── Mobile Sticky CTA ──────────────────────────────────── */
+    .mobile-sticky {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      padding: 12px 16px;
+      background: rgba(10,10,15,0.96); backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -8px 30px rgba(0,0,0,.5);
+    }
+    .mobile-sticky a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--accent); color: #fff;
+      padding: 15px; border-radius: 14px;
+      font-weight: 800; font-size: 1rem; letter-spacing: .3px;
+    }
+    .mobile-sticky .ms-price {
+      background: rgba(255,255,255,.22); border-radius: 8px;
+      padding: 2px 10px; font-size: .82rem; font-weight: 700;
+    }
+
     /* ── Mobile ─────────────────────────────────────────────── */
     @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .hero-card { display: none; }
-      .contact-wrap { grid-template-columns: 1fr; }
+
+      /* Show sticky CTA, add body padding so content isn't hidden behind it */
+      .mobile-sticky { display: block; }
+      body { padding-bottom: 78px; }
+
+      /* Navbar */
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
+      nav { padding: 14px 4%; }
       .nav-links.open {
-        display: flex; flex-direction: column; position: absolute;
-        top: 60px; left: 0; right: 0; background: #0a0a0f;
-        padding: 20px 5%; border-bottom: 1px solid var(--border);
-        gap: 16px;
+        display: flex; flex-direction: column; position: fixed;
+        top: 52px; left: 0; right: 0; bottom: 0;
+        background: rgba(10,10,15,.97); backdrop-filter: blur(16px);
+        padding: 32px 6%; gap: 0;
+        border-bottom: none; z-index: 99;
+        overflow-y: auto;
       }
-      .nav-cta.open { display: block; }
+      .nav-links.open a {
+        font-size: 1.3rem; font-weight: 700; color: #e0e0e0;
+        padding: 16px 0; border-bottom: 1px solid var(--border);
+        letter-spacing: .3px;
+      }
+      .nav-links.open a:last-child { border-bottom: none; }
+      .nav-cta.open {
+        display: block; position: fixed;
+        bottom: 88px; left: 6%; right: 6%; z-index: 100;
+        background: var(--accent); color: #fff;
+        text-align: center; padding: 15px; border-radius: 14px;
+        font-weight: 800; font-size: 1rem;
+      }
+
+      /* Hero */
+      .hero { min-height: 100svh; padding: 90px 5% 50px; align-items: flex-start; }
+      .hero-inner { grid-template-columns: 1fr; gap: 0; }
+      .hero-card { display: none; }
+      .hero-badge { font-size: .75rem; }
+      .hero h1 { font-size: 2.1rem; line-height: 1.15; margin-bottom: 14px; }
+      .hero p { font-size: .93rem; margin-bottom: 26px; }
+      .hero-btns { flex-direction: column; gap: 10px; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; padding: 15px 20px; font-size: .95rem; border-radius: 12px; }
+      .hero-stats { gap: 0; margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stat-item .num { font-size: 1.6rem; }
+      .stat-item .lbl { font-size: .72rem; }
+
+      /* Section base */
+      section { padding: 56px 5%; }
+      .section-title { font-size: 1.7rem; }
+      .section-sub { font-size: .88rem; }
+
+      /* Consultation */
+      #consultation { padding: 48px 5%; }
+      .consult-inner { grid-template-columns: 1fr; gap: 28px; }
+      .consult-inner h2 { font-size: 1.6rem; }
+      .consult-inner p { font-size: .88rem; }
+      .consult-features { gap: 8px; }
+      .consult-features span { font-size: .76rem; padding: 5px 11px; }
+      .consult-card { padding: 24px 20px; border-radius: 16px; }
+      .consult-card .c-price { font-size: 2.6rem; }
+      .consult-card .book-btn { font-size: .95rem; padding: 14px; }
+
+      /* Services */
+      .services-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+      .service-card { padding: 20px; border-radius: 14px; }
+      .service-card h3 { font-size: .92rem; }
+      .service-card p { font-size: .8rem; }
+      .price { font-size: 1.05rem; }
+
+      /* Why Me */
+      .why-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+      .why-card { padding: 16px 14px; border-radius: 12px; }
+      .why-card .icon { font-size: 1.4rem; margin-bottom: 8px; }
+      .why-card h4 { font-size: .82rem; margin-bottom: 4px; }
+      .why-card p { font-size: .75rem; }
+
+      /* Process */
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+      .step { padding: 20px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; text-align: left; }
+      .step-num { margin: 0 0 12px 0; width: 38px; height: 38px; }
+      .step h4 { font-size: .85rem; }
+      .step p { font-size: .76rem; }
+
+      /* Testimonials — horizontal swipe */
+      .testimonials-grid {
+        display: flex; overflow-x: auto; gap: 14px;
+        margin-top: 28px; padding-bottom: 16px;
+        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .testimonials-grid::-webkit-scrollbar { display: none; }
+      .testimonial-card {
+        min-width: 82vw; scroll-snap-align: start;
+        border-radius: 14px; padding: 20px; flex-shrink: 0;
+      }
+      .testimonial-card p { font-size: .82rem; }
+
+      /* Contact */
+      #contact { padding: 56px 5%; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 28px; }
+      .contact-info p { font-size: .85rem; }
+      .contact-item { font-size: .83rem; }
+      .contact-form { padding: 20px; border-radius: 14px; }
+      .form-group input, .form-group textarea, .form-group select {
+        font-size: .9rem; padding: 13px 14px; border-radius: 10px;
+      }
+      .form-group textarea { min-height: 90px; }
+      .submit-btn { padding: 15px; font-size: .95rem; border-radius: 12px; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; padding: 24px 5%; gap: 10px; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.8rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .testimonial-card { min-width: 90vw; }
     }
   </style>
 </head>
@@ -227,6 +352,7 @@
 <nav id="navbar">
   <div class="logo">sha<span>.</span>dev</div>
   <div class="nav-links" id="nav-links">
+    <a href="#consultation">📅 Consultation — ₹199</a>
     <a href="#services">Services</a>
     <a href="#why">Why Me</a>
     <a href="#process">Process</a>
@@ -576,27 +702,53 @@
 </footer>
 
 <script>
-  // Mobile menu
+  // ── Mobile menu toggle (fullscreen) ──────────────────────
+  const navLinks  = document.getElementById("nav-links");
+  const navCta    = document.getElementById("nav-cta");
+  const hamburger = document.getElementById("hamburger");
+  let menuOpen    = false;
+
   function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("open");
-    document.getElementById("nav-cta").classList.toggle("open");
+    menuOpen = !menuOpen;
+    navLinks.classList.toggle("open",  menuOpen);
+    navCta.classList.toggle("open",    menuOpen);
+    // Animate hamburger → X
+    const bars = hamburger.querySelectorAll("span");
+    if (menuOpen) {
+      bars[0].style.cssText = "transform:rotate(45deg) translate(5px,5px)";
+      bars[1].style.cssText = "opacity:0";
+      bars[2].style.cssText = "transform:rotate(-45deg) translate(5px,-5px)";
+      document.body.style.overflow = "hidden";
+    } else {
+      bars.forEach(b => b.style.cssText = "");
+      document.body.style.overflow = "";
+    }
   }
 
-  // Close menu on link click
+  // Close menu on any nav link click
   document.querySelectorAll(".nav-links a").forEach(a => {
     a.addEventListener("click", () => {
-      document.getElementById("nav-links").classList.remove("open");
-      document.getElementById("nav-cta").classList.remove("open");
+      if (menuOpen) toggleMenu();
     });
   });
 
-  // Navbar shadow on scroll
+  // Navbar shadow + hide sticky CTA when consultation is visible
+  const stickyCta = document.getElementById("sticky-cta");
+  const consultSection = document.getElementById("consultation");
+
   window.addEventListener("scroll", () => {
     document.getElementById("navbar").style.boxShadow =
       window.scrollY > 10 ? "0 2px 20px rgba(0,0,0,.4)" : "none";
+
+    // Hide sticky CTA when user can already see the consultation card
+    if (stickyCta && consultSection) {
+      const rect = consultSection.getBoundingClientRect();
+      stickyCta.style.opacity  = (rect.top < window.innerHeight && rect.bottom > 0) ? "0" : "1";
+      stickyCta.style.pointerEvents = (rect.top < window.innerHeight && rect.bottom > 0) ? "none" : "auto";
+    }
   });
 
-  // Form submit
+  // ── Form submit ───────────────────────────────────────────
   function submitForm(e) {
     e.preventDefault();
     const name  = document.getElementById("f-name").value;
@@ -604,7 +756,6 @@
     const biz   = document.getElementById("f-biz").value;
     const msg   = document.getElementById("f-msg").value;
 
-    // Open WhatsApp with pre-filled message
     const text = encodeURIComponent(
       `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like to book a consultation."}`
     );
@@ -614,5 +765,13 @@
     document.getElementById("contact-form").reset();
   }
 </script>
+
+<!-- ── Mobile Sticky Bottom CTA ─────────────────────────── -->
+<div class="mobile-sticky" id="sticky-cta" style="transition:opacity .3s;">
+  <a href="#consultation">
+    🟢 Book Online Consultation
+    <span class="ms-price">₹199 / 1 hr</span>
+  </a>
+</div>
 </body>
 </html>
