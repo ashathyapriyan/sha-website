@@ -5,7 +5,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
-    { "src": "/leads", "dest": "/leads.html" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/leads",    "dest": "/leads.html" },
+    { "src": "/ai-agent", "dest": "/ai-agent.html" },
+    { "src": "/",         "dest": "/index.html" }
   ]
 }
