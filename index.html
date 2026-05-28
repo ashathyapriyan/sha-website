@@ -156,6 +156,48 @@
     .submit-btn:hover { background: #6872ff; }
     .form-success { display: none; background: #1aff8c15; border: 1px solid #1aff8c30; color: var(--green); padding: 12px 16px; border-radius: 9px; font-size: .85rem; margin-top: 12px; text-align: center; }
 
+    /* ── Consultation Banner ────────────────────────────────── */
+    #consultation {
+      background: linear-gradient(135deg, #1a1a2e 0%, #12121c 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 5%;
+    }
+    .consult-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+    }
+    .consult-badge {
+      display: inline-block; background: #1aff8c18; border: 1px solid #1aff8c44;
+      color: var(--green); font-size: .75rem; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .consult-inner h2 { font-size: 1.9rem; font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
+    .consult-inner h2 span { color: var(--accent); }
+    .consult-inner p { color: #888; font-size: .92rem; line-height: 1.7; max-width: 480px; }
+    .consult-features { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .consult-features span {
+      background: #ffffff08; border: 1px solid #ffffff12;
+      padding: 5px 14px; border-radius: 20px; font-size: .8rem; color: #bbb;
+    }
+    .consult-card {
+      background: var(--accent); border-radius: 20px; padding: 32px 36px;
+      text-align: center; min-width: 200px; flex-shrink: 0;
+    }
+    .consult-card .c-label { font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: .85; margin-bottom: 8px; }
+    .consult-card .c-price { font-size: 3rem; font-weight: 900; line-height: 1; color: #fff; }
+    .consult-card .c-unit { font-size: .85rem; opacity: .8; margin-top: 4px; margin-bottom: 20px; }
+    .consult-card .c-avail { font-size: .78rem; background: #ffffff20; border-radius: 20px; padding: 4px 12px; margin-bottom: 18px; display: inline-block; }
+    .consult-card .book-btn {
+      display: block; background: #fff; color: var(--accent);
+      font-weight: 800; font-size: .9rem; padding: 12px 24px; border-radius: 12px; text-decoration: none;
+    }
+    .consult-card .book-btn:hover { background: #f0f0ff; }
+    @media (max-width: 768px) {
+      .consult-inner { grid-template-columns: 1fr; }
+      .consult-card { min-width: unset; }
+    }
+
     /* ── Footer ─────────────────────────────────────────────── */
     footer { padding: 30px 5%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     footer p { color: #555; font-size: .8rem; }
@@ -191,7 +233,7 @@
     <a href="#testimonials">Reviews</a>
     <a href="#contact">Contact</a>
   </div>
-  <a href="#contact" class="nav-cta" id="nav-cta">Get Started</a>
+  <a href="#consultation" class="nav-cta" id="nav-cta">Book Consultation</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
@@ -205,7 +247,7 @@
       <h1>Web Developer &<br /><span>Digital Growth</span><br />Expert, Chennai</h1>
       <p>8 years experience. 50+ websites built across Tamil Nadu. I help local businesses get found online, get more leads, and grow revenue — starting at just ₹500.</p>
       <div class="hero-btns">
-        <a href="#contact" class="btn-primary">Get Free Consultation</a>
+        <a href="#consultation" class="btn-primary">Book Consultation — ₹199</a>
         <a href="#services" class="btn-secondary">View Services ↓</a>
       </div>
       <div class="hero-stats">
@@ -234,6 +276,31 @@
       <div class="result-row"><span>Restaurant, T Nagar</span><span class="rval">3× more orders</span></div>
       <div class="result-row"><span>Real Estate, OMR</span><span class="rval">2× leads/month</span></div>
       <div class="result-row"><span>Coaching Centre, Porur</span><span class="rval">₹2L+ revenue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Online Consultation ───────────────────────────────────── -->
+<section id="consultation">
+  <div class="consult-inner">
+    <div>
+      <span class="consult-badge">🟢 24/7 Available</span>
+      <h2>Online Consultation<br /><span>with Sha</span></h2>
+      <p>Got questions about your website, SEO, or digital presence? Book a 1-hour session and get clear answers, an action plan, and expert advice — all live on video or WhatsApp call.</p>
+      <div class="consult-features">
+        <span>🎥 Video or WhatsApp Call</span>
+        <span>📋 Written Summary After</span>
+        <span>🔍 SEO / Website / AI Advice</span>
+        <span>⚡ Same-day Booking</span>
+        <span>🌐 Any Business, Any Industry</span>
+      </div>
+    </div>
+    <div class="consult-card">
+      <div class="c-label">Online Consultation</div>
+      <div class="c-price">₹199</div>
+      <div class="c-unit">per 1 hour session</div>
+      <div class="c-avail">🟢 Available 24/7</div>
+      <a href="#contact" class="book-btn">Book Now →</a>
     </div>
   </div>
 </section>
@@ -289,7 +356,7 @@
       <div class="service-card">
         <div class="service-icon">🌐</div>
         <h3>New Website</h3>
-        <p>5–10 page professional website. Mobile-first, fast, SEO-ready. Includes 1 month free support.</p>
+        <p>5–10 page professional website. Mobile-first, fast, SEO-ready. Includes 1 month post-launch support.</p>
         <div class="price">₹15,000 – ₹35,000</div>
         <div class="price-note">One-time • 7–14 days delivery</div>
       </div>
@@ -373,8 +440,8 @@
     <div class="process-steps">
       <div class="step">
         <div class="step-num">1</div>
-        <h4>Free Consultation</h4>
-        <p>Tell me about your business. WhatsApp or call — 15 mins, no pressure.</p>
+        <h4>Book Consultation</h4>
+        <p>Book a 1-hour online session for ₹199. Video or WhatsApp call — available 24/7.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
@@ -436,11 +503,11 @@
 <section id="contact">
   <div class="section-wrap">
     <span class="section-label">Get In Touch</span>
-    <h2 class="section-title">Start With a<br />Free Consultation</h2>
+    <h2 class="section-title">Book a Session or<br />Send a Message</h2>
 
     <div class="contact-wrap">
       <div class="contact-info">
-        <p>Tell me about your business and what you need. I'll reply within 2 hours with a clear plan and price.</p>
+        <p>Book a 1-hour online consultation for ₹199, or send a message about a project. I'll reply within 2 hours.</p>
 
         <div class="contact-item">
           <div class="ci">📧</div>
@@ -452,11 +519,11 @@
         </div>
         <div class="contact-item">
           <div class="ci">⏰</div>
-          <span>Mon – Sat, 9 AM – 8 PM IST</span>
+          <span>Online Consultation — 24/7 Available</span>
         </div>
 
         <br />
-        <p style="font-size:.82rem;color:#666">✅ Free 15-min consultation<br />✅ Fixed price — no surprises<br />✅ WhatsApp updates throughout<br />✅ 1 month free support after delivery</p>
+        <p style="font-size:.82rem;color:#666">🟢 Online Consultation — ₹199 / 1 hr<br />✅ Fixed price — no surprises<br />✅ WhatsApp updates throughout<br />✅ 1 month support after delivery</p>
       </div>
 
       <div class="contact-form">
@@ -539,7 +606,7 @@
 
     // Open WhatsApp with pre-filled message
     const text = encodeURIComponent(
-      `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like a free consultation."}`
+      `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like to book a consultation."}`
     );
     window.open(`https://wa.me/919XXXXXXXXX?text=${text}`, "_blank");
 
