@@ -749,13 +749,27 @@
   });
 
   // ── Form submit ───────────────────────────────────────────
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
-    const name  = document.getElementById("f-name").value;
-    const phone = document.getElementById("f-phone").value;
+    const btn  = document.querySelector(".submit-btn");
+    const name  = document.getElementById("f-name").value.trim();
+    const phone = document.getElementById("f-phone").value.trim();
     const biz   = document.getElementById("f-biz").value;
-    const msg   = document.getElementById("f-msg").value;
+    const msg   = document.getElementById("f-msg").value.trim();
 
+    btn.textContent = "Sending…";
+    btn.disabled = true;
+
+    try {
+      // Save to backend database
+      await fetch("https://income-agent-six.vercel.app/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, business_type: biz, message: msg }),
+      });
+    } catch(_) { /* silent — still open WhatsApp below */ }
+
+    // Also open WhatsApp
     const text = encodeURIComponent(
       `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like to book a consultation."}`
     );
@@ -763,6 +777,8 @@
 
     document.getElementById("form-success").style.display = "block";
     document.getElementById("contact-form").reset();
+    btn.textContent = "Send Message →";
+    btn.disabled = false;
   }
 </script>
 
