@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sha — Web Developer & Digital Growth, Chennai</title>
+  <meta name="description" content="8 years experience. 50+ websites built across Tamil Nadu. Websites, SEO, AI Chatbots, Digital Marketing — starting ₹500." />
+  <meta name="keywords" content="web developer Chennai, SEO Chennai, website design Chennai, digital marketing Chennai, AI chatbot Chennai" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0f; color: #e0e0e0; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── Variables ──────────────────────────────────────────── */
+    :root {
+      --accent: #7c84ff;
+      --green:  #1aff8c;
+      --orange: #ff9f1c;
+      --card:   #12121c;
+      --border: #1e1e2e;
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,10,15,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+    .logo span { color: var(--green); }
+    .nav-links { display: flex; gap: 28px; font-size: .88rem; color: #aaa; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--accent); color: #fff; padding: 8px 20px;
+      border-radius: 8px; font-weight: 600; font-size: .85rem;
+    }
+    .nav-cta:hover { background: #6872ff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: #aaa; border-radius: 2px; }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, #7c84ff18 0%, transparent 60%);
+    }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #1aff8c15; border: 1px solid #1aff8c30; color: var(--green); padding: 6px 14px; border-radius: 20px; font-size: .78rem; font-weight: 600; margin-bottom: 20px; }
+    .hero-badge::before { content: ''; width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { color: #999; font-size: 1rem; margin-bottom: 32px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 13px 28px; border-radius: 10px; font-weight: 700; font-size: .9rem; transition: .2s; }
+    .btn-primary:hover { background: #6872ff; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: #ccc; padding: 13px 28px; border-radius: 10px; font-weight: 600; font-size: .9rem; border: 1px solid var(--border); transition: .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats { display: flex; gap: 30px; margin-top: 40px; flex-wrap: wrap; }
+    .stat-item .num { font-size: 1.8rem; font-weight: 800; color: var(--green); }
+    .stat-item .lbl { font-size: .75rem; color: #666; }
+    .hero-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 28px; position: relative; overflow: hidden;
+    }
+    .hero-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: var(--accent); opacity: .06; border-radius: 50%; }
+    .card-profile { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .avatar { width: 52px; height: 52px; background: linear-gradient(135deg, var(--accent), var(--green)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .card-profile .name { font-weight: 700; font-size: .95rem; }
+    .card-profile .role { font-size: .78rem; color: #888; }
+    .card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tag { padding: 4px 12px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .tag-purple { background: #7c84ff18; color: var(--accent); border: 1px solid #7c84ff30; }
+    .tag-green  { background: #1aff8c15; color: var(--green);  border: 1px solid #1aff8c30; }
+    .tag-orange { background: #ff9f1c18; color: var(--orange); border: 1px solid #ff9f1c30; }
+    .result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: .84rem; }
+    .result-row:last-child { border: none; }
+    .result-row .rval { color: var(--green); font-weight: 700; }
+
+    /* ── Section base ───────────────────────────────────────── */
+    section { padding: 80px 5%; }
+    .section-wrap { max-width: 1100px; margin: 0 auto; }
+    .section-label { display: inline-block; background: #7c84ff15; color: var(--accent); border: 1px solid #7c84ff30; padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 600; margin-bottom: 14px; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 12px; }
+    .section-sub { color: #777; font-size: .9rem; max-width: 540px; }
+
+    /* ── Services ───────────────────────────────────────────── */
+    #services { background: #0d0d16; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; transition: .2s; cursor: default;
+    }
+    .service-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .service-icon { font-size: 1.8rem; margin-bottom: 14px; }
+    .service-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; }
+    .service-card p { font-size: .82rem; color: #777; margin-bottom: 16px; line-height: 1.6; }
+    .price { font-size: 1.1rem; font-weight: 800; color: var(--green); }
+    .price-note { font-size: .72rem; color: #666; margin-top: 2px; }
+
+    /* ── Why Me ─────────────────────────────────────────────── */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .why-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .why-card .icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .why-card h4 { font-size: .9rem; font-weight: 700; margin-bottom: 6px; }
+    .why-card p { font-size: .8rem; color: #777; }
+
+    /* ── Process ────────────────────────────────────────────── */
+    #process { background: #0d0d16; }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 40px; position: relative; }
+    .step { text-align: center; padding: 24px 16px; position: relative; }
+    .step-num { width: 44px; height: 44px; background: #7c84ff18; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent); margin: 0 auto 14px; font-size: .9rem; }
+    .step h4 { font-size: .9rem; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: .8rem; color: #777; }
+
+    /* ── Testimonials ───────────────────────────────────────── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 40px; }
+    .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+    .stars { color: #ffd700; font-size: 1rem; margin-bottom: 12px; }
+    .testimonial-card p { font-size: .84rem; color: #aaa; line-height: 1.7; margin-bottom: 16px; font-style: italic; }
+    .client-info .cname { font-weight: 700; font-size: .88rem; }
+    .client-info .cbiz  { font-size: .75rem; color: #666; }
+
+    /* ── Contact ────────────────────────────────────────────── */
+    #contact { background: #0d0d16; }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-top: 40px; }
+    .contact-info p { color: #888; font-size: .88rem; margin-bottom: 24px; }
+    .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: .88rem; color: #bbb; }
+    .contact-item .ci { width: 38px; height: 38px; background: #7c84ff15; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-form { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: .8rem; color: #888; margin-bottom: 6px; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: #0a0a0f; border: 1px solid var(--border);
+      color: #e0e0e0; padding: 11px 14px; border-radius: 9px; font-size: .88rem;
+      font-family: inherit; transition: .2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select option { background: #12121c; }
+    .submit-btn {
+      width: 100%; background: var(--accent); color: #fff; border: none;
+      padding: 13px; border-radius: 9px; font-weight: 700; font-size: .92rem;
+      cursor: pointer; transition: .2s;
+    }
+    .submit-btn:hover { background: #6872ff; }
+    .form-success { display: none; background: #1aff8c15; border: 1px solid #1aff8c30; color: var(--green); padding: 12px 16px; border-radius: 9px; font-size: .85rem; margin-top: 12px; text-align: center; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer { padding: 30px 5%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    footer p { color: #555; font-size: .8rem; }
+    .footer-links { display: flex; gap: 20px; font-size: .8rem; color: #555; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── Mobile ─────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-card { display: none; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 60px; left: 0; right: 0; background: #0a0a0f;
+        padding: 20px 5%; border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+      .nav-cta.open { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ───────────────────────────────────────────────── -->
+<nav id="navbar">
+  <div class="logo">sha<span>.</span>dev</div>
+  <div class="nav-links" id="nav-links">
+    <a href="#services">Services</a>
+    <a href="#why">Why Me</a>
+    <a href="#process">Process</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta" id="nav-cta">Get Started</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Available for new projects</div>
+      <h1>Web Developer &<br /><span>Digital Growth</span><br />Expert, Chennai</h1>
+      <p>8 years experience. 50+ websites built across Tamil Nadu. I help local businesses get found online, get more leads, and grow revenue — starting at just ₹500.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get Free Consultation</a>
+        <a href="#services" class="btn-secondary">View Services ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="num">50+</div><div class="lbl">Websites Built</div></div>
+        <div class="stat-item"><div class="num">8</div><div class="lbl">Years Experience</div></div>
+        <div class="stat-item"><div class="num">300%</div><div class="lbl">Avg Traffic Growth</div></div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="card-profile">
+        <div class="avatar">S</div>
+        <div>
+          <div class="name">Shathyapriyan</div>
+          <div class="role">Web Developer & Digital Growth, Chennai</div>
+        </div>
+      </div>
+      <div class="card-tags">
+        <span class="tag tag-purple">React & Next.js</span>
+        <span class="tag tag-green">SEO Expert</span>
+        <span class="tag tag-orange">AI Chatbots</span>
+        <span class="tag tag-purple">WordPress</span>
+        <span class="tag tag-green">Google Ads</span>
+      </div>
+      <div class="result-row"><span>Dental Clinic, Anna Nagar</span><span class="rval">+40% bookings</span></div>
+      <div class="result-row"><span>Restaurant, T Nagar</span><span class="rval">3× more orders</span></div>
+      <div class="result-row"><span>Real Estate, OMR</span><span class="rval">2× leads/month</span></div>
+      <div class="result-row"><span>Coaching Centre, Porur</span><span class="rval">₹2L+ revenue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ─────────────────────────────────────────────── -->
+<section id="services">
+  <div class="section-wrap">
+    <span class="section-label">What I Offer</span>
+    <h2 class="section-title">Services & Pricing</h2>
+    <p class="section-sub">No hidden charges. Fixed price. Delivered on time. Every time.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Website Audit Report</h3>
+        <p>15-point check — speed, SEO, mobile, security. Full report + fix plan delivered in 24 hours.</p>
+        <div class="price">₹500</div>
+        <div class="price-note">One-time • Delivered in 24hrs</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📄</div>
+        <h3>New Page Added</h3>
+        <p>Add a service page, landing page, or about page to your existing website. SEO-optimised.</p>
+        <div class="price">₹999</div>
+        <div class="price-note">One-time • Done in 2 days</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Speed Fix</h3>
+        <p>Make your site 3× faster. Slow websites lose customers. I fix it — images, code, hosting config.</p>
+        <div class="price">₹1,499</div>
+        <div class="price-note">One-time • Done in 3 days</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>SEO Starter Pack</h3>
+        <p>On-page SEO fixes + Google Search Console setup. Get found on Google for local searches.</p>
+        <div class="price">₹1,999</div>
+        <div class="price-note">One-time • Done in 5 days</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">✍️</div>
+        <h3>Blog Post Written</h3>
+        <p>1000-word SEO blog post — written, optimised, and published to your website for you.</p>
+        <div class="price">₹2,499</div>
+        <div class="price-note">One-time • Delivered in 48hrs</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌐</div>
+        <h3>New Website</h3>
+        <p>5–10 page professional website. Mobile-first, fast, SEO-ready. Includes 1 month free support.</p>
+        <div class="price">₹15,000 – ₹35,000</div>
+        <div class="price-note">One-time • 7–14 days delivery</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI Chatbot</h3>
+        <p>Smart chatbot for your website — answers questions, captures leads, books appointments 24/7.</p>
+        <div class="price">₹8,000 – ₹20,000</div>
+        <div class="price-note">One-time setup + optional monthly</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛠️</div>
+        <h3>Monthly Maintenance</h3>
+        <p>Updates, backups, security monitoring, 4 blog posts/month. Your website always up and running.</p>
+        <div class="price">₹1,999 – ₹5,999/mo</div>
+        <div class="price-note">Monthly retainer</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Custom AI Agent</h3>
+        <p>WhatsApp bot, booking system, lead gen bot, or any custom automation for your business.</p>
+        <div class="price">₹25,000 – ₹75,000</div>
+        <div class="price-note">Custom quote • Most popular 🔥</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why Me ─────────────────────────────────────────────────── -->
+<section id="why">
+  <div class="section-wrap">
+    <span class="section-label">Why Choose Me</span>
+    <h2 class="section-title">Local Expert.<br />Real Results.</h2>
+    <p class="section-sub">Not an agency. Not a freelancer from another city. I'm based in Chennai and I understand your customers.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">📍</div>
+        <h4>Chennai Based</h4>
+        <p>I know the local market, Tamil Nadu businesses, and what works here. Not a generic solution.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">⏱️</div>
+        <h4>Fast Delivery</h4>
+        <p>Most projects done in 2–7 days. Audit reports in 24 hours. No waiting weeks for simple work.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">💬</div>
+        <h4>WhatsApp Support</h4>
+        <p>Direct communication on WhatsApp. No ticket system, no waiting for email replies.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">💰</div>
+        <h4>Fair Pricing</h4>
+        <p>Starting at ₹500. No agency markup. You pay for work, not for office rent and designer chairs.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📊</div>
+        <h4>Results Focused</h4>
+        <p>I track leads, traffic, and conversions — not just page views. You see real business impact.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🔒</div>
+        <h4>You Own Everything</h4>
+        <p>Your domain, your hosting, your code. Full ownership. No lock-in contracts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ─────────────────────────────────────────────────── -->
+<section id="process">
+  <div class="section-wrap">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">Simple 4-Step Process</h2>
+    <p class="section-sub">From first message to live website — here's exactly what happens.</p>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Free Consultation</h4>
+        <p>Tell me about your business. WhatsApp or call — 15 mins, no pressure.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Proposal & Price</h4>
+        <p>I send a clear scope and fixed price. No surprises later.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>I Build It</h4>
+        <p>Fast turnaround. You get daily updates on WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Live & Growing</h4>
+        <p>Your site goes live. I track results and report monthly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ──────────────────────────────────────────── -->
+<section id="testimonials">
+  <div class="section-wrap">
+    <span class="section-label">Client Reviews</span>
+    <h2 class="section-title">What Clients Say</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Sha built our clinic website in just 5 days. Online appointment bookings went up 40% in the first month. Best investment we made."</p>
+        <div class="client-info">
+          <div class="cname">Dr. Ramesh Kumar</div>
+          <div class="cbiz">Dental Clinic, Anna Nagar</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Our restaurant now gets 3× more online orders since Sha set up our website and Google listing. Response was very quick and price was very reasonable."</p>
+        <div class="client-info">
+          <div class="cname">Murugan S.</div>
+          <div class="cbiz">Restaurant Owner, T Nagar</div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"The ₹500 audit report showed me exactly why my site was slow. Sha fixed everything in 2 days. Now Google ranks us on page 1 for our area."</p>
+        <div class="client-info">
+          <div class="cname">Priya V.</div>
+          <div class="cbiz">Interior Designer, Adyar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ───────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="section-wrap">
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-title">Start With a<br />Free Consultation</h2>
+
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <p>Tell me about your business and what you need. I'll reply within 2 hours with a clear plan and price.</p>
+
+        <div class="contact-item">
+          <div class="ci">📧</div>
+          <span>ashathyapriyan@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <div class="ci">📍</div>
+          <span>Chennai, Tamil Nadu</span>
+        </div>
+        <div class="contact-item">
+          <div class="ci">⏰</div>
+          <span>Mon – Sat, 9 AM – 8 PM IST</span>
+        </div>
+
+        <br />
+        <p style="font-size:.82rem;color:#666">✅ Free 15-min consultation<br />✅ Fixed price — no surprises<br />✅ WhatsApp updates throughout<br />✅ 1 month free support after delivery</p>
+      </div>
+
+      <div class="contact-form">
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="f-name" placeholder="e.g. Ramesh Kumar" required />
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp *</label>
+            <input type="tel" id="f-phone" placeholder="e.g. 98765 43210" required />
+          </div>
+          <div class="form-group">
+            <label>Business Type</label>
+            <select id="f-biz">
+              <option value="">Select your business</option>
+              <option>Restaurant / Cafe</option>
+              <option>Clinic / Hospital</option>
+              <option>Real Estate</option>
+              <option>Retail / Shop</option>
+              <option>Education / Coaching</option>
+              <option>Interior Design</option>
+              <option>Event Management</option>
+              <option>Travel / Tours</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>What do you need?</label>
+            <textarea id="f-msg" placeholder="e.g. I need a website for my dental clinic in Anna Nagar. Currently no online presence."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message →</button>
+          <div class="form-success" id="form-success">
+            ✅ Message sent! I'll reply within 2 hours on WhatsApp.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer>
+  <p>© 2025 Shathyapriyan — Web & Digital Growth, Chennai</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:ashathyapriyan@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById("nav-links").classList.toggle("open");
+    document.getElementById("nav-cta").classList.toggle("open");
+  }
+
+  // Close menu on link click
+  document.querySelectorAll(".nav-links a").forEach(a => {
+    a.addEventListener("click", () => {
+      document.getElementById("nav-links").classList.remove("open");
+      document.getElementById("nav-cta").classList.remove("open");
+    });
+  });
+
+  // Navbar shadow on scroll
+  window.addEventListener("scroll", () => {
+    document.getElementById("navbar").style.boxShadow =
+      window.scrollY > 10 ? "0 2px 20px rgba(0,0,0,.4)" : "none";
+  });
+
+  // Form submit
+  function submitForm(e) {
+    e.preventDefault();
+    const name  = document.getElementById("f-name").value;
+    const phone = document.getElementById("f-phone").value;
+    const biz   = document.getElementById("f-biz").value;
+    const msg   = document.getElementById("f-msg").value;
+
+    // Open WhatsApp with pre-filled message
+    const text = encodeURIComponent(
+      `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like a free consultation."}`
+    );
+    window.open(`https://wa.me/919XXXXXXXXX?text=${text}`, "_blank");
+
+    document.getElementById("form-success").style.display = "block";
+    document.getElementById("contact-form").reset();
+  }
+</script>
+</body>
+</html>
