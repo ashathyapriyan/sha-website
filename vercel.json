@@ -1,0 +1,11 @@
+{
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/leads", "dest": "/leads.html" },
+    { "src": "/", "dest": "/index.html" }
+  ]
+}
