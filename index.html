@@ -288,12 +288,27 @@
       .consult-card .c-price { font-size: 2.6rem; }
       .consult-card .book-btn { font-size: .95rem; padding: 14px; }
 
-      /* Services */
-      .services-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
-      .service-card { padding: 20px; border-radius: 14px; }
+      /* Services — carousel on mobile */
+      .services-grid {
+        display: flex; overflow-x: auto; gap: 14px;
+        margin-top: 28px; padding-bottom: 16px; padding-left: 2px; padding-right: 2px;
+        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .services-grid::-webkit-scrollbar { display: none; }
+      .service-card {
+        min-width: 78vw; scroll-snap-align: start; flex-shrink: 0;
+        padding: 20px; border-radius: 14px;
+      }
       .service-card h3 { font-size: .92rem; }
       .service-card p { font-size: .8rem; }
       .price { font-size: 1.05rem; }
+      .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
+      .carousel-dots span {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: var(--border); transition: background .2s, transform .2s; cursor: pointer;
+      }
+      .carousel-dots span.active { background: var(--accent); transform: scale(1.3); }
 
       /* Why Me */
       .why-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
@@ -529,6 +544,7 @@
         <div class="price-note">Per campaign • Results tracked</div>
       </div>
     </div>
+    <div class="carousel-dots" id="service-dots"></div>
   </div>
 </section>
 
@@ -767,6 +783,46 @@
       stickyCta.style.pointerEvents = (rect.top < window.innerHeight && rect.bottom > 0) ? "none" : "auto";
     }
   });
+
+  // ── Services carousel dots (mobile only) ─────────────────
+  (function() {
+    const grid = document.querySelector(".services-grid");
+    const dotsWrap = document.getElementById("service-dots");
+    if (!grid || !dotsWrap) return;
+
+    const cards = grid.querySelectorAll(".service-card");
+    const total = cards.length;
+
+    function buildDots() {
+      if (window.innerWidth > 768) { dotsWrap.style.display = "none"; return; }
+      dotsWrap.style.display = "flex";
+      if (dotsWrap.children.length === total) return;
+      dotsWrap.innerHTML = "";
+      cards.forEach((_, i) => {
+        const d = document.createElement("span");
+        if (i === 0) d.classList.add("active");
+        d.addEventListener("click", () => {
+          grid.scrollTo({ left: cards[i].offsetLeft - grid.offsetLeft, behavior: "smooth" });
+        });
+        dotsWrap.appendChild(d);
+      });
+    }
+
+    function updateDots() {
+      if (window.innerWidth > 768) return;
+      const dots = dotsWrap.querySelectorAll("span");
+      let closest = 0, minDist = Infinity;
+      cards.forEach((c, i) => {
+        const dist = Math.abs(c.offsetLeft - grid.offsetLeft - grid.scrollLeft);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle("active", i === closest));
+    }
+
+    buildDots();
+    grid.addEventListener("scroll", updateDots, { passive: true });
+    window.addEventListener("resize", buildDots);
+  })();
 
   // ── Form submit ───────────────────────────────────────────
   async function submitForm(e) {
