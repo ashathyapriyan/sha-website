@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 200 Web Development Interview Questions — Sha Dev</title>
+  <meta name="description" content="Complete list of Top 200 Web Development Interview Questions covering HTML, CSS, JavaScript, React, Node.js, Databases, Security, APIs, DevOps and more." />
+  <meta name="keywords" content="web development interview questions, HTML CSS JavaScript interview, React interview questions, Node.js interview, frontend interview questions Chennai" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f8f8f2; color: #111; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    :root {
+      --accent: #0f7a52;
+      --green:  #1aaa70;
+      --orange: #c07e1a;
+      --card:   #ffffff;
+      --border: #e0e0d4;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(248,248,242,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+    .logo span { color: var(--orange); }
+    .nav-back { background: var(--accent); color: #fff; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: .85rem; }
+    .nav-back:hover { background: #0a5e3e; }
+
+    /* Hero */
+    .hero {
+      padding: 120px 5% 60px;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, #0f7a5212 0%, transparent 60%);
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #0f7a5215; border: 1px solid #0f7a5230;
+      color: var(--accent); padding: 6px 14px; border-radius: 20px;
+      font-size: .78rem; font-weight: 600; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { color: #555; font-size: 1rem; max-width: 600px; margin: 0 auto 32px; }
+    .stats-row { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .stat-item .num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .stat-item .lbl { font-size: .75rem; color: #888; }
+
+    /* TOC */
+    .toc-section { padding: 60px 5%; background: #fff; }
+    .toc-wrap { max-width: 900px; margin: 0 auto; }
+    .section-label { display: inline-block; background: #0f7a5215; color: var(--accent); border: 1px solid #0f7a5230; padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 600; margin-bottom: 14px; }
+    .section-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; margin-bottom: 28px; }
+    .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .toc-card {
+      display: flex; align-items: center; gap: 12px;
+      background: #f8f8f2; border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      transition: .2s;
+    }
+    .toc-card:hover { border-color: var(--accent); background: #0f7a5208; transform: translateY(-2px); }
+    .toc-icon { font-size: 1.3rem; }
+    .toc-count { margin-left: auto; font-size: .72rem; color: #888; font-weight: 500; }
+
+    /* Main content */
+    .content { max-width: 900px; margin: 0 auto; padding: 60px 5%; }
+
+    /* Category block */
+    .category {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; margin-bottom: 40px; overflow: hidden;
+    }
+    .category-header {
+      padding: 24px 28px;
+      background: linear-gradient(135deg, #0f7a5208, #0f7a5202);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .cat-icon { font-size: 2rem; }
+    .cat-title { font-size: 1.2rem; font-weight: 800; }
+    .cat-range { font-size: .78rem; color: #888; font-weight: 500; margin-top: 2px; }
+    .cat-badge { margin-left: auto; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: .72rem; font-weight: 700; }
+
+    /* Questions list */
+    .questions-list { padding: 8px 0; }
+    .q-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 28px; border-bottom: 1px solid #f0f0e8;
+      transition: background .15s; cursor: pointer;
+    }
+    .q-item:last-child { border-bottom: none; }
+    .q-item:hover { background: #0f7a5206; }
+    .q-num {
+      min-width: 32px; height: 32px; background: #0f7a5212;
+      color: var(--accent); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .q-text { font-size: .9rem; color: #222; flex: 1; }
+    .q-text code {
+      background: #0f7a5212; color: var(--accent); padding: 1px 6px;
+      border-radius: 4px; font-family: 'Courier New', monospace; font-size: .82rem;
+    }
+    .q-arrow { color: #ccc; font-size: .8rem; margin-top: 6px; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--accent); border-radius: 20px;
+      padding: 48px; text-align: center; margin: 60px 0;
+    }
+    .cta-section h2 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
+    .cta-section p { color: rgba(255,255,255,.8); margin-bottom: 28px; }
+    .cta-btn {
+      background: #fff; color: var(--accent);
+      padding: 13px 32px; border-radius: 10px;
+      font-weight: 700; font-size: .95rem; display: inline-block;
+    }
+    .cta-btn:hover { background: #f0fdf7; }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--accent); z-index: 200;
+      transition: width .1s;
+    }
+
+    /* Search */
+    .search-wrap { max-width: 900px; margin: 0 auto 40px; padding: 0 5%; }
+    .search-box {
+      width: 100%; padding: 14px 20px 14px 44px;
+      border: 1.5px solid var(--border); border-radius: 12px;
+      font-size: .95rem; font-family: 'Inter', sans-serif;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E") no-repeat 16px center;
+      outline: none; transition: .2s;
+    }
+    .search-box:focus { border-color: var(--accent); }
+    .no-results { text-align: center; padding: 40px; color: #888; display: none; }
+
+    @media (max-width: 600px) {
+      .category-header { padding: 18px 20px; }
+      .q-item { padding: 12px 20px; }
+      .cta-section { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<nav>
+  <div class="logo">sha<span>.</span>dev</div>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Interview Prep Guide 2025</div>
+  <h1>Top <span>200</span> Web Development<br>Interview Questions</h1>
+  <p>Master HTML, CSS, JavaScript, React, Node.js, Databases, Security, APIs, and DevOps. Crack your next frontend or full-stack interview.</p>
+  <div class="stats-row">
+    <div class="stat-item"><div class="num">200</div><div class="lbl">Questions</div></div>
+    <div class="stat-item"><div class="num">10</div><div class="lbl">Categories</div></div>
+    <div class="stat-item"><div class="num">2025</div><div class="lbl">Updated</div></div>
+  </div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc-section">
+  <div class="toc-wrap">
+    <div class="section-label">Quick Navigation</div>
+    <div class="section-title">All Categories</div>
+    <div class="toc-grid">
+      <a href="#html" class="toc-card"><span class="toc-icon">🧠</span> HTML<span class="toc-count">Q1–20</span></a>
+      <a href="#css" class="toc-card"><span class="toc-icon">🎨</span> CSS<span class="toc-count">Q21–45</span></a>
+      <a href="#js" class="toc-card"><span class="toc-icon">⚡</span> JavaScript<span class="toc-count">Q46–80</span></a>
+      <a href="#react" class="toc-card"><span class="toc-icon">⚛️</span> ReactJS<span class="toc-count">Q81–110</span></a>
+      <a href="#nodejs" class="toc-card"><span class="toc-icon">🌐</span> Node.js<span class="toc-count">Q111–130</span></a>
+      <a href="#db" class="toc-card"><span class="toc-icon">🗄️</span> Databases<span class="toc-count">Q131–150</span></a>
+      <a href="#security" class="toc-card"><span class="toc-icon">🔒</span> Security<span class="toc-count">Q151–165</span></a>
+      <a href="#api" class="toc-card"><span class="toc-icon">🚀</span> APIs & Backend<span class="toc-count">Q166–180</span></a>
+      <a href="#devops" class="toc-card"><span class="toc-icon">☁️</span> DevOps<span class="toc-count">Q181–190</span></a>
+      <a href="#advanced" class="toc-card"><span class="toc-icon">🧩</span> Advanced<span class="toc-count">Q191–200</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="search-wrap">
+  <input type="text" class="search-box" id="searchBox" placeholder="Search any question... e.g. closure, flexbox, useState" />
+</div>
+
+<div class="no-results" id="noResults">No questions found. Try a different keyword.</div>
+
+<!-- Questions Content -->
+<div class="content" id="questionsContent">
+
+  <!-- HTML -->
+  <div class="category" id="html">
+    <div class="category-header">
+      <div class="cat-icon">🧠</div>
+      <div><div class="cat-title">1. HTML Interview Questions</div><div class="cat-range">Questions 1 – 20</div></div>
+      <div class="cat-badge">20 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">1</div><div class="q-text">What is HTML?</div></div>
+      <div class="q-item"><div class="q-num">2</div><div class="q-text">Difference between HTML4 and HTML5</div></div>
+      <div class="q-item"><div class="q-num">3</div><div class="q-text">What are semantic tags in HTML5?</div></div>
+      <div class="q-item"><div class="q-num">4</div><div class="q-text">Difference between <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code></div></div>
+      <div class="q-item"><div class="q-num">5</div><div class="q-text">What is the purpose of DOCTYPE?</div></div>
+      <div class="q-item"><div class="q-num">6</div><div class="q-text">What are meta tags?</div></div>
+      <div class="q-item"><div class="q-num">7</div><div class="q-text">Difference between ID and Class</div></div>
+      <div class="q-item"><div class="q-num">8</div><div class="q-text">What are inline and block elements?</div></div>
+      <div class="q-item"><div class="q-num">9</div><div class="q-text">Explain forms in HTML</div></div>
+      <div class="q-item"><div class="q-num">10</div><div class="q-text">Difference between GET and POST</div></div>
+      <div class="q-item"><div class="q-num">11</div><div class="q-text">What is localStorage and sessionStorage?</div></div>
+      <div class="q-item"><div class="q-num">12</div><div class="q-text">What are data attributes?</div></div>
+      <div class="q-item"><div class="q-num">13</div><div class="q-text">What is iframe?</div></div>
+      <div class="q-item"><div class="q-num">14</div><div class="q-text">Difference between cookies and localStorage</div></div>
+      <div class="q-item"><div class="q-num">15</div><div class="q-text">What are void elements?</div></div>
+      <div class="q-item"><div class="q-num">16</div><div class="q-text">What is the purpose of <code>alt</code> attribute?</div></div>
+      <div class="q-item"><div class="q-num">17</div><div class="q-text">Explain audio and video tags</div></div>
+      <div class="q-item"><div class="q-num">18</div><div class="q-text">What is accessibility in HTML?</div></div>
+      <div class="q-item"><div class="q-num">19</div><div class="q-text">What are ARIA attributes?</div></div>
+      <div class="q-item"><div class="q-num">20</div><div class="q-text">What is the difference between <code>&lt;strong&gt;</code> and <code>&lt;b&gt;</code> tags?</div></div>
+    </div>
+  </div>
+
+  <!-- CSS -->
+  <div class="category" id="css">
+    <div class="category-header">
+      <div class="cat-icon">🎨</div>
+      <div><div class="cat-title">2. CSS Interview Questions</div><div class="cat-range">Questions 21 – 45</div></div>
+      <div class="cat-badge">25 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">21</div><div class="q-text">What is CSS?</div></div>
+      <div class="q-item"><div class="q-num">22</div><div class="q-text">Difference between inline, internal, and external CSS</div></div>
+      <div class="q-item"><div class="q-num">23</div><div class="q-text">What is specificity in CSS?</div></div>
+      <div class="q-item"><div class="q-num">24</div><div class="q-text">Explain CSS Box Model</div></div>
+      <div class="q-item"><div class="q-num">25</div><div class="q-text">Difference between margin and padding</div></div>
+      <div class="q-item"><div class="q-num">26</div><div class="q-text">What is Flexbox?</div></div>
+      <div class="q-item"><div class="q-num">27</div><div class="q-text">What is CSS Grid?</div></div>
+      <div class="q-item"><div class="q-num">28</div><div class="q-text">Difference between relative, absolute, fixed, and sticky positioning</div></div>
+      <div class="q-item"><div class="q-num">29</div><div class="q-text">What is z-index?</div></div>
+      <div class="q-item"><div class="q-num">30</div><div class="q-text">Difference between <code>em</code>, <code>rem</code>, <code>%</code>, <code>px</code>, <code>vh</code>, and <code>vw</code></div></div>
+      <div class="q-item"><div class="q-num">31</div><div class="q-text">What are pseudo-classes?</div></div>
+      <div class="q-item"><div class="q-num">32</div><div class="q-text">What are pseudo-elements?</div></div>
+      <div class="q-item"><div class="q-num">33</div><div class="q-text">Difference between <code>visibility:hidden</code> and <code>display:none</code></div></div>
+      <div class="q-item"><div class="q-num">34</div><div class="q-text">What is media query?</div></div>
+      <div class="q-item"><div class="q-num">35</div><div class="q-text">Explain responsive design</div></div>
+      <div class="q-item"><div class="q-num">36</div><div class="q-text">What is mobile-first design?</div></div>
+      <div class="q-item"><div class="q-num">37</div><div class="q-text">What are CSS transitions?</div></div>
+      <div class="q-item"><div class="q-num">38</div><div class="q-text">Difference between transition and animation</div></div>
+      <div class="q-item"><div class="q-num">39</div><div class="q-text">What is <code>transform</code> property?</div></div>
+      <div class="q-item"><div class="q-num">40</div><div class="q-text">What is <code>overflow</code> property?</div></div>
+      <div class="q-item"><div class="q-num">41</div><div class="q-text">Explain CSS inheritance</div></div>
+      <div class="q-item"><div class="q-num">42</div><div class="q-text">What is <code>!important</code>?</div></div>
+      <div class="q-item"><div class="q-num">43</div><div class="q-text">What are CSS preprocessors?</div></div>
+      <div class="q-item"><div class="q-num">44</div><div class="q-text">Difference between SCSS and SASS</div></div>
+      <div class="q-item"><div class="q-num">45</div><div class="q-text">What is Bootstrap?</div></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <div class="category" id="js">
+    <div class="category-header">
+      <div class="cat-icon">⚡</div>
+      <div><div class="cat-title">3. JavaScript Basics</div><div class="cat-range">Questions 46 – 80</div></div>
+      <div class="cat-badge">35 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">46</div><div class="q-text">What is JavaScript?</div></div>
+      <div class="q-item"><div class="q-num">47</div><div class="q-text">Difference between <code>var</code>, <code>let</code>, and <code>const</code></div></div>
+      <div class="q-item"><div class="q-num">48</div><div class="q-text">What are data types in JavaScript?</div></div>
+      <div class="q-item"><div class="q-num">49</div><div class="q-text">Difference between <code>null</code> and <code>undefined</code></div></div>
+      <div class="q-item"><div class="q-num">50</div><div class="q-text">What is hoisting?</div></div>
+      <div class="q-item"><div class="q-num">51</div><div class="q-text">Explain scope in JavaScript</div></div>
+      <div class="q-item"><div class="q-num">52</div><div class="q-text">What is closure?</div></div>
+      <div class="q-item"><div class="q-num">53</div><div class="q-text">What is callback function?</div></div>
+      <div class="q-item"><div class="q-num">54</div><div class="q-text">What is arrow function?</div></div>
+      <div class="q-item"><div class="q-num">55</div><div class="q-text">Difference between <code>==</code> and <code>===</code></div></div>
+      <div class="q-item"><div class="q-num">56</div><div class="q-text">What is event bubbling?</div></div>
+      <div class="q-item"><div class="q-num">57</div><div class="q-text">What is event capturing?</div></div>
+      <div class="q-item"><div class="q-num">58</div><div class="q-text">What is event delegation?</div></div>
+      <div class="q-item"><div class="q-num">59</div><div class="q-text">What is DOM?</div></div>
+      <div class="q-item"><div class="q-num">60</div><div class="q-text">Difference between synchronous and asynchronous programming</div></div>
+      <div class="q-item"><div class="q-num">61</div><div class="q-text">What is promise in JavaScript?</div></div>
+      <div class="q-item"><div class="q-num">62</div><div class="q-text">What are <code>async</code> and <code>await</code>?</div></div>
+      <div class="q-item"><div class="q-num">63</div><div class="q-text">What is <code>setTimeout</code>?</div></div>
+      <div class="q-item"><div class="q-num">64</div><div class="q-text">Difference between <code>map()</code>, <code>filter()</code>, and <code>reduce()</code></div></div>
+      <div class="q-item"><div class="q-num">65</div><div class="q-text">What is destructuring?</div></div>
+      <div class="q-item"><div class="q-num">66</div><div class="q-text">What is spread operator?</div></div>
+      <div class="q-item"><div class="q-num">67</div><div class="q-text">What is rest operator?</div></div>
+      <div class="q-item"><div class="q-num">68</div><div class="q-text">What is template literal?</div></div>
+      <div class="q-item"><div class="q-num">69</div><div class="q-text">What is optional chaining?</div></div>
+      <div class="q-item"><div class="q-num">70</div><div class="q-text">Explain <code>this</code> keyword</div></div>
+      <div class="q-item"><div class="q-num">71</div><div class="q-text">Difference between function declaration and expression</div></div>
+      <div class="q-item"><div class="q-num">72</div><div class="q-text">What is prototype?</div></div>
+      <div class="q-item"><div class="q-num">73</div><div class="q-text">What is prototypal inheritance?</div></div>
+      <div class="q-item"><div class="q-num">74</div><div class="q-text">What is JSON?</div></div>
+      <div class="q-item"><div class="q-num">75</div><div class="q-text">Difference between localStorage and sessionStorage</div></div>
+      <div class="q-item"><div class="q-num">76</div><div class="q-text">What is <code>NaN</code>?</div></div>
+      <div class="q-item"><div class="q-num">77</div><div class="q-text">What are truthy and falsy values?</div></div>
+      <div class="q-item"><div class="q-num">78</div><div class="q-text">What is debounce?</div></div>
+      <div class="q-item"><div class="q-num">79</div><div class="q-text">What is throttle?</div></div>
+      <div class="q-item"><div class="q-num">80</div><div class="q-text">What is currying?</div></div>
+    </div>
+  </div>
+
+  <!-- React -->
+  <div class="category" id="react">
+    <div class="category-header">
+      <div class="cat-icon">⚛️</div>
+      <div><div class="cat-title">4. ReactJS Interview Questions</div><div class="cat-range">Questions 81 – 110</div></div>
+      <div class="cat-badge">30 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">81</div><div class="q-text">What is React?</div></div>
+      <div class="q-item"><div class="q-num">82</div><div class="q-text">What are components in React?</div></div>
+      <div class="q-item"><div class="q-num">83</div><div class="q-text">Difference between functional and class components</div></div>
+      <div class="q-item"><div class="q-num">84</div><div class="q-text">What is JSX?</div></div>
+      <div class="q-item"><div class="q-num">85</div><div class="q-text">What are props?</div></div>
+      <div class="q-item"><div class="q-num">86</div><div class="q-text">What is state?</div></div>
+      <div class="q-item"><div class="q-num">87</div><div class="q-text">Difference between state and props</div></div>
+      <div class="q-item"><div class="q-num">88</div><div class="q-text">What is <code>useState</code> hook?</div></div>
+      <div class="q-item"><div class="q-num">89</div><div class="q-text">What is <code>useEffect</code> hook?</div></div>
+      <div class="q-item"><div class="q-num">90</div><div class="q-text">What is virtual DOM?</div></div>
+      <div class="q-item"><div class="q-num">91</div><div class="q-text">What is reconciliation?</div></div>
+      <div class="q-item"><div class="q-num">92</div><div class="q-text">What are keys in React?</div></div>
+      <div class="q-item"><div class="q-num">93</div><div class="q-text">What is prop drilling?</div></div>
+      <div class="q-item"><div class="q-num">94</div><div class="q-text">What is Context API?</div></div>
+      <div class="q-item"><div class="q-num">95</div><div class="q-text">What is Redux?</div></div>
+      <div class="q-item"><div class="q-num">96</div><div class="q-text">Difference between Redux and Context API</div></div>
+      <div class="q-item"><div class="q-num">97</div><div class="q-text">What are React hooks?</div></div>
+      <div class="q-item"><div class="q-num">98</div><div class="q-text">What is <code>useRef</code>?</div></div>
+      <div class="q-item"><div class="q-num">99</div><div class="q-text">What is <code>useMemo</code>?</div></div>
+      <div class="q-item"><div class="q-num">100</div><div class="q-text">What is <code>useCallback</code>?</div></div>
+      <div class="q-item"><div class="q-num">101</div><div class="q-text">What is lazy loading in React?</div></div>
+      <div class="q-item"><div class="q-num">102</div><div class="q-text">What is React Router?</div></div>
+      <div class="q-item"><div class="q-num">103</div><div class="q-text">What are controlled components?</div></div>
+      <div class="q-item"><div class="q-num">104</div><div class="q-text">What are uncontrolled components?</div></div>
+      <div class="q-item"><div class="q-num">105</div><div class="q-text">What is lifting state up?</div></div>
+      <div class="q-item"><div class="q-num">106</div><div class="q-text">What is Higher Order Component (HOC)?</div></div>
+      <div class="q-item"><div class="q-num">107</div><div class="q-text">What are custom hooks?</div></div>
+      <div class="q-item"><div class="q-num">108</div><div class="q-text">What is Strict Mode?</div></div>
+      <div class="q-item"><div class="q-num">109</div><div class="q-text">What is server-side rendering?</div></div>
+      <div class="q-item"><div class="q-num">110</div><div class="q-text">Difference between CSR and SSR</div></div>
+    </div>
+  </div>
+
+  <!-- Node.js -->
+  <div class="category" id="nodejs">
+    <div class="category-header">
+      <div class="cat-icon">🌐</div>
+      <div><div class="cat-title">5. Node.js Interview Questions</div><div class="cat-range">Questions 111 – 130</div></div>
+      <div class="cat-badge">20 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">111</div><div class="q-text">What is Node.js?</div></div>
+      <div class="q-item"><div class="q-num">112</div><div class="q-text">Why use Node.js?</div></div>
+      <div class="q-item"><div class="q-num">113</div><div class="q-text">What is npm?</div></div>
+      <div class="q-item"><div class="q-num">114</div><div class="q-text">Difference between CommonJS and ES Modules</div></div>
+      <div class="q-item"><div class="q-num">115</div><div class="q-text">What is Express.js?</div></div>
+      <div class="q-item"><div class="q-num">116</div><div class="q-text">What is middleware?</div></div>
+      <div class="q-item"><div class="q-num">117</div><div class="q-text">What is REST API?</div></div>
+      <div class="q-item"><div class="q-num">118</div><div class="q-text">Difference between PUT and PATCH</div></div>
+      <div class="q-item"><div class="q-num">119</div><div class="q-text">What is JWT?</div></div>
+      <div class="q-item"><div class="q-num">120</div><div class="q-text">What is authentication vs authorization?</div></div>
+      <div class="q-item"><div class="q-num">121</div><div class="q-text">What is CORS?</div></div>
+      <div class="q-item"><div class="q-num">122</div><div class="q-text">What is <code>dotenv</code>?</div></div>
+      <div class="q-item"><div class="q-num">123</div><div class="q-text">What is event loop?</div></div>
+      <div class="q-item"><div class="q-num">124</div><div class="q-text">What is non-blocking I/O?</div></div>
+      <div class="q-item"><div class="q-num">125</div><div class="q-text">What is <code>package.json</code>?</div></div>
+      <div class="q-item"><div class="q-num">126</div><div class="q-text">What is nodemon?</div></div>
+      <div class="q-item"><div class="q-num">127</div><div class="q-text">What are streams in Node.js?</div></div>
+      <div class="q-item"><div class="q-num">128</div><div class="q-text">What is buffering?</div></div>
+      <div class="q-item"><div class="q-num">129</div><div class="q-text">What is async middleware?</div></div>
+      <div class="q-item"><div class="q-num">130</div><div class="q-text">What is rate limiting?</div></div>
+    </div>
+  </div>
+
+  <!-- Database -->
+  <div class="category" id="db">
+    <div class="category-header">
+      <div class="cat-icon">🗄️</div>
+      <div><div class="cat-title">6. Database Interview Questions</div><div class="cat-range">Questions 131 – 150</div></div>
+      <div class="cat-badge">20 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">131</div><div class="q-text">What is SQL?</div></div>
+      <div class="q-item"><div class="q-num">132</div><div class="q-text">Difference between SQL and NoSQL</div></div>
+      <div class="q-item"><div class="q-num">133</div><div class="q-text">What is primary key?</div></div>
+      <div class="q-item"><div class="q-num">134</div><div class="q-text">What is foreign key?</div></div>
+      <div class="q-item"><div class="q-num">135</div><div class="q-text">What is normalization?</div></div>
+      <div class="q-item"><div class="q-num">136</div><div class="q-text">What are joins in SQL?</div></div>
+      <div class="q-item"><div class="q-num">137</div><div class="q-text">Difference between INNER JOIN and LEFT JOIN</div></div>
+      <div class="q-item"><div class="q-num">138</div><div class="q-text">What is indexing?</div></div>
+      <div class="q-item"><div class="q-num">139</div><div class="q-text">What is aggregate function?</div></div>
+      <div class="q-item"><div class="q-num">140</div><div class="q-text">Difference between DELETE, DROP, and TRUNCATE</div></div>
+      <div class="q-item"><div class="q-num">141</div><div class="q-text">What is MongoDB?</div></div>
+      <div class="q-item"><div class="q-num">142</div><div class="q-text">Difference between MongoDB and MySQL</div></div>
+      <div class="q-item"><div class="q-num">143</div><div class="q-text">What is schema?</div></div>
+      <div class="q-item"><div class="q-num">144</div><div class="q-text">What is ORM?</div></div>
+      <div class="q-item"><div class="q-num">145</div><div class="q-text">What is Sequelize?</div></div>
+      <div class="q-item"><div class="q-num">146</div><div class="q-text">What is Mongoose?</div></div>
+      <div class="q-item"><div class="q-num">147</div><div class="q-text">What is ACID property?</div></div>
+      <div class="q-item"><div class="q-num">148</div><div class="q-text">What is transaction?</div></div>
+      <div class="q-item"><div class="q-num">149</div><div class="q-text">What is database sharding?</div></div>
+      <div class="q-item"><div class="q-num">150</div><div class="q-text">What is replication?</div></div>
+    </div>
+  </div>
+
+  <!-- Security -->
+  <div class="category" id="security">
+    <div class="category-header">
+      <div class="cat-icon">🔒</div>
+      <div><div class="cat-title">7. Web Security Interview Questions</div><div class="cat-range">Questions 151 – 165</div></div>
+      <div class="cat-badge">15 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">151</div><div class="q-text">What is HTTPS?</div></div>
+      <div class="q-item"><div class="q-num">152</div><div class="q-text">Difference between HTTP and HTTPS</div></div>
+      <div class="q-item"><div class="q-num">153</div><div class="q-text">What is SSL/TLS?</div></div>
+      <div class="q-item"><div class="q-num">154</div><div class="q-text">What is XSS attack?</div></div>
+      <div class="q-item"><div class="q-num">155</div><div class="q-text">What is CSRF attack?</div></div>
+      <div class="q-item"><div class="q-num">156</div><div class="q-text">What is SQL Injection?</div></div>
+      <div class="q-item"><div class="q-num">157</div><div class="q-text">How to secure APIs?</div></div>
+      <div class="q-item"><div class="q-num">158</div><div class="q-text">What is hashing?</div></div>
+      <div class="q-item"><div class="q-num">159</div><div class="q-text">Difference between encryption and hashing</div></div>
+      <div class="q-item"><div class="q-num">160</div><div class="q-text">What is bcrypt?</div></div>
+      <div class="q-item"><div class="q-num">161</div><div class="q-text">What is OAuth?</div></div>
+      <div class="q-item"><div class="q-num">162</div><div class="q-text">What is JWT token security?</div></div>
+      <div class="q-item"><div class="q-num">163</div><div class="q-text">What is Content Security Policy?</div></div>
+      <div class="q-item"><div class="q-num">164</div><div class="q-text">What is brute force attack?</div></div>
+      <div class="q-item"><div class="q-num">165</div><div class="q-text">What is two-factor authentication?</div></div>
+    </div>
+  </div>
+
+  <!-- APIs -->
+  <div class="category" id="api">
+    <div class="category-header">
+      <div class="cat-icon">🚀</div>
+      <div><div class="cat-title">8. APIs & Backend Concepts</div><div class="cat-range">Questions 166 – 180</div></div>
+      <div class="cat-badge">15 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">166</div><div class="q-text">What is API?</div></div>
+      <div class="q-item"><div class="q-num">167</div><div class="q-text">Difference between REST and GraphQL</div></div>
+      <div class="q-item"><div class="q-num">168</div><div class="q-text">What is RESTful API?</div></div>
+      <div class="q-item"><div class="q-num">169</div><div class="q-text">What are HTTP status codes?</div></div>
+      <div class="q-item"><div class="q-num">170</div><div class="q-text">Explain 200, 201, 400, 401, 403, 404, 500</div></div>
+      <div class="q-item"><div class="q-num">171</div><div class="q-text">What is API testing?</div></div>
+      <div class="q-item"><div class="q-num">172</div><div class="q-text">What is Postman?</div></div>
+      <div class="q-item"><div class="q-num">173</div><div class="q-text">What is WebSocket?</div></div>
+      <div class="q-item"><div class="q-num">174</div><div class="q-text">Difference between polling and WebSocket</div></div>
+      <div class="q-item"><div class="q-num">175</div><div class="q-text">What is microservice architecture?</div></div>
+      <div class="q-item"><div class="q-num">176</div><div class="q-text">What is monolithic architecture?</div></div>
+      <div class="q-item"><div class="q-num">177</div><div class="q-text">What is caching?</div></div>
+      <div class="q-item"><div class="q-num">178</div><div class="q-text">What is Redis?</div></div>
+      <div class="q-item"><div class="q-num">179</div><div class="q-text">What is CDN?</div></div>
+      <div class="q-item"><div class="q-num">180</div><div class="q-text">What is load balancing?</div></div>
+    </div>
+  </div>
+
+  <!-- DevOps -->
+  <div class="category" id="devops">
+    <div class="category-header">
+      <div class="cat-icon">☁️</div>
+      <div><div class="cat-title">9. Deployment & DevOps Questions</div><div class="cat-range">Questions 181 – 190</div></div>
+      <div class="cat-badge">10 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">181</div><div class="q-text">What is Git?</div></div>
+      <div class="q-item"><div class="q-num">182</div><div class="q-text">Difference between Git and GitHub</div></div>
+      <div class="q-item"><div class="q-num">183</div><div class="q-text">What is version control?</div></div>
+      <div class="q-item"><div class="q-num">184</div><div class="q-text">What is branching in Git?</div></div>
+      <div class="q-item"><div class="q-num">185</div><div class="q-text">What is merge conflict?</div></div>
+      <div class="q-item"><div class="q-num">186</div><div class="q-text">What is CI/CD?</div></div>
+      <div class="q-item"><div class="q-num">187</div><div class="q-text">What is Docker?</div></div>
+      <div class="q-item"><div class="q-num">188</div><div class="q-text">What is Kubernetes?</div></div>
+      <div class="q-item"><div class="q-num">189</div><div class="q-text">What is cloud hosting?</div></div>
+      <div class="q-item"><div class="q-num">190</div><div class="q-text">Difference between AWS, Azure, and GCP</div></div>
+    </div>
+  </div>
+
+  <!-- Advanced -->
+  <div class="category" id="advanced">
+    <div class="category-header">
+      <div class="cat-icon">🧩</div>
+      <div><div class="cat-title">10. Advanced Web Development Questions</div><div class="cat-range">Questions 191 – 200</div></div>
+      <div class="cat-badge">10 Qs</div>
+    </div>
+    <div class="questions-list">
+      <div class="q-item"><div class="q-num">191</div><div class="q-text">What is Progressive Web App (PWA)?</div></div>
+      <div class="q-item"><div class="q-num">192</div><div class="q-text">What is service worker?</div></div>
+      <div class="q-item"><div class="q-num">193</div><div class="q-text">What is lazy loading?</div></div>
+      <div class="q-item"><div class="q-num">194</div><div class="q-text">What is code splitting?</div></div>
+      <div class="q-item"><div class="q-num">195</div><div class="q-text">What is tree shaking?</div></div>
+      <div class="q-item"><div class="q-num">196</div><div class="q-text">What is SSR in Next.js?</div></div>
+      <div class="q-item"><div class="q-num">197</div><div class="q-text">What is hydration in React?</div></div>
+      <div class="q-item"><div class="q-num">198</div><div class="q-text">What is Webpack?</div></div>
+      <div class="q-item"><div class="q-num">199</div><div class="q-text">What is Babel?</div></div>
+      <div class="q-item"><div class="q-num">200</div><div class="q-text">What is TypeScript and why use it?</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Need Interview Coaching?</h2>
+    <p>Book a 1-on-1 consultation with Sha — Chennai's web developer with 8 years experience helping freshers and professionals crack tech interviews.</p>
+    <a href="index.html#consultation" class="cta-btn">Book Consultation — ₹199</a>
+  </div>
+
+</div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('progress');
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    el.style.width = scrolled + '%';
+  });
+
+  // Search
+  const searchBox = document.getElementById('searchBox');
+  const noResults = document.getElementById('noResults');
+
+  searchBox.addEventListener('input', () => {
+    const q = searchBox.value.toLowerCase().trim();
+    const items = document.querySelectorAll('.q-item');
+    const categories = document.querySelectorAll('.category');
+    let totalVisible = 0;
+
+    categories.forEach(cat => {
+      let catVisible = 0;
+      cat.querySelectorAll('.q-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const show = !q || text.includes(q);
+        item.style.display = show ? 'flex' : 'none';
+        if (show) catVisible++;
+      });
+      cat.style.display = catVisible > 0 ? 'block' : 'none';
+      totalVisible += catVisible;
+    });
+
+    noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+  });
+</script>
+</body>
+</html>
