@@ -35,8 +35,10 @@
     }
     .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
     .logo span { color: var(--orange); }
-    .nav-links { display: flex; gap: 28px; font-size: .88rem; color: #444; }
+    .nav-links { display: flex; gap: 18px; font-size: .82rem; color: #444; flex-wrap: nowrap; align-items: center; }
     .nav-links a:hover { color: var(--accent); }
+    .nav-links a.tool-link { background: #0f7a5212; color: var(--accent); border: 1px solid #0f7a5230; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: .76rem; white-space: nowrap; }
+    .nav-links a.tool-link:hover { background: #0f7a5225; }
     .nav-cta {
       background: var(--accent); color: #fff; padding: 8px 20px;
       border-radius: 8px; font-weight: 600; font-size: .85rem;
@@ -248,9 +250,15 @@
       .nav-links.open a {
         font-size: 1.3rem; font-weight: 700; color: #111111;
         padding: 16px 0; border-bottom: 1px solid var(--border);
-        letter-spacing: .3px;
+        letter-spacing: .3px; background: none; border-radius: 0;
       }
       .nav-links.open a:last-child { border-bottom: none; }
+      .nav-links.open a.tool-link {
+        color: var(--accent); font-size: 1.1rem;
+        background: #0f7a5210; border-radius: 10px;
+        padding: 12px 16px; border: 1px solid #0f7a5225;
+        margin: 4px 0;
+      }
       .nav-cta.open {
         display: block; position: fixed;
         bottom: 88px; left: 6%; right: 6%; z-index: 100;
@@ -377,8 +385,8 @@
     <a href="#process">Process</a>
     <a href="#testimonials">Reviews</a>
     <a href="#contact">Contact</a>
-    <a href="seo-analyzer.html">🔍 Free SEO Tool</a>
-    <a href="web-dev-interview-questions.html">📚 Interview Q&A</a>
+    <a href="seo-analyzer.html" class="tool-link">🔍 SEO Tool</a>
+    <a href="web-dev-interview-questions.html" class="tool-link">📚 Interview Q&A</a>
   </div>
   <a href="#consultation" class="nav-cta" id="nav-cta">Book Consultation</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -768,7 +776,14 @@
   // Close menu on any nav link click
   document.querySelectorAll(".nav-links a").forEach(a => {
     a.addEventListener("click", () => {
-      if (menuOpen) toggleMenu();
+      if (menuOpen) {
+        // For external page links, just reset body overflow immediately
+        document.body.style.overflow = "";
+        menuOpen = false;
+        navLinks.classList.remove("open");
+        navCta.classList.remove("open");
+        hamburger.querySelectorAll("span").forEach(b => b.style.cssText = "");
+      }
     });
   });
 
