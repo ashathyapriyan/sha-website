@@ -1,558 +1,1180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Top 200 Web Development Interview Questions — Sha Dev</title>
-  <meta name="description" content="Complete list of Top 200 Web Development Interview Questions covering HTML, CSS, JavaScript, React, Node.js, Databases, Security, APIs, DevOps and more." />
-  <meta name="keywords" content="web development interview questions, HTML CSS JavaScript interview, React interview questions, Node.js interview, frontend interview questions Chennai" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #f8f8f2; color: #111; line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
-    :root {
-      --accent: #0f7a52;
-      --green:  #1aaa70;
-      --orange: #c07e1a;
-      --card:   #ffffff;
-      --border: #e0e0d4;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>200 Web Dev Interview Questions — sha.dev</title>
+<meta name="description" content="200 web development interview questions with full answers and live code editors. HTML, CSS, JavaScript, React, Node.js, Databases, Security, APIs, DevOps and more." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#f8f8f2;--text:#111;--muted:#555;--accent:#0f7a52;--accent2:#0a5e3e;
+    --orange:#c07e1a;--card:#fff;--border:#e0e0d4;--side:#fbfbf6;--code:#1e2128;
+  }
+  body.dark{
+    --bg:#15171c;--text:#e8e8e2;--muted:#9a9a92;--card:#1e2128;--border:#2c2f37;
+    --side:#1a1c22;--code:#0d0f13;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  a{color:inherit;text-decoration:none}
 
-    /* Nav */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(248,248,242,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 5%;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
-    .logo span { color: var(--orange); }
-    .nav-back { background: var(--accent); color: #fff; padding: 8px 20px; border-radius: 8px; font-weight: 600; font-size: .85rem; }
-    .nav-back:hover { background: #0a5e3e; }
+  nav{position:fixed;top:0;left:0;right:0;height:58px;z-index:100;
+    background:var(--card);border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:18px;padding:0 18px}
+  .logo{font-size:1.15rem;font-weight:800;color:var(--accent)}
+  .logo span{color:var(--orange)}
+  .nav-back{font-size:.85rem;color:var(--muted)}
+  .nav-back:hover{color:var(--accent)}
+  .nav-spacer{flex:1}
+  .progress-wrap{display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--muted)}
+  .progress-bar{width:120px;height:7px;background:var(--border);border-radius:6px;overflow:hidden}
+  .progress-fill{height:100%;width:0;background:var(--accent);transition:width .3s}
+  .icon-btn{background:none;border:1px solid var(--border);color:var(--text);
+    width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+  .icon-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-    /* Hero */
-    .hero {
-      padding: 120px 5% 60px;
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, #0f7a5212 0%, transparent 60%);
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #0f7a5215; border: 1px solid #0f7a5230;
-      color: var(--accent); padding: 6px 14px; border-radius: 20px;
-      font-size: .78rem; font-weight: 600; margin-bottom: 20px;
-    }
-    .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; margin-bottom: 16px; }
-    .hero h1 span { color: var(--accent); }
-    .hero p { color: #555; font-size: 1rem; max-width: 600px; margin: 0 auto 32px; }
-    .stats-row { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
-    .stat-item .num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
-    .stat-item .lbl { font-size: .75rem; color: #888; }
+  .layout{display:flex;padding-top:58px;min-height:100vh}
 
-    /* TOC */
-    .toc-section { padding: 60px 5%; background: #fff; }
-    .toc-wrap { max-width: 900px; margin: 0 auto; }
-    .section-label { display: inline-block; background: #0f7a5215; color: var(--accent); border: 1px solid #0f7a5230; padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 600; margin-bottom: 14px; }
-    .section-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 800; margin-bottom: 28px; }
-    .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .toc-card {
-      display: flex; align-items: center; gap: 12px;
-      background: #f8f8f2; border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 16px;
-      font-size: .85rem; font-weight: 600; cursor: pointer;
-      transition: .2s;
-    }
-    .toc-card:hover { border-color: var(--accent); background: #0f7a5208; transform: translateY(-2px); }
-    .toc-icon { font-size: 1.3rem; }
-    .toc-count { margin-left: auto; font-size: .72rem; color: #888; font-weight: 500; }
+  aside{width:280px;flex-shrink:0;background:var(--side);border-right:1px solid var(--border);
+    position:fixed;top:58px;bottom:0;left:0;overflow-y:auto;padding:14px}
+  .search-box{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;
+    background:var(--card);color:var(--text);font-size:.85rem;margin-bottom:12px;font-family:inherit}
+  .search-box:focus{outline:none;border-color:var(--accent)}
+  .cat{margin-bottom:6px}
+  .cat-head{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;
+    border-radius:8px;font-weight:700;font-size:.85rem;user-select:none}
+  .cat-head:hover{background:var(--border)}
+  .cat-head .chev{margin-left:auto;font-size:.7rem;transition:transform .2s;color:var(--muted)}
+  .cat.open .chev{transform:rotate(90deg)}
+  .cat-count{font-size:.7rem;color:var(--muted);font-weight:500}
+  .q-list{display:none;flex-direction:column;margin:2px 0 6px 6px;border-left:1px solid var(--border)}
+  .cat.open .q-list{display:flex}
+  .q-item{padding:6px 10px 6px 14px;font-size:.8rem;color:var(--muted);cursor:pointer;
+    border-radius:0 6px 6px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.35}
+  .q-item:hover{background:var(--border);color:var(--text)}
+  .q-item.active{background:var(--accent);color:#fff;font-weight:600}
+  .q-item .qid{font-variant-numeric:tabular-nums;opacity:.7;flex-shrink:0}
+  .q-item.active .qid{opacity:.9}
+  .q-item .check{margin-left:auto;color:var(--accent);flex-shrink:0;visibility:hidden}
+  .q-item.done .check{visibility:visible}
+  .q-item.active.done .check{color:#fff}
 
-    /* Main content */
-    .content { max-width: 900px; margin: 0 auto; padding: 60px 5%; }
+  main{margin-left:280px;flex:1;padding:32px 40px 80px;max-width:100%}
+  .crumb{font-size:.78rem;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+  .crumb .ic{margin-right:6px}
+  h1.q-title{font-size:1.7rem;font-weight:800;line-height:1.25;margin-bottom:18px;max-width:760px}
+  .answer{max-width:760px;font-size:.98rem}
+  .answer p{margin-bottom:12px}
+  .answer ul,.answer ol{margin:0 0 14px 22px}
+  .answer li{margin-bottom:5px}
+  .answer code{background:var(--border);padding:2px 6px;border-radius:5px;font-size:.85em;
+    font-family:ui-monospace,Menlo,Consolas,monospace}
+  .answer strong{color:var(--accent)}
+  body.dark .answer strong{color:#3ec98a}
+  .answer table{border-collapse:collapse;margin:0 0 16px;width:100%;font-size:.88rem}
+  .answer th,.answer td{border:1px solid var(--border);padding:7px 10px;text-align:left}
+  .answer th{background:var(--border)}
 
-    /* Category block */
-    .category {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; margin-bottom: 40px; overflow: hidden;
-    }
-    .category-header {
-      padding: 24px 28px;
-      background: linear-gradient(135deg, #0f7a5208, #0f7a5202);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .cat-icon { font-size: 2rem; }
-    .cat-title { font-size: 1.2rem; font-weight: 800; }
-    .cat-range { font-size: .78rem; color: #888; font-weight: 500; margin-top: 2px; }
-    .cat-badge { margin-left: auto; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: .72rem; font-weight: 700; }
+  .editor-section{margin-top:26px;max-width:980px}
+  .editor-label{font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.05em;margin-bottom:8px}
+  .editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .editor-pane,.preview-pane{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--code)}
+  .pane-head{font-size:.72rem;font-weight:600;color:#9aa;padding:6px 12px;
+    background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;align-items:center;justify-content:space-between}
+  textarea.editor{width:100%;min-height:240px;background:var(--code);color:#e6e6e6;border:none;
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.55;
+    padding:12px;resize:vertical}
+  textarea.editor:focus{outline:none}
+  .preview-pane{background:#fff}
+  iframe.preview{width:100%;min-height:240px;border:none;background:#fff}
+  .run-bar{margin-top:10px;display:flex;gap:10px;align-items:center}
+  .btn{font-family:inherit;font-size:.83rem;font-weight:600;border:none;border-radius:8px;
+    padding:9px 16px;cursor:pointer}
+  .btn-run{background:var(--accent);color:#fff}
+  .btn-run:hover{background:var(--accent2)}
+  .btn-reset{background:var(--border);color:var(--text)}
 
-    /* Questions list */
-    .questions-list { padding: 8px 0; }
-    .q-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 14px 28px; border-bottom: 1px solid #f0f0e8;
-      transition: background .15s; cursor: pointer;
-    }
-    .q-item:last-child { border-bottom: none; }
-    .q-item:hover { background: #0f7a5206; }
-    .q-num {
-      min-width: 32px; height: 32px; background: #0f7a5212;
-      color: var(--accent); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem; font-weight: 700; flex-shrink: 0; margin-top: 1px;
-    }
-    .q-text { font-size: .9rem; color: #222; flex: 1; }
-    .q-text code {
-      background: #0f7a5212; color: var(--accent); padding: 1px 6px;
-      border-radius: 4px; font-family: 'Courier New', monospace; font-size: .82rem;
-    }
-    .q-arrow { color: #ccc; font-size: .8rem; margin-top: 6px; }
+  .nav-btns{display:flex;justify-content:space-between;gap:12px;margin-top:40px;max-width:980px}
+  .navbtn{background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:12px 18px;cursor:pointer;font-family:inherit;font-size:.85rem;color:var(--text);
+    display:flex;flex-direction:column;gap:2px;min-width:150px;text-align:left}
+  .navbtn:hover{border-color:var(--accent)}
+  .navbtn.next{text-align:right;align-items:flex-end}
+  .navbtn .lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .navbtn .ttl{font-weight:600;font-size:.85rem}
+  .navbtn:disabled{opacity:.35;cursor:default}
 
-    /* CTA */
-    .cta-section {
-      background: var(--accent); border-radius: 20px;
-      padding: 48px; text-align: center; margin: 60px 0;
-    }
-    .cta-section h2 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 12px; }
-    .cta-section p { color: rgba(255,255,255,.8); margin-bottom: 28px; }
-    .cta-btn {
-      background: #fff; color: var(--accent);
-      padding: 13px 32px; border-radius: 10px;
-      font-weight: 700; font-size: .95rem; display: inline-block;
-    }
-    .cta-btn:hover { background: #f0fdf7; }
+  .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .btn-done{background:var(--accent);color:#fff}
+  .btn-done.is-done{background:var(--border);color:var(--text)}
+  .btn-share{background:var(--card);border:1px solid var(--border);color:var(--text)}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);
+    color:#fff;padding:10px 20px;border-radius:10px;font-size:.85rem;font-weight:600;
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:200}
+  .toast.show{opacity:1}
 
-    /* Progress bar */
-    .progress-bar {
-      position: fixed; top: 0; left: 0; height: 3px;
-      background: var(--accent); z-index: 200;
-      transition: width .1s;
-    }
+  .overlay{display:none;position:fixed;inset:58px 0 0;background:rgba(0,0,0,.4);z-index:90}
+  .overlay.show{display:block}
 
-    /* Search */
-    .search-wrap { max-width: 900px; margin: 0 auto 40px; padding: 0 5%; }
-    .search-box {
-      width: 100%; padding: 14px 20px 14px 44px;
-      border: 1.5px solid var(--border); border-radius: 12px;
-      font-size: .95rem; font-family: 'Inter', sans-serif;
-      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E") no-repeat 16px center;
-      outline: none; transition: .2s;
-    }
-    .search-box:focus { border-color: var(--accent); }
-    .no-results { text-align: center; padding: 40px; color: #888; display: none; }
+  .hamburger{background:none;border:1px solid var(--border);color:var(--text);
+    width:34px;height:34px;border-radius:8px;cursor:pointer;align-items:center;justify-content:center;font-size:1.1rem;display:none}
 
-    @media (max-width: 600px) {
-      .category-header { padding: 18px 20px; }
-      .q-item { padding: 12px 20px; }
-      .cta-section { padding: 32px 20px; }
-    }
-  </style>
+  @media(max-width:900px){
+    aside{transform:translateX(-100%);transition:transform .25s;z-index:95;width:280px}
+    aside.open{transform:translateX(0)}
+    main{margin-left:0;padding:24px 18px 70px}
+    .hamburger{display:flex}
+    .editor-grid{grid-template-columns:1fr}
+    .progress-wrap .ptext{display:none}
+    .nav-back{display:none}
+  }
+</style>
 </head>
 <body>
-
-<div class="progress-bar" id="progress"></div>
-
 <nav>
-  <div class="logo">sha<span>.</span>dev</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo">sha<span>.dev</span></a>
   <a href="index.html" class="nav-back">← Back to Home</a>
+  <div class="nav-spacer"></div>
+  <div class="progress-wrap">
+    <span class="ptext"><span id="doneCount">0</span> of 200 completed</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span id="progressPct">0%</span>
+  </div>
+  <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
 </nav>
 
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-badge">Interview Prep Guide 2025</div>
-  <h1>Top <span>200</span> Web Development<br>Interview Questions</h1>
-  <p>Master HTML, CSS, JavaScript, React, Node.js, Databases, Security, APIs, and DevOps. Crack your next frontend or full-stack interview.</p>
-  <div class="stats-row">
-    <div class="stat-item"><div class="num">200</div><div class="lbl">Questions</div></div>
-    <div class="stat-item"><div class="num">10</div><div class="lbl">Categories</div></div>
-    <div class="stat-item"><div class="num">2025</div><div class="lbl">Updated</div></div>
-  </div>
+<div class="overlay" id="overlay"></div>
+
+<div class="layout">
+  <aside id="sidebar">
+    <input type="text" class="search-box" id="search" placeholder="🔍 Search 200 questions..." />
+    <div id="catList"></div>
+  </aside>
+
+  <main id="main">
+    <div class="crumb" id="crumb"></div>
+    <h1 class="q-title" id="qTitle"></h1>
+    <div class="answer" id="answer"></div>
+
+    <div class="action-row">
+      <button class="btn btn-done" id="doneBtn">Mark as Done</button>
+      <button class="btn btn-share" id="shareBtn">🔗 Share</button>
+    </div>
+
+    <div class="editor-section" id="editorSection" style="display:none">
+      <div class="editor-label">Live Code Editor</div>
+      <div class="editor-grid" id="editorGrid">
+        <div class="editor-pane">
+          <div class="pane-head"><span id="langLabel">CODE</span><span>editable</span></div>
+          <textarea class="editor" id="editor" spellcheck="false"></textarea>
+        </div>
+        <div class="preview-pane" id="previewPane">
+          <div class="pane-head"><span>OUTPUT</span><span>preview</span></div>
+          <iframe class="preview" id="preview" sandbox="allow-scripts"></iframe>
+        </div>
+      </div>
+      <div class="run-bar">
+        <button class="btn btn-run" id="runBtn">▶ Run Code</button>
+        <button class="btn btn-reset" id="resetBtn">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="navbtn prev" id="prevBtn"><span class="lbl">← Previous</span><span class="ttl" id="prevTtl"></span></button>
+      <button class="navbtn next" id="nextBtn"><span class="lbl">Next →</span><span class="ttl" id="nextTtl"></span></button>
+    </div>
+  </main>
 </div>
 
-<!-- Table of Contents -->
-<div class="toc-section">
-  <div class="toc-wrap">
-    <div class="section-label">Quick Navigation</div>
-    <div class="section-title">All Categories</div>
-    <div class="toc-grid">
-      <a href="#html" class="toc-card"><span class="toc-icon">🧠</span> HTML<span class="toc-count">Q1–20</span></a>
-      <a href="#css" class="toc-card"><span class="toc-icon">🎨</span> CSS<span class="toc-count">Q21–45</span></a>
-      <a href="#js" class="toc-card"><span class="toc-icon">⚡</span> JavaScript<span class="toc-count">Q46–80</span></a>
-      <a href="#react" class="toc-card"><span class="toc-icon">⚛️</span> ReactJS<span class="toc-count">Q81–110</span></a>
-      <a href="#nodejs" class="toc-card"><span class="toc-icon">🌐</span> Node.js<span class="toc-count">Q111–130</span></a>
-      <a href="#db" class="toc-card"><span class="toc-icon">🗄️</span> Databases<span class="toc-count">Q131–150</span></a>
-      <a href="#security" class="toc-card"><span class="toc-icon">🔒</span> Security<span class="toc-count">Q151–165</span></a>
-      <a href="#api" class="toc-card"><span class="toc-icon">🚀</span> APIs & Backend<span class="toc-count">Q166–180</span></a>
-      <a href="#devops" class="toc-card"><span class="toc-icon">☁️</span> DevOps<span class="toc-count">Q181–190</span></a>
-      <a href="#advanced" class="toc-card"><span class="toc-icon">🧩</span> Advanced<span class="toc-count">Q191–200</span></a>
-    </div>
-  </div>
-</div>
-
-<!-- Search -->
-<div class="search-wrap">
-  <input type="text" class="search-box" id="searchBox" placeholder="Search any question... e.g. closure, flexbox, useState" />
-</div>
-
-<div class="no-results" id="noResults">No questions found. Try a different keyword.</div>
-
-<!-- Questions Content -->
-<div class="content" id="questionsContent">
-
-  <!-- HTML -->
-  <div class="category" id="html">
-    <div class="category-header">
-      <div class="cat-icon">🧠</div>
-      <div><div class="cat-title">1. HTML Interview Questions</div><div class="cat-range">Questions 1 – 20</div></div>
-      <div class="cat-badge">20 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">1</div><div class="q-text">What is HTML?</div></div>
-      <div class="q-item"><div class="q-num">2</div><div class="q-text">Difference between HTML4 and HTML5</div></div>
-      <div class="q-item"><div class="q-num">3</div><div class="q-text">What are semantic tags in HTML5?</div></div>
-      <div class="q-item"><div class="q-num">4</div><div class="q-text">Difference between <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code></div></div>
-      <div class="q-item"><div class="q-num">5</div><div class="q-text">What is the purpose of DOCTYPE?</div></div>
-      <div class="q-item"><div class="q-num">6</div><div class="q-text">What are meta tags?</div></div>
-      <div class="q-item"><div class="q-num">7</div><div class="q-text">Difference between ID and Class</div></div>
-      <div class="q-item"><div class="q-num">8</div><div class="q-text">What are inline and block elements?</div></div>
-      <div class="q-item"><div class="q-num">9</div><div class="q-text">Explain forms in HTML</div></div>
-      <div class="q-item"><div class="q-num">10</div><div class="q-text">Difference between GET and POST</div></div>
-      <div class="q-item"><div class="q-num">11</div><div class="q-text">What is localStorage and sessionStorage?</div></div>
-      <div class="q-item"><div class="q-num">12</div><div class="q-text">What are data attributes?</div></div>
-      <div class="q-item"><div class="q-num">13</div><div class="q-text">What is iframe?</div></div>
-      <div class="q-item"><div class="q-num">14</div><div class="q-text">Difference between cookies and localStorage</div></div>
-      <div class="q-item"><div class="q-num">15</div><div class="q-text">What are void elements?</div></div>
-      <div class="q-item"><div class="q-num">16</div><div class="q-text">What is the purpose of <code>alt</code> attribute?</div></div>
-      <div class="q-item"><div class="q-num">17</div><div class="q-text">Explain audio and video tags</div></div>
-      <div class="q-item"><div class="q-num">18</div><div class="q-text">What is accessibility in HTML?</div></div>
-      <div class="q-item"><div class="q-num">19</div><div class="q-text">What are ARIA attributes?</div></div>
-      <div class="q-item"><div class="q-num">20</div><div class="q-text">What is the difference between <code>&lt;strong&gt;</code> and <code>&lt;b&gt;</code> tags?</div></div>
-    </div>
-  </div>
-
-  <!-- CSS -->
-  <div class="category" id="css">
-    <div class="category-header">
-      <div class="cat-icon">🎨</div>
-      <div><div class="cat-title">2. CSS Interview Questions</div><div class="cat-range">Questions 21 – 45</div></div>
-      <div class="cat-badge">25 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">21</div><div class="q-text">What is CSS?</div></div>
-      <div class="q-item"><div class="q-num">22</div><div class="q-text">Difference between inline, internal, and external CSS</div></div>
-      <div class="q-item"><div class="q-num">23</div><div class="q-text">What is specificity in CSS?</div></div>
-      <div class="q-item"><div class="q-num">24</div><div class="q-text">Explain CSS Box Model</div></div>
-      <div class="q-item"><div class="q-num">25</div><div class="q-text">Difference between margin and padding</div></div>
-      <div class="q-item"><div class="q-num">26</div><div class="q-text">What is Flexbox?</div></div>
-      <div class="q-item"><div class="q-num">27</div><div class="q-text">What is CSS Grid?</div></div>
-      <div class="q-item"><div class="q-num">28</div><div class="q-text">Difference between relative, absolute, fixed, and sticky positioning</div></div>
-      <div class="q-item"><div class="q-num">29</div><div class="q-text">What is z-index?</div></div>
-      <div class="q-item"><div class="q-num">30</div><div class="q-text">Difference between <code>em</code>, <code>rem</code>, <code>%</code>, <code>px</code>, <code>vh</code>, and <code>vw</code></div></div>
-      <div class="q-item"><div class="q-num">31</div><div class="q-text">What are pseudo-classes?</div></div>
-      <div class="q-item"><div class="q-num">32</div><div class="q-text">What are pseudo-elements?</div></div>
-      <div class="q-item"><div class="q-num">33</div><div class="q-text">Difference between <code>visibility:hidden</code> and <code>display:none</code></div></div>
-      <div class="q-item"><div class="q-num">34</div><div class="q-text">What is media query?</div></div>
-      <div class="q-item"><div class="q-num">35</div><div class="q-text">Explain responsive design</div></div>
-      <div class="q-item"><div class="q-num">36</div><div class="q-text">What is mobile-first design?</div></div>
-      <div class="q-item"><div class="q-num">37</div><div class="q-text">What are CSS transitions?</div></div>
-      <div class="q-item"><div class="q-num">38</div><div class="q-text">Difference between transition and animation</div></div>
-      <div class="q-item"><div class="q-num">39</div><div class="q-text">What is <code>transform</code> property?</div></div>
-      <div class="q-item"><div class="q-num">40</div><div class="q-text">What is <code>overflow</code> property?</div></div>
-      <div class="q-item"><div class="q-num">41</div><div class="q-text">Explain CSS inheritance</div></div>
-      <div class="q-item"><div class="q-num">42</div><div class="q-text">What is <code>!important</code>?</div></div>
-      <div class="q-item"><div class="q-num">43</div><div class="q-text">What are CSS preprocessors?</div></div>
-      <div class="q-item"><div class="q-num">44</div><div class="q-text">Difference between SCSS and SASS</div></div>
-      <div class="q-item"><div class="q-num">45</div><div class="q-text">What is Bootstrap?</div></div>
-    </div>
-  </div>
-
-  <!-- JavaScript -->
-  <div class="category" id="js">
-    <div class="category-header">
-      <div class="cat-icon">⚡</div>
-      <div><div class="cat-title">3. JavaScript Basics</div><div class="cat-range">Questions 46 – 80</div></div>
-      <div class="cat-badge">35 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">46</div><div class="q-text">What is JavaScript?</div></div>
-      <div class="q-item"><div class="q-num">47</div><div class="q-text">Difference between <code>var</code>, <code>let</code>, and <code>const</code></div></div>
-      <div class="q-item"><div class="q-num">48</div><div class="q-text">What are data types in JavaScript?</div></div>
-      <div class="q-item"><div class="q-num">49</div><div class="q-text">Difference between <code>null</code> and <code>undefined</code></div></div>
-      <div class="q-item"><div class="q-num">50</div><div class="q-text">What is hoisting?</div></div>
-      <div class="q-item"><div class="q-num">51</div><div class="q-text">Explain scope in JavaScript</div></div>
-      <div class="q-item"><div class="q-num">52</div><div class="q-text">What is closure?</div></div>
-      <div class="q-item"><div class="q-num">53</div><div class="q-text">What is callback function?</div></div>
-      <div class="q-item"><div class="q-num">54</div><div class="q-text">What is arrow function?</div></div>
-      <div class="q-item"><div class="q-num">55</div><div class="q-text">Difference between <code>==</code> and <code>===</code></div></div>
-      <div class="q-item"><div class="q-num">56</div><div class="q-text">What is event bubbling?</div></div>
-      <div class="q-item"><div class="q-num">57</div><div class="q-text">What is event capturing?</div></div>
-      <div class="q-item"><div class="q-num">58</div><div class="q-text">What is event delegation?</div></div>
-      <div class="q-item"><div class="q-num">59</div><div class="q-text">What is DOM?</div></div>
-      <div class="q-item"><div class="q-num">60</div><div class="q-text">Difference between synchronous and asynchronous programming</div></div>
-      <div class="q-item"><div class="q-num">61</div><div class="q-text">What is promise in JavaScript?</div></div>
-      <div class="q-item"><div class="q-num">62</div><div class="q-text">What are <code>async</code> and <code>await</code>?</div></div>
-      <div class="q-item"><div class="q-num">63</div><div class="q-text">What is <code>setTimeout</code>?</div></div>
-      <div class="q-item"><div class="q-num">64</div><div class="q-text">Difference between <code>map()</code>, <code>filter()</code>, and <code>reduce()</code></div></div>
-      <div class="q-item"><div class="q-num">65</div><div class="q-text">What is destructuring?</div></div>
-      <div class="q-item"><div class="q-num">66</div><div class="q-text">What is spread operator?</div></div>
-      <div class="q-item"><div class="q-num">67</div><div class="q-text">What is rest operator?</div></div>
-      <div class="q-item"><div class="q-num">68</div><div class="q-text">What is template literal?</div></div>
-      <div class="q-item"><div class="q-num">69</div><div class="q-text">What is optional chaining?</div></div>
-      <div class="q-item"><div class="q-num">70</div><div class="q-text">Explain <code>this</code> keyword</div></div>
-      <div class="q-item"><div class="q-num">71</div><div class="q-text">Difference between function declaration and expression</div></div>
-      <div class="q-item"><div class="q-num">72</div><div class="q-text">What is prototype?</div></div>
-      <div class="q-item"><div class="q-num">73</div><div class="q-text">What is prototypal inheritance?</div></div>
-      <div class="q-item"><div class="q-num">74</div><div class="q-text">What is JSON?</div></div>
-      <div class="q-item"><div class="q-num">75</div><div class="q-text">Difference between localStorage and sessionStorage</div></div>
-      <div class="q-item"><div class="q-num">76</div><div class="q-text">What is <code>NaN</code>?</div></div>
-      <div class="q-item"><div class="q-num">77</div><div class="q-text">What are truthy and falsy values?</div></div>
-      <div class="q-item"><div class="q-num">78</div><div class="q-text">What is debounce?</div></div>
-      <div class="q-item"><div class="q-num">79</div><div class="q-text">What is throttle?</div></div>
-      <div class="q-item"><div class="q-num">80</div><div class="q-text">What is currying?</div></div>
-    </div>
-  </div>
-
-  <!-- React -->
-  <div class="category" id="react">
-    <div class="category-header">
-      <div class="cat-icon">⚛️</div>
-      <div><div class="cat-title">4. ReactJS Interview Questions</div><div class="cat-range">Questions 81 – 110</div></div>
-      <div class="cat-badge">30 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">81</div><div class="q-text">What is React?</div></div>
-      <div class="q-item"><div class="q-num">82</div><div class="q-text">What are components in React?</div></div>
-      <div class="q-item"><div class="q-num">83</div><div class="q-text">Difference between functional and class components</div></div>
-      <div class="q-item"><div class="q-num">84</div><div class="q-text">What is JSX?</div></div>
-      <div class="q-item"><div class="q-num">85</div><div class="q-text">What are props?</div></div>
-      <div class="q-item"><div class="q-num">86</div><div class="q-text">What is state?</div></div>
-      <div class="q-item"><div class="q-num">87</div><div class="q-text">Difference between state and props</div></div>
-      <div class="q-item"><div class="q-num">88</div><div class="q-text">What is <code>useState</code> hook?</div></div>
-      <div class="q-item"><div class="q-num">89</div><div class="q-text">What is <code>useEffect</code> hook?</div></div>
-      <div class="q-item"><div class="q-num">90</div><div class="q-text">What is virtual DOM?</div></div>
-      <div class="q-item"><div class="q-num">91</div><div class="q-text">What is reconciliation?</div></div>
-      <div class="q-item"><div class="q-num">92</div><div class="q-text">What are keys in React?</div></div>
-      <div class="q-item"><div class="q-num">93</div><div class="q-text">What is prop drilling?</div></div>
-      <div class="q-item"><div class="q-num">94</div><div class="q-text">What is Context API?</div></div>
-      <div class="q-item"><div class="q-num">95</div><div class="q-text">What is Redux?</div></div>
-      <div class="q-item"><div class="q-num">96</div><div class="q-text">Difference between Redux and Context API</div></div>
-      <div class="q-item"><div class="q-num">97</div><div class="q-text">What are React hooks?</div></div>
-      <div class="q-item"><div class="q-num">98</div><div class="q-text">What is <code>useRef</code>?</div></div>
-      <div class="q-item"><div class="q-num">99</div><div class="q-text">What is <code>useMemo</code>?</div></div>
-      <div class="q-item"><div class="q-num">100</div><div class="q-text">What is <code>useCallback</code>?</div></div>
-      <div class="q-item"><div class="q-num">101</div><div class="q-text">What is lazy loading in React?</div></div>
-      <div class="q-item"><div class="q-num">102</div><div class="q-text">What is React Router?</div></div>
-      <div class="q-item"><div class="q-num">103</div><div class="q-text">What are controlled components?</div></div>
-      <div class="q-item"><div class="q-num">104</div><div class="q-text">What are uncontrolled components?</div></div>
-      <div class="q-item"><div class="q-num">105</div><div class="q-text">What is lifting state up?</div></div>
-      <div class="q-item"><div class="q-num">106</div><div class="q-text">What is Higher Order Component (HOC)?</div></div>
-      <div class="q-item"><div class="q-num">107</div><div class="q-text">What are custom hooks?</div></div>
-      <div class="q-item"><div class="q-num">108</div><div class="q-text">What is Strict Mode?</div></div>
-      <div class="q-item"><div class="q-num">109</div><div class="q-text">What is server-side rendering?</div></div>
-      <div class="q-item"><div class="q-num">110</div><div class="q-text">Difference between CSR and SSR</div></div>
-    </div>
-  </div>
-
-  <!-- Node.js -->
-  <div class="category" id="nodejs">
-    <div class="category-header">
-      <div class="cat-icon">🌐</div>
-      <div><div class="cat-title">5. Node.js Interview Questions</div><div class="cat-range">Questions 111 – 130</div></div>
-      <div class="cat-badge">20 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">111</div><div class="q-text">What is Node.js?</div></div>
-      <div class="q-item"><div class="q-num">112</div><div class="q-text">Why use Node.js?</div></div>
-      <div class="q-item"><div class="q-num">113</div><div class="q-text">What is npm?</div></div>
-      <div class="q-item"><div class="q-num">114</div><div class="q-text">Difference between CommonJS and ES Modules</div></div>
-      <div class="q-item"><div class="q-num">115</div><div class="q-text">What is Express.js?</div></div>
-      <div class="q-item"><div class="q-num">116</div><div class="q-text">What is middleware?</div></div>
-      <div class="q-item"><div class="q-num">117</div><div class="q-text">What is REST API?</div></div>
-      <div class="q-item"><div class="q-num">118</div><div class="q-text">Difference between PUT and PATCH</div></div>
-      <div class="q-item"><div class="q-num">119</div><div class="q-text">What is JWT?</div></div>
-      <div class="q-item"><div class="q-num">120</div><div class="q-text">What is authentication vs authorization?</div></div>
-      <div class="q-item"><div class="q-num">121</div><div class="q-text">What is CORS?</div></div>
-      <div class="q-item"><div class="q-num">122</div><div class="q-text">What is <code>dotenv</code>?</div></div>
-      <div class="q-item"><div class="q-num">123</div><div class="q-text">What is event loop?</div></div>
-      <div class="q-item"><div class="q-num">124</div><div class="q-text">What is non-blocking I/O?</div></div>
-      <div class="q-item"><div class="q-num">125</div><div class="q-text">What is <code>package.json</code>?</div></div>
-      <div class="q-item"><div class="q-num">126</div><div class="q-text">What is nodemon?</div></div>
-      <div class="q-item"><div class="q-num">127</div><div class="q-text">What are streams in Node.js?</div></div>
-      <div class="q-item"><div class="q-num">128</div><div class="q-text">What is buffering?</div></div>
-      <div class="q-item"><div class="q-num">129</div><div class="q-text">What is async middleware?</div></div>
-      <div class="q-item"><div class="q-num">130</div><div class="q-text">What is rate limiting?</div></div>
-    </div>
-  </div>
-
-  <!-- Database -->
-  <div class="category" id="db">
-    <div class="category-header">
-      <div class="cat-icon">🗄️</div>
-      <div><div class="cat-title">6. Database Interview Questions</div><div class="cat-range">Questions 131 – 150</div></div>
-      <div class="cat-badge">20 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">131</div><div class="q-text">What is SQL?</div></div>
-      <div class="q-item"><div class="q-num">132</div><div class="q-text">Difference between SQL and NoSQL</div></div>
-      <div class="q-item"><div class="q-num">133</div><div class="q-text">What is primary key?</div></div>
-      <div class="q-item"><div class="q-num">134</div><div class="q-text">What is foreign key?</div></div>
-      <div class="q-item"><div class="q-num">135</div><div class="q-text">What is normalization?</div></div>
-      <div class="q-item"><div class="q-num">136</div><div class="q-text">What are joins in SQL?</div></div>
-      <div class="q-item"><div class="q-num">137</div><div class="q-text">Difference between INNER JOIN and LEFT JOIN</div></div>
-      <div class="q-item"><div class="q-num">138</div><div class="q-text">What is indexing?</div></div>
-      <div class="q-item"><div class="q-num">139</div><div class="q-text">What is aggregate function?</div></div>
-      <div class="q-item"><div class="q-num">140</div><div class="q-text">Difference between DELETE, DROP, and TRUNCATE</div></div>
-      <div class="q-item"><div class="q-num">141</div><div class="q-text">What is MongoDB?</div></div>
-      <div class="q-item"><div class="q-num">142</div><div class="q-text">Difference between MongoDB and MySQL</div></div>
-      <div class="q-item"><div class="q-num">143</div><div class="q-text">What is schema?</div></div>
-      <div class="q-item"><div class="q-num">144</div><div class="q-text">What is ORM?</div></div>
-      <div class="q-item"><div class="q-num">145</div><div class="q-text">What is Sequelize?</div></div>
-      <div class="q-item"><div class="q-num">146</div><div class="q-text">What is Mongoose?</div></div>
-      <div class="q-item"><div class="q-num">147</div><div class="q-text">What is ACID property?</div></div>
-      <div class="q-item"><div class="q-num">148</div><div class="q-text">What is transaction?</div></div>
-      <div class="q-item"><div class="q-num">149</div><div class="q-text">What is database sharding?</div></div>
-      <div class="q-item"><div class="q-num">150</div><div class="q-text">What is replication?</div></div>
-    </div>
-  </div>
-
-  <!-- Security -->
-  <div class="category" id="security">
-    <div class="category-header">
-      <div class="cat-icon">🔒</div>
-      <div><div class="cat-title">7. Web Security Interview Questions</div><div class="cat-range">Questions 151 – 165</div></div>
-      <div class="cat-badge">15 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">151</div><div class="q-text">What is HTTPS?</div></div>
-      <div class="q-item"><div class="q-num">152</div><div class="q-text">Difference between HTTP and HTTPS</div></div>
-      <div class="q-item"><div class="q-num">153</div><div class="q-text">What is SSL/TLS?</div></div>
-      <div class="q-item"><div class="q-num">154</div><div class="q-text">What is XSS attack?</div></div>
-      <div class="q-item"><div class="q-num">155</div><div class="q-text">What is CSRF attack?</div></div>
-      <div class="q-item"><div class="q-num">156</div><div class="q-text">What is SQL Injection?</div></div>
-      <div class="q-item"><div class="q-num">157</div><div class="q-text">How to secure APIs?</div></div>
-      <div class="q-item"><div class="q-num">158</div><div class="q-text">What is hashing?</div></div>
-      <div class="q-item"><div class="q-num">159</div><div class="q-text">Difference between encryption and hashing</div></div>
-      <div class="q-item"><div class="q-num">160</div><div class="q-text">What is bcrypt?</div></div>
-      <div class="q-item"><div class="q-num">161</div><div class="q-text">What is OAuth?</div></div>
-      <div class="q-item"><div class="q-num">162</div><div class="q-text">What is JWT token security?</div></div>
-      <div class="q-item"><div class="q-num">163</div><div class="q-text">What is Content Security Policy?</div></div>
-      <div class="q-item"><div class="q-num">164</div><div class="q-text">What is brute force attack?</div></div>
-      <div class="q-item"><div class="q-num">165</div><div class="q-text">What is two-factor authentication?</div></div>
-    </div>
-  </div>
-
-  <!-- APIs -->
-  <div class="category" id="api">
-    <div class="category-header">
-      <div class="cat-icon">🚀</div>
-      <div><div class="cat-title">8. APIs & Backend Concepts</div><div class="cat-range">Questions 166 – 180</div></div>
-      <div class="cat-badge">15 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">166</div><div class="q-text">What is API?</div></div>
-      <div class="q-item"><div class="q-num">167</div><div class="q-text">Difference between REST and GraphQL</div></div>
-      <div class="q-item"><div class="q-num">168</div><div class="q-text">What is RESTful API?</div></div>
-      <div class="q-item"><div class="q-num">169</div><div class="q-text">What are HTTP status codes?</div></div>
-      <div class="q-item"><div class="q-num">170</div><div class="q-text">Explain 200, 201, 400, 401, 403, 404, 500</div></div>
-      <div class="q-item"><div class="q-num">171</div><div class="q-text">What is API testing?</div></div>
-      <div class="q-item"><div class="q-num">172</div><div class="q-text">What is Postman?</div></div>
-      <div class="q-item"><div class="q-num">173</div><div class="q-text">What is WebSocket?</div></div>
-      <div class="q-item"><div class="q-num">174</div><div class="q-text">Difference between polling and WebSocket</div></div>
-      <div class="q-item"><div class="q-num">175</div><div class="q-text">What is microservice architecture?</div></div>
-      <div class="q-item"><div class="q-num">176</div><div class="q-text">What is monolithic architecture?</div></div>
-      <div class="q-item"><div class="q-num">177</div><div class="q-text">What is caching?</div></div>
-      <div class="q-item"><div class="q-num">178</div><div class="q-text">What is Redis?</div></div>
-      <div class="q-item"><div class="q-num">179</div><div class="q-text">What is CDN?</div></div>
-      <div class="q-item"><div class="q-num">180</div><div class="q-text">What is load balancing?</div></div>
-    </div>
-  </div>
-
-  <!-- DevOps -->
-  <div class="category" id="devops">
-    <div class="category-header">
-      <div class="cat-icon">☁️</div>
-      <div><div class="cat-title">9. Deployment & DevOps Questions</div><div class="cat-range">Questions 181 – 190</div></div>
-      <div class="cat-badge">10 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">181</div><div class="q-text">What is Git?</div></div>
-      <div class="q-item"><div class="q-num">182</div><div class="q-text">Difference between Git and GitHub</div></div>
-      <div class="q-item"><div class="q-num">183</div><div class="q-text">What is version control?</div></div>
-      <div class="q-item"><div class="q-num">184</div><div class="q-text">What is branching in Git?</div></div>
-      <div class="q-item"><div class="q-num">185</div><div class="q-text">What is merge conflict?</div></div>
-      <div class="q-item"><div class="q-num">186</div><div class="q-text">What is CI/CD?</div></div>
-      <div class="q-item"><div class="q-num">187</div><div class="q-text">What is Docker?</div></div>
-      <div class="q-item"><div class="q-num">188</div><div class="q-text">What is Kubernetes?</div></div>
-      <div class="q-item"><div class="q-num">189</div><div class="q-text">What is cloud hosting?</div></div>
-      <div class="q-item"><div class="q-num">190</div><div class="q-text">Difference between AWS, Azure, and GCP</div></div>
-    </div>
-  </div>
-
-  <!-- Advanced -->
-  <div class="category" id="advanced">
-    <div class="category-header">
-      <div class="cat-icon">🧩</div>
-      <div><div class="cat-title">10. Advanced Web Development Questions</div><div class="cat-range">Questions 191 – 200</div></div>
-      <div class="cat-badge">10 Qs</div>
-    </div>
-    <div class="questions-list">
-      <div class="q-item"><div class="q-num">191</div><div class="q-text">What is Progressive Web App (PWA)?</div></div>
-      <div class="q-item"><div class="q-num">192</div><div class="q-text">What is service worker?</div></div>
-      <div class="q-item"><div class="q-num">193</div><div class="q-text">What is lazy loading?</div></div>
-      <div class="q-item"><div class="q-num">194</div><div class="q-text">What is code splitting?</div></div>
-      <div class="q-item"><div class="q-num">195</div><div class="q-text">What is tree shaking?</div></div>
-      <div class="q-item"><div class="q-num">196</div><div class="q-text">What is SSR in Next.js?</div></div>
-      <div class="q-item"><div class="q-num">197</div><div class="q-text">What is hydration in React?</div></div>
-      <div class="q-item"><div class="q-num">198</div><div class="q-text">What is Webpack?</div></div>
-      <div class="q-item"><div class="q-num">199</div><div class="q-text">What is Babel?</div></div>
-      <div class="q-item"><div class="q-num">200</div><div class="q-text">What is TypeScript and why use it?</div></div>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-section">
-    <h2>Need Interview Coaching?</h2>
-    <p>Book a 1-on-1 consultation with Sha — Chennai's web developer with 8 years experience helping freshers and professionals crack tech interviews.</p>
-    <a href="index.html#consultation" class="cta-btn">Book Consultation — ₹199</a>
-  </div>
-
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
-  // Progress bar
-  window.addEventListener('scroll', () => {
-    const el = document.getElementById('progress');
-    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    el.style.width = scrolled + '%';
-  });
+const ICONS={HTML:"🧠",CSS:"🎨",JavaScript:"⚡",React:"⚛️","Node.js":"🟢",Databases:"🗄️",Security:"🔒",APIs:"🔌",DevOps:"🚀",Advanced:"🧩"};
+const QUESTIONS=[
+{id:1,category:"HTML",question:"What is HTML?",lang:"html",
+answer:`<p><strong>HTML (HyperText Markup Language)</strong> is the standard markup language used to create the structure and content of web pages. It is not a programming language — it describes the structure of a document using <em>elements</em> made of <em>tags</em>.</p>
+<ul><li><strong>HyperText</strong> – links that connect documents to each other.</li><li><strong>Markup</strong> – tags like <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;div&gt;</code> that "mark up" content.</li></ul>
+<p>The browser reads the HTML and <strong>renders</strong> it into the visual page you see. CSS adds styling and JavaScript adds behaviour, but HTML is always the foundation.</p>`,
+code:`<!DOCTYPE html>\n<html>\n<body>\n  <h1>Hello World</h1>\n  <p>This is my first HTML page!</p>\n  <a href="#">A hyperlink</a>\n</body>\n</html>`},
+{id:2,category:"HTML",question:"Difference between HTML4 and HTML5?",lang:"html",
+answer:`<p><strong>HTML5</strong> is the modern version and introduced major improvements over HTML4:</p>
+<table><tr><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>Long, complex doctype</td><td>Simple <code>&lt;!DOCTYPE html&gt;</code></td></tr>
+<tr><td>No semantic tags</td><td><code>header, nav, footer, article, section</code></td></tr>
+<tr><td>Needed Flash for media</td><td>Native <code>&lt;audio&gt;</code> & <code>&lt;video&gt;</code></td></tr>
+<tr><td>No drawing API</td><td><code>&lt;canvas&gt;</code> & SVG</td></tr>
+<tr><td>Only cookies</td><td>localStorage & sessionStorage</td></tr>
+<tr><td>Basic form inputs</td><td>email, date, range, color inputs</td></tr></table>`,
+code:`<!DOCTYPE html>\n<html>\n<body>\n  <header>HTML5 semantic header</header>\n  <video controls width="250">\n    <source src="movie.mp4" type="video/mp4">\n  </video>\n  <input type="email" placeholder="HTML5 email input">\n</body>\n</html>`},
+{id:3,category:"HTML",question:"What are semantic tags in HTML5?",lang:"html",
+answer:`<p><strong>Semantic tags</strong> describe their meaning to the browser and developer — unlike <code>&lt;div&gt;</code> which is generic. They improve <strong>accessibility</strong> and <strong>SEO</strong>.</p>
+<ul><li><code>&lt;header&gt;</code> – top section / intro</li><li><code>&lt;nav&gt;</code> – navigation links</li><li><code>&lt;main&gt;</code> – main unique content</li><li><code>&lt;article&gt;</code> – self-contained content</li><li><code>&lt;section&gt;</code> – thematic grouping</li><li><code>&lt;aside&gt;</code> – sidebar / related content</li><li><code>&lt;figure&gt;</code> & <code>&lt;figcaption&gt;</code> – media with caption</li><li><code>&lt;footer&gt;</code> – bottom section</li></ul>`,
+code:`<header><h1>My Blog</h1></header>\n<nav><a href="#">Home</a> <a href="#">About</a></nav>\n<main>\n  <article>\n    <h2>Post Title</h2>\n    <p>Article content here.</p>\n  </article>\n  <aside>Related links</aside>\n</main>\n<footer>© 2026 sha.dev</footer>`},
+{id:4,category:"HTML",question:"div vs span?",lang:"html",
+answer:`<p>Both are generic containers with no semantic meaning, but they differ in display:</p>
+<ul><li><code>&lt;div&gt;</code> – a <strong>block-level</strong> element. Takes full width and starts on a new line. Used for layout sections/wrappers.</li><li><code>&lt;span&gt;</code> – an <strong>inline</strong> element. Flows within text and only takes as much width as its content. Used to style part of a line of text.</li></ul>`,
+code:`<div style="background:#0f7a52;color:#fff;padding:8px">\n  I am a DIV (block, full width)\n</div>\n<p>This text has a \n  <span style="color:#c07e1a;font-weight:bold">SPAN</span>\n  inside it (inline).</p>`},
+{id:5,category:"HTML",question:"Purpose of DOCTYPE?",lang:"html",
+answer:`<p>The <code>&lt;!DOCTYPE html&gt;</code> declaration tells the browser <strong>which version of HTML</strong> the document uses. It must be the very first line.</p>
+<ul><li>It triggers <strong>standards mode</strong> rendering.</li><li>Without it, browsers fall back to <strong>quirks mode</strong>, emulating old buggy behaviour and breaking layouts.</li><li>In HTML5 it is short and version-less: <code>&lt;!DOCTYPE html&gt;</code>.</li></ul>`,
+code:`<!DOCTYPE html>\n<html>\n<head><title>Standards Mode</title></head>\n<body>\n  <p>This page renders in standards mode.</p>\n</body>\n</html>`},
+{id:6,category:"HTML",question:"What are meta tags?",lang:"html",
+answer:`<p><strong>Meta tags</strong> live inside <code>&lt;head&gt;</code> and provide metadata about the page (not visible content) used by browsers, search engines and social platforms.</p>
+<ul><li><code>charset</code> – character encoding (UTF-8).</li><li><code>viewport</code> – responsive scaling on mobile.</li><li><code>description</code> – SEO snippet shown in search results.</li><li><code>keywords</code> – legacy SEO keywords.</li><li><code>og:*</code> (Open Graph) – preview cards on social media.</li></ul>`,
+code:`<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <meta name="description" content="Learn web dev with sha.dev">\n  <meta property="og:title" content="200 Interview Questions">\n</head>`},
+{id:7,category:"HTML",question:"ID vs Class?",lang:"css",
+answer:`<table><tr><th>ID</th><th>Class</th></tr>
+<tr><td>Unique — one per page</td><td>Reusable — many elements</td></tr>
+<tr><td>Selected with <code>#name</code></td><td>Selected with <code>.name</code></td></tr>
+<tr><td>Higher CSS specificity (100)</td><td>Lower specificity (10)</td></tr>
+<tr><td><code>getElementById()</code></td><td><code>getElementsByClassName()</code></td></tr></table>
+<p>Use <strong>classes</strong> for styling and IDs for unique anchors/JS hooks.</p>`,
+code:`<style>\n  #header { color: #0f7a52; }   /* unique */\n  .box { background:#eee; padding:8px } /* reusable */\n</style>\n<h1 id="header">Unique ID</h1>\n<div class="box">Box 1</div>\n<div class="box">Box 2</div>`},
+{id:8,category:"HTML",question:"Inline vs block elements?",lang:"html",
+answer:`<ul><li><strong>Block elements</strong> start on a new line and take the full available width. Examples: <code>div, p, h1-h6, ul, section, header</code>.</li><li><strong>Inline elements</strong> stay in the text flow and only take the width of their content. Examples: <code>span, a, strong, em, img, b</code>.</li></ul>
+<p>You can switch them with the CSS <code>display</code> property (e.g. <code>display:inline-block</code>).</p>`,
+code:`<p>Block elements:</p>\n<div style="background:#cde">Block 1</div>\n<div style="background:#dec">Block 2</div>\n<p>Inline: <span style="background:#cde">A</span>\n<span style="background:#dec">B</span></p>`},
+{id:9,category:"HTML",question:"Forms in HTML?",lang:"html",
+answer:`<p>The <code>&lt;form&gt;</code> element collects user input and submits it to a server.</p>
+<ul><li><code>action</code> – URL the data is sent to.</li><li><code>method</code> – GET or POST.</li><li>Inputs: <code>text, email, password, checkbox, radio, number, date, file</code>.</li><li>Built-in validation: <code>required, minlength, pattern, type="email"</code>.</li></ul>`,
+code:`<form action="/submit" method="post">\n  <label>Name: <input type="text" required></label><br>\n  <label>Email: <input type="email" required></label><br>\n  <label>Age: <input type="number" min="1"></label><br>\n  <button type="submit">Send</button>\n</form>`},
+{id:10,category:"HTML",question:"GET vs POST?",lang:"none",
+answer:`<table><tr><th>GET</th><th>POST</th></tr>
+<tr><td>Data in URL query string</td><td>Data in request body</td></tr>
+<tr><td>Visible & bookmarkable</td><td>Hidden from URL</td></tr>
+<tr><td>Limited length (~2KB)</td><td>No practical size limit</td></tr>
+<tr><td>Cacheable</td><td>Not cached</td></tr>
+<tr><td>For reading/idempotent</td><td>For creating/changing data</td></tr></table>
+<p>Never send passwords or sensitive data with GET.</p>`,
+code:`// GET — params in URL\nfetch('/search?q=react');\n\n// POST — data in body\nfetch('/login', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ user: 'sha', pass: 'secret' })\n});`},
+{id:11,category:"HTML",question:"localStorage vs sessionStorage?",lang:"js",
+answer:`<p>Both store key-value string pairs in the browser (~5-10 MB), but differ in lifetime:</p>
+<ul><li><strong>localStorage</strong> – persists <em>forever</em> until manually cleared. Shared across all tabs of the same origin.</li><li><strong>sessionStorage</strong> – lasts only for the <em>tab session</em>. Cleared when the tab closes and is not shared between tabs.</li></ul>`,
+code:`// localStorage – persists\nlocalStorage.setItem('theme', 'dark');\nconsole.log(localStorage.getItem('theme'));\n\n// sessionStorage – per tab\nsessionStorage.setItem('step', '2');\nconsole.log(sessionStorage.getItem('step'));`},
+{id:12,category:"HTML",question:"What are data attributes?",lang:"js",
+answer:`<p><strong>Custom data attributes</strong> (<code>data-*</code>) let you store extra information on any HTML element. They are read in JavaScript via the <code>dataset</code> API.</p>
+<ul><li>Must start with <code>data-</code> followed by a lowercase name.</li><li><code>data-user-id</code> becomes <code>element.dataset.userId</code> (camelCase).</li><li>Useful for passing data to JS without globals.</li></ul>`,
+code:`<button id="b" data-user-id="42" data-role="admin">Click</button>\n<script>\n  const b = document.getElementById('b');\n  document.body.innerHTML += b.dataset.userId + ' / ' + b.dataset.role;\n<\/script>`},
+{id:13,category:"HTML",question:"What is an iframe?",lang:"html",
+answer:`<p>An <code>&lt;iframe&gt;</code> (inline frame) embeds another HTML document inside the current page — e.g. YouTube videos, maps, or ads.</p>
+<ul><li><strong>Security concern:</strong> external content can be malicious, so use the <code>sandbox</code> attribute to restrict scripts, forms and popups.</li><li>Same-origin policy prevents JS from freely accessing cross-origin iframe content.</li></ul>`,
+code:`<iframe \n  srcdoc="<h2 style='color:#0f7a52'>Embedded page!</h2>"\n  sandbox="allow-scripts"\n  width="100%" height="120">\n</iframe>`},
+{id:14,category:"HTML",question:"Cookies vs localStorage?",lang:"none",
+answer:`<table><tr><th>Cookies</th><th>localStorage</th></tr>
+<tr><td>~4 KB limit</td><td>~5-10 MB limit</td></tr>
+<tr><td>Sent to server on every request</td><td>Stays only in browser</td></tr>
+<tr><td>Has expiry date</td><td>No expiry (manual)</td></tr>
+<tr><td>Good for auth/sessions</td><td>Good for app data/preferences</td></tr></table>`,
+code:`// Cookie (sent to server)\ndocument.cookie = "token=abc; max-age=3600; path=/";\n\n// localStorage (client only)\nlocalStorage.setItem('lang', 'en');`},
+{id:15,category:"HTML",question:"What are void elements?",lang:"html",
+answer:`<p><strong>Void (empty) elements</strong> have no closing tag and cannot contain children. They are self-closing.</p>
+<p>Common void elements: <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;area&gt;</code>, <code>&lt;source&gt;</code>.</p>`,
+code:`<img src="logo.png" alt="logo">\nLine one<br>Line two\n<hr>\n<input type="text" placeholder="no closing tag">`},
+{id:16,category:"HTML",question:"The alt attribute?",lang:"html",
+answer:`<p>The <code>alt</code> attribute on <code>&lt;img&gt;</code> provides <strong>alternative text</strong>:</p>
+<ul><li><strong>Accessibility</strong> – screen readers read it aloud for blind users.</li><li><strong>Broken images</strong> – shown if the image fails to load.</li><li><strong>SEO</strong> – search engines use it to understand images.</li></ul>
+<p>Decorative images should use empty <code>alt=""</code>.</p>`,
+code:`<img src="broken-link.png" alt="A green sha.dev logo">\n<!-- If the image fails, the alt text shows -->`},
+{id:17,category:"HTML",question:"Audio and video tags?",lang:"html",
+answer:`<p>HTML5 added native media playback without plugins:</p>
+<ul><li><code>controls</code> – show play/pause UI.</li><li><code>autoplay</code> – start automatically (often muted is required).</li><li><code>loop</code> – repeat.</li><li><code>&lt;source&gt;</code> – provide multiple formats (mp4, webm, ogg).</li></ul>`,
+code:`<audio controls>\n  <source src="song.mp3" type="audio/mpeg">\n  Your browser does not support audio.\n</audio>\n\n<video controls width="250" loop muted>\n  <source src="clip.mp4" type="video/mp4">\n</video>`},
+{id:18,category:"HTML",question:"Accessibility in HTML?",lang:"html",
+answer:`<p><strong>Accessibility (a11y)</strong> means building pages usable by everyone, including people with disabilities.</p>
+<ul><li>Use <strong>semantic HTML</strong> so screen readers understand structure.</li><li>Always provide <code>alt</code> text and form <code>&lt;label&gt;</code>s.</li><li>Ensure <strong>keyboard navigation</strong> (tab order, focus states).</li><li>Maintain sufficient <strong>colour contrast</strong>.</li><li>Add ARIA attributes where native semantics are missing.</li></ul>`,
+code:`<label for="email">Email</label>\n<input id="email" type="email">\n\n<button aria-label="Close menu">✕</button>\n<img src="chart.png" alt="Sales rose 20% in Q1">`},
+{id:19,category:"HTML",question:"ARIA attributes?",lang:"html",
+answer:`<p><strong>ARIA (Accessible Rich Internet Applications)</strong> attributes add accessibility info to elements when native HTML isn't enough (e.g. custom widgets).</p>
+<ul><li><code>role</code> – defines what an element is (<code>role="button"</code>).</li><li><code>aria-label</code> – accessible name for icon-only elements.</li><li><code>aria-hidden="true"</code> – hide decorative content from screen readers.</li><li><code>aria-expanded</code> – open/closed state of dropdowns.</li></ul>`,
+code:`<div role="button" tabindex="0" aria-label="Play video">▶</div>\n<span aria-hidden="true">🎨</span>\n<button aria-expanded="false">Menu</button>`},
+{id:20,category:"HTML",question:"strong vs b?",lang:"html",
+answer:`<p>Both render bold text but differ in <strong>meaning</strong>:</p>
+<ul><li><code>&lt;strong&gt;</code> – <strong>semantic</strong> importance; screen readers may emphasise it.</li><li><code>&lt;b&gt;</code> – purely <strong>visual</strong> bold with no added importance.</li></ul>
+<p>Same applies to <code>&lt;em&gt;</code> (semantic emphasis) vs <code>&lt;i&gt;</code> (visual italic). Prefer semantic tags.</p>`,
+code:`<p><strong>This is important</strong> (semantic)</p>\n<p><b>This is just bold</b> (visual only)</p>`},
 
-  // Search
-  const searchBox = document.getElementById('searchBox');
-  const noResults = document.getElementById('noResults');
+{id:21,category:"CSS",question:"What is CSS?",lang:"css",
+answer:`<p><strong>CSS (Cascading Style Sheets)</strong> is the language used to style and lay out HTML. It controls colours, fonts, spacing, positioning, animations and responsiveness.</p>
+<p>"Cascading" means rules cascade and combine, with conflicts resolved by <strong>specificity</strong> and source order. CSS separates presentation from structure.</p>`,
+code:`<style>\n  h1 { color: #0f7a52; font-family: sans-serif; }\n  p  { background: #f0f0e8; padding: 10px; border-radius: 8px; }\n</style>\n<h1>Styled with CSS</h1>\n<p>This paragraph has a background and padding.</p>`},
+{id:22,category:"CSS",question:"Inline vs internal vs external CSS?",lang:"css",
+answer:`<ul><li><strong>Inline</strong> – <code>style</code> attribute on an element. Highest specificity, hard to maintain.</li><li><strong>Internal</strong> – <code>&lt;style&gt;</code> block in the <code>&lt;head&gt;</code>. Page-specific.</li><li><strong>External</strong> – separate <code>.css</code> file linked with <code>&lt;link&gt;</code>. Reusable & cacheable — the recommended approach.</li></ul>`,
+code:`<!-- Inline -->\n<p style="color:red">Inline</p>\n\n<!-- Internal -->\n<style> p { color: green; } </style>\n\n<!-- External -->\n<link rel="stylesheet" href="styles.css">`},
+{id:23,category:"CSS",question:"CSS Specificity?",lang:"css",
+answer:`<p><strong>Specificity</strong> decides which conflicting rule wins. Calculated as (inline, IDs, classes, elements):</p>
+<ul><li>Inline style → 1000</li><li>ID <code>#id</code> → 100</li><li>Class/attribute/pseudo-class <code>.cls</code> → 10</li><li>Element/pseudo-element <code>div</code> → 1</li></ul>
+<p>Higher total wins. Ties are broken by source order (later wins). <code>!important</code> overrides all.</p>`,
+code:`<style>\n  p { color: gray; }        /* 1 */\n  .text { color: blue; }    /* 10 */\n  #para { color: green; }   /* 100 wins */\n</style>\n<p id="para" class="text">What colour am I?</p>`},
+{id:24,category:"CSS",question:"The CSS Box Model?",lang:"css",
+answer:`<p>Every element is a box made of four layers (inside-out):</p>
+<ul><li><strong>Content</strong> – text/image.</li><li><strong>Padding</strong> – space inside, around content.</li><li><strong>Border</strong> – edge around padding.</li><li><strong>Margin</strong> – space outside, between elements.</li></ul>
+<p>With <code>box-sizing:border-box</code> the width includes padding + border, which is more intuitive.</p>`,
+code:`<style>\n  .box {\n    width: 200px; padding: 20px;\n    border: 5px solid #0f7a52;\n    margin: 15px; background: #d6efe4;\n    box-sizing: border-box;\n  }\n</style>\n<div class="box">Box model demo</div>`},
+{id:25,category:"CSS",question:"Margin vs padding?",lang:"css",
+answer:`<ul><li><strong>Margin</strong> – space <em>outside</em> the border; pushes other elements away. Margins can collapse vertically.</li><li><strong>Padding</strong> – space <em>inside</em> the border, between content and edge; part of the clickable/background area.</li></ul>`,
+code:`<style>\n  .pad { padding: 25px; background:#cce; }\n  .mar { margin: 25px; background:#ecc; }\n</style>\n<div class="pad">Padding (inside)</div>\n<div class="mar">Margin (outside)</div>`},
+{id:26,category:"CSS",question:"What is Flexbox?",lang:"css",
+answer:`<p><strong>Flexbox</strong> is a one-dimensional layout system for arranging items in a row or column.</p>
+<ul><li><code>display:flex</code> on the container.</li><li><code>flex-direction</code> – row | column.</li><li><code>justify-content</code> – aligns along the <strong>main axis</strong>.</li><li><code>align-items</code> – aligns along the <strong>cross axis</strong>.</li><li><code>gap</code> – spacing between items.</li></ul>`,
+code:`<style>\n  .flex {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    gap: 10px; background:#eee; padding:10px;\n  }\n  .flex div { background:#0f7a52; color:#fff; padding:14px; }\n</style>\n<div class="flex"><div>1</div><div>2</div><div>3</div></div>`},
+{id:27,category:"CSS",question:"What is CSS Grid?",lang:"css",
+answer:`<p><strong>CSS Grid</strong> is a two-dimensional layout system (rows AND columns) — ideal for page layouts.</p>
+<ul><li><code>display:grid</code></li><li><code>grid-template-columns: 1fr 1fr 1fr</code> – three equal columns.</li><li><code>grid-gap / gap</code> – spacing.</li><li><code>grid-area</code> / named areas for complex layouts.</li></ul>`,
+code:`<style>\n  .grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 8px;\n  }\n  .grid div { background:#c07e1a; color:#fff; padding:18px; text-align:center; }\n</style>\n<div class="grid">\n  <div>A</div><div>B</div><div>C</div>\n  <div>D</div><div>E</div><div>F</div>\n</div>`},
+{id:28,category:"CSS",question:"CSS Positioning?",lang:"css",
+answer:`<ul><li><strong>static</strong> – default, normal flow.</li><li><strong>relative</strong> – offset relative to its normal position; keeps space.</li><li><strong>absolute</strong> – removed from flow, positioned relative to nearest positioned ancestor.</li><li><strong>fixed</strong> – relative to the viewport; stays on scroll.</li><li><strong>sticky</strong> – relative until a scroll threshold, then fixed.</li></ul>`,
+code:`<style>\n  .rel { position: relative; height:100px; background:#eee; }\n  .abs { position: absolute; top:10px; right:10px;\n         background:#0f7a52; color:#fff; padding:6px; }\n</style>\n<div class="rel">Relative parent\n  <div class="abs">Absolute child</div>\n</div>`},
+{id:29,category:"CSS",question:"What is z-index?",lang:"css",
+answer:`<p><strong>z-index</strong> controls the stacking order of overlapping elements along the z-axis. Higher values appear in front.</p>
+<ul><li>Only works on <strong>positioned</strong> elements (relative, absolute, fixed, sticky).</li><li>Creates a <strong>stacking context</strong>; children are stacked within their parent's context.</li></ul>`,
+code:`<style>\n  .a,.b { position:absolute; width:80px; height:80px; }\n  .a { background:#0f7a52; z-index:1; }\n  .b { background:#c07e1a; left:40px; top:40px; z-index:2; }\n</style>\n<div class="a"></div><div class="b"></div>`},
+{id:30,category:"CSS",question:"em, rem, %, px, vh, vw units?",lang:"css",
+answer:`<ul><li><strong>px</strong> – absolute pixels.</li><li><strong>em</strong> – relative to the <em>parent's</em> font-size.</li><li><strong>rem</strong> – relative to the <em>root</em> (<code>html</code>) font-size — predictable.</li><li><strong>%</strong> – relative to the parent's size.</li><li><strong>vh / vw</strong> – 1% of the viewport height / width.</li></ul>`,
+code:`<style>\n  html { font-size:16px; }\n  .px  { font-size:24px; }\n  .rem { font-size:2rem; }   /* 32px */\n  .vw  { width:50vw; background:#0f7a52; color:#fff; }\n</style>\n<p class="px">px</p><p class="rem">rem</p>\n<div class="vw">50vw wide</div>`},
+{id:31,category:"CSS",question:"Pseudo-classes?",lang:"css",
+answer:`<p><strong>Pseudo-classes</strong> select elements based on state or position, written with a single colon.</p>
+<ul><li><code>:hover</code> – mouse over.</li><li><code>:focus</code> – focused input.</li><li><code>:nth-child(n)</code> – nth element.</li><li><code>:not(sel)</code> – everything except.</li><li><code>:first-child / :last-child</code></li></ul>`,
+code:`<style>\n  li:hover { color:#0f7a52; }\n  li:nth-child(odd) { background:#f0f0e8; }\n  li:first-child { font-weight:bold; }\n</style>\n<ul><li>One</li><li>Two</li><li>Three</li><li>Four</li></ul>`},
+{id:32,category:"CSS",question:"Pseudo-elements?",lang:"css",
+answer:`<p><strong>Pseudo-elements</strong> style a specific part of an element, written with a double colon <code>::</code>.</p>
+<ul><li><code>::before / ::after</code> – insert generated content (need <code>content</code>).</li><li><code>::placeholder</code> – style input placeholder text.</li><li><code>::selection</code> – style highlighted text.</li><li><code>::first-line / ::first-letter</code></li></ul>`,
+code:`<style>\n  .quote::before { content:"\\201C "; color:#c07e1a; }\n  .quote::after  { content:" \\201D"; color:#c07e1a; }\n  p::first-letter { font-size:2em; color:#0f7a52; }\n</style>\n<p class="quote">Styled with pseudo-elements.</p>`},
+{id:33,category:"CSS",question:"visibility:hidden vs display:none?",lang:"css",
+answer:`<ul><li><code>visibility:hidden</code> – element is invisible but <strong>still occupies space</strong>.</li><li><code>display:none</code> – element is <strong>removed</strong> from layout entirely; no space reserved and not read by most screen readers.</li></ul>`,
+code:`<style>\n  .hide-v { visibility:hidden; }\n  .hide-d { display:none; }\n  div { background:#0f7a52;color:#fff;padding:6px;margin:3px }\n</style>\n<div>Visible</div>\n<div class="hide-v">visibility:hidden (space stays)</div>\n<div class="hide-d">display:none (gone)</div>\n<div>After</div>`},
+{id:34,category:"CSS",question:"Media queries?",lang:"css",
+answer:`<p><strong>Media queries</strong> apply CSS conditionally based on device characteristics like screen width — the core of responsive design.</p>
+<ul><li><code>@media (max-width: 600px)</code> – styles for small screens.</li><li><code>@media (min-width: 768px)</code> – mobile-first approach.</li><li>Common breakpoints: 480, 768, 1024, 1200px.</li></ul>`,
+code:`<style>\n  .box { background:#0f7a52; color:#fff; padding:20px; }\n  @media (max-width: 500px) {\n    .box { background:#c07e1a; }\n  }\n</style>\n<div class="box">Resize me — I turn orange when narrow!</div>`},
+{id:35,category:"CSS",question:"Responsive design?",lang:"css",
+answer:`<p><strong>Responsive design</strong> makes pages adapt to any screen size. Three pillars:</p>
+<ul><li><strong>Fluid grids</strong> – widths in % / fr / flex instead of fixed px.</li><li><strong>Flexible images</strong> – <code>max-width:100%</code>.</li><li><strong>Media queries</strong> – adjust layout at breakpoints.</li></ul>
+<p>Always include the viewport meta tag.</p>`,
+code:`<style>\n  img { max-width:100%; height:auto; }\n  .row { display:flex; flex-wrap:wrap; gap:10px; }\n  .row > div { flex:1 1 150px; background:#0f7a52;color:#fff;padding:14px; }\n</style>\n<div class="row"><div>A</div><div>B</div><div>C</div></div>`},
+{id:36,category:"CSS",question:"Mobile-first design?",lang:"css",
+answer:`<p><strong>Mobile-first</strong> means writing base styles for small screens, then adding complexity for larger screens with <code>min-width</code> media queries.</p>
+<ul><li>Better performance — mobile loads minimal CSS.</li><li>Forces prioritising essential content.</li><li>Progressive enhancement instead of graceful degradation.</li></ul>`,
+code:`<style>\n  .nav { display:block; }\n  @media (min-width: 768px) {\n    .nav { display:flex; gap:20px; }\n  }\n</style>\n<div class="nav"><span>Home</span><span>About</span></div>`},
+{id:37,category:"CSS",question:"CSS transitions?",lang:"css",
+answer:`<p><strong>Transitions</strong> smoothly animate a property change over time.</p>
+<ul><li><code>transition: property duration timing-function delay;</code></li><li>Timing functions: <code>ease, linear, ease-in-out, cubic-bezier()</code>.</li></ul>`,
+code:`<style>\n  .btn {\n    background:#0f7a52; color:#fff; padding:12px 20px;\n    transition: all 0.4s ease;\n  }\n  .btn:hover {\n    background:#c07e1a; transform: scale(1.1);\n  }\n</style>\n<button class="btn">Hover me</button>`},
+{id:38,category:"CSS",question:"Transition vs animation?",lang:"css",
+answer:`<ul><li><strong>Transition</strong> – animates <em>between two states</em> and needs a trigger (e.g. hover). One-shot.</li><li><strong>Animation</strong> – uses <code>@keyframes</code> with multiple steps, can run automatically, <strong>loop</strong>, and play without interaction.</li></ul>`,
+code:`<style>\n  @keyframes spin { to { transform: rotate(360deg); } }\n  .loader {\n    width:40px; height:40px; border:5px solid #eee;\n    border-top-color:#0f7a52; border-radius:50%;\n    animation: spin 1s linear infinite;\n  }\n</style>\n<div class="loader"></div>`},
+{id:39,category:"CSS",question:"CSS Transform?",lang:"css",
+answer:`<p><strong>transform</strong> changes an element's shape/position without affecting layout flow.</p>
+<ul><li><code>translate(x,y)</code> – move.</li><li><code>rotate(deg)</code> – spin.</li><li><code>scale(n)</code> – resize.</li><li><code>skew(deg)</code> – slant.</li></ul>
+<p>Transforms are GPU-accelerated and great for performance.</p>`,
+code:`<style>\n  div { width:80px;height:80px;background:#0f7a52;color:#fff;margin:20px; display:inline-flex;align-items:center;justify-content:center }\n  .r { transform: rotate(20deg); }\n  .s { transform: scale(1.3); }\n  .k { transform: skewX(15deg); }\n</style>\n<div class="r">rot</div><div class="s">scale</div><div class="k">skew</div>`},
+{id:40,category:"CSS",question:"Overflow property?",lang:"css",
+answer:`<p><strong>overflow</strong> controls what happens when content is bigger than its box.</p>
+<ul><li><code>visible</code> – content spills out (default).</li><li><code>hidden</code> – clipped, no scrollbar.</li><li><code>scroll</code> – always shows scrollbars.</li><li><code>auto</code> – scrollbar only when needed.</li></ul>`,
+code:`<style>\n  .box { width:160px; height:70px; border:2px solid #0f7a52; overflow:auto; }\n</style>\n<div class="box">\n  This is a lot of text that overflows the small box so a scrollbar appears thanks to overflow:auto.\n</div>`},
+{id:41,category:"CSS",question:"CSS inheritance?",lang:"css",
+answer:`<p>Some CSS properties are <strong>inherited</strong> by child elements automatically, others are not.</p>
+<ul><li><strong>Inherited:</strong> <code>color, font-family, font-size, line-height, visibility</code>.</li><li><strong>Not inherited:</strong> <code>margin, padding, border, background, width</code>.</li><li>Force with <code>inherit</code>, or reset with <code>initial</code>.</li></ul>`,
+code:`<style>\n  .parent { color:#0f7a52; font-family:monospace; }\n</style>\n<div class="parent">\n  Parent\n  <p>Child inherits green monospace text</p>\n</div>`},
+{id:42,category:"CSS",question:"The !important rule?",lang:"css",
+answer:`<p><code>!important</code> overrides <strong>all other declarations</strong> regardless of specificity. It should be used sparingly because it breaks the natural cascade and is hard to override.</p>
+<p>Only an <code>!important</code> rule with higher specificity (or a later one) can beat another <code>!important</code>.</p>`,
+code:`<style>\n  p { color: green !important; }\n  #x { color: red; }   /* loses to !important */\n</style>\n<p id="x">I am green because of !important</p>`},
+{id:43,category:"CSS",question:"CSS preprocessors?",lang:"none",
+answer:`<p><strong>Preprocessors</strong> (SASS/SCSS, LESS) extend CSS with programming features, compiled into plain CSS.</p>
+<ul><li><strong>Variables</strong> – reusable values.</li><li><strong>Nesting</strong> – mirror HTML structure.</li><li><strong>Mixins</strong> – reusable rule blocks.</li><li><strong>Functions & math</strong>.</li></ul>`,
+code:`// SCSS example (compiles to CSS)\n$primary: #0f7a52;\n\n.card {\n  color: $primary;\n  .title { font-weight: bold; } // nesting\n  &:hover { opacity: 0.8; }     // parent ref\n}`},
+{id:44,category:"CSS",question:"SCSS vs SASS?",lang:"none",
+answer:`<p>Both are syntaxes of the Sass preprocessor:</p>
+<ul><li><strong>SASS</strong> – older, indentation-based, no braces or semicolons.</li><li><strong>SCSS</strong> – newer, CSS-like with braces <code>{}</code> and semicolons. Any valid CSS is valid SCSS, so it's more popular.</li></ul>`,
+code:`// SASS (indented)\n.box\n  color: red\n  font-size: 14px\n\n// SCSS (CSS-like)\n.box {\n  color: red;\n  font-size: 14px;\n}`},
+{id:45,category:"CSS",question:"What is Bootstrap?",lang:"html",
+answer:`<p><strong>Bootstrap</strong> is a popular CSS framework that provides ready-made, responsive components and a 12-column grid system, letting you build UIs fast.</p>
+<ul><li><strong>Grid:</strong> <code>container, row, col-*</code>.</li><li>Pre-styled components: buttons, navbars, cards, modals.</li><li>Utility classes for spacing, colours, flex.</li></ul>`,
+code:`<!-- Bootstrap grid concept -->\n<div class="container">\n  <div class="row">\n    <div class="col-6">Half</div>\n    <div class="col-6">Half</div>\n  </div>\n  <button class="btn btn-primary">Bootstrap button</button>\n</div>`},
 
-  searchBox.addEventListener('input', () => {
-    const q = searchBox.value.toLowerCase().trim();
-    const items = document.querySelectorAll('.q-item');
-    const categories = document.querySelectorAll('.category');
-    let totalVisible = 0;
+{id:46,category:"JavaScript",question:"What is JavaScript?",lang:"js",
+answer:`<p><strong>JavaScript</strong> is a high-level, interpreted, dynamically-typed scripting language that adds interactivity and behaviour to web pages. It runs in the browser (and on servers via Node.js).</p>
+<ul><li>Single-threaded with an event loop (async).</li><li>Multi-paradigm: functional, object-oriented, event-driven.</li><li>The only language natively understood by browsers.</li></ul>`,
+code:`document.body.innerHTML = "<h2>Hello from JS!</h2>";\nlet sum = 0;\nfor (let i = 1; i <= 5; i++) sum += i;\nconsole.log("Sum 1..5 =", sum);\ndocument.body.innerHTML += "Sum = " + sum;`},
+{id:47,category:"JavaScript",question:"var, let, const?",lang:"js",
+answer:`<table><tr><th></th><th>var</th><th>let</th><th>const</th></tr>
+<tr><td>Scope</td><td>function</td><td>block</td><td>block</td></tr>
+<tr><td>Reassign</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td>Hoisting</td><td>yes (undefined)</td><td>TDZ</td><td>TDZ</td></tr>
+<tr><td>Redeclare</td><td>yes</td><td>no</td><td>no</td></tr></table>
+<p>Use <code>const</code> by default, <code>let</code> when reassigning, avoid <code>var</code>.</p>`,
+code:`const PI = 3.14;\nlet count = 0;\ncount++;\nconsole.log(PI, count);\nif (true) { let x = 1; }\nconsole.log("const & let are block-scoped");`},
+{id:48,category:"JavaScript",question:"JavaScript data types?",lang:"js",
+answer:`<p>JS has <strong>7 primitive types</strong> plus objects:</p>
+<ul><li><strong>string, number, boolean</strong></li><li><strong>null</strong> – intentional empty.</li><li><strong>undefined</strong> – not assigned.</li><li><strong>symbol</strong> – unique identifier.</li><li><strong>bigint</strong> – huge integers.</li><li><strong>object</strong> – arrays, functions, objects (reference type).</li></ul>`,
+code:`console.log(typeof "hi");      // string\nconsole.log(typeof 42);        // number\nconsole.log(typeof true);      // boolean\nconsole.log(typeof undefined); // undefined\nconsole.log(typeof null);      // object (quirk!)\nconsole.log(typeof {});        // object\nconsole.log(typeof 10n);       // bigint`},
+{id:49,category:"JavaScript",question:"null vs undefined?",lang:"js",
+answer:`<ul><li><strong>undefined</strong> – a variable declared but not assigned, or a missing property/return. Set by JS.</li><li><strong>null</strong> – an intentional "no value" assigned by the developer.</li></ul>
+<p><code>null == undefined</code> is <code>true</code> (loose) but <code>null === undefined</code> is <code>false</code>.</p>`,
+code:`let a;\nconsole.log(a);            // undefined\nlet b = null;\nconsole.log(b);            // null\nconsole.log(null == undefined);  // true\nconsole.log(null === undefined); // false`},
+{id:50,category:"JavaScript",question:"What is hoisting?",lang:"js",
+answer:`<p><strong>Hoisting</strong> moves variable and function <em>declarations</em> to the top of their scope during compilation.</p>
+<ul><li><code>var</code> is hoisted and initialised to <code>undefined</code>.</li><li><code>let/const</code> are hoisted but in the <strong>Temporal Dead Zone</strong> — using them early throws an error.</li><li>Function declarations are fully hoisted (callable before definition).</li></ul>`,
+code:`console.log(x); // undefined (var hoisted)\nvar x = 5;\n\ngreet();        // works! function hoisted\nfunction greet() { console.log("Hi"); }`},
+{id:51,category:"JavaScript",question:"Scope in JavaScript?",lang:"js",
+answer:`<p><strong>Scope</strong> determines where variables are accessible.</p>
+<ul><li><strong>Global</strong> – accessible everywhere.</li><li><strong>Function</strong> – inside a function only.</li><li><strong>Block</strong> – inside <code>{}</code> for let/const.</li><li><strong>Lexical scope</strong> – inner functions can access variables of outer functions where they were defined.</li></ul>`,
+code:`let g = "global";\nfunction outer() {\n  let o = "outer";\n  function inner() {\n    console.log(g, o); // lexical access\n  }\n  inner();\n}\nouter();`},
+{id:52,category:"JavaScript",question:"What is a closure?",lang:"js",
+answer:`<p>A <strong>closure</strong> is a function that "remembers" the variables from its outer (lexical) scope even after that outer function has finished executing.</p>
+<p>Used for data privacy, factories, and maintaining state (e.g. counters).</p>`,
+code:`function makeCounter() {\n  let count = 0;          // private\n  return function() {\n    count++;\n    return count;\n  };\n}\nconst c = makeCounter();\nconsole.log(c(), c(), c()); // 1 2 3`},
+{id:53,category:"JavaScript",question:"What is a callback function?",lang:"js",
+answer:`<p>A <strong>callback</strong> is a function passed as an argument to another function, to be executed later — often after an async operation completes.</p>
+<p>They power event handlers, timers and array methods. Nesting many callbacks creates "callback hell", solved by Promises/async-await.</p>`,
+code:`function greet(name, callback) {\n  console.log("Hi " + name);\n  callback();\n}\ngreet("Sha", function() {\n  console.log("Callback executed!");\n});\n\n[1,2,3].forEach(n => console.log(n)); // callback`},
+{id:54,category:"JavaScript",question:"Arrow functions?",lang:"js",
+answer:`<p><strong>Arrow functions</strong> are a concise function syntax introduced in ES6.</p>
+<ul><li>Shorter syntax, implicit return for single expressions.</li><li>No own <code>this</code> — they inherit <code>this</code> from the enclosing scope.</li><li>No <code>arguments</code> object; cannot be used as constructors.</li></ul>`,
+code:`const add = (a, b) => a + b;           // implicit return\nconst square = n => n * n;             // single param\nconst greet = () => console.log("Hi"); // no params\nconsole.log(add(2,3), square(4));`},
+{id:55,category:"JavaScript",question:"== vs ===?",lang:"js",
+answer:`<ul><li><code>==</code> (loose equality) – compares after <strong>type coercion</strong>.</li><li><code>===</code> (strict equality) – compares value <strong>and</strong> type, no coercion.</li></ul>
+<p>Always prefer <code>===</code> to avoid surprising coercion bugs.</p>`,
+code:`console.log(5 == "5");   // true  (coerced)\nconsole.log(5 === "5");  // false (different type)\nconsole.log(0 == false); // true\nconsole.log(0 === false);// false\nconsole.log(null == undefined);  // true`},
+{id:56,category:"JavaScript",question:"Event bubbling?",lang:"html",
+answer:`<p><strong>Event bubbling</strong> is the default phase where an event fires on the target element first, then propagates <em>upward</em> through its ancestors to the document root.</p>
+<p>Stop it with <code>event.stopPropagation()</code>.</p>`,
+code:`<div id="parent" style="padding:20px;background:#eee">\n  <button id="child">Click me</button>\n</div>\n<script>\n  parent.onclick = () => parent.append(" Parent(bubbled)");\n  child.onclick  = () => child.after(" Child-first");\n<\/script>`},
+{id:57,category:"JavaScript",question:"Event capturing?",lang:"html",
+answer:`<p><strong>Event capturing</strong> (trickling) is the opposite of bubbling — the event travels <em>downward</em> from the root to the target first.</p>
+<p>Enable it by passing <code>true</code> (or <code>{capture:true}</code>) as the third argument to <code>addEventListener</code>.</p>`,
+code:`<div id="p" style="padding:20px;background:#ddd">\n  <button id="c">Click</button>\n</div>\n<script>\n  p.addEventListener('click', () => p.append(' Parent-captures'), true);\n  c.addEventListener('click', () => c.after(' Child'));\n<\/script>`},
+{id:58,category:"JavaScript",question:"Event delegation?",lang:"html",
+answer:`<p><strong>Event delegation</strong> attaches a single listener to a parent element and uses bubbling to handle events from many children — including ones added dynamically.</p>
+<p>More efficient than adding a listener to each child.</p>`,
+code:`<ul id="list">\n  <li>Item 1</li><li>Item 2</li><li>Item 3</li>\n</ul>\n<script>\n  list.addEventListener('click', e => {\n    if (e.target.tagName === 'LI')\n      e.target.textContent += " ✓clicked";\n  });\n<\/script>`},
+{id:59,category:"JavaScript",question:"What is the DOM?",lang:"js",
+answer:`<p>The <strong>DOM (Document Object Model)</strong> is a tree representation of an HTML document that JavaScript can read and manipulate. Each tag becomes a node/object.</p>
+<p>JS can select, create, modify, and delete elements, and respond to events through DOM APIs.</p>`,
+code:`const h = document.createElement('h2');\nh.textContent = "Created via DOM";\nh.style.color = "#0f7a52";\ndocument.body.appendChild(h);\nconsole.log("Element added to the DOM");`},
+{id:60,category:"JavaScript",question:"Synchronous vs asynchronous?",lang:"js",
+answer:`<ul><li><strong>Synchronous</strong> – code runs line by line, <em>blocking</em> until each finishes.</li><li><strong>Asynchronous</strong> – long tasks (timers, network) run in the background; their callbacks run later via the <strong>event loop</strong> without blocking.</li></ul>`,
+code:`console.log("1");\nsetTimeout(() => console.log("3 (async, later)"), 0);\nconsole.log("2");\n// Output: 1, 2, 3`},
+{id:61,category:"JavaScript",question:"What is a Promise?",lang:"js",
+answer:`<p>A <strong>Promise</strong> represents the eventual result of an async operation. It has three states: <strong>pending → fulfilled / rejected</strong>.</p>
+<ul><li><code>.then()</code> – handle success.</li><li><code>.catch()</code> – handle errors.</li><li><code>.finally()</code> – always runs.</li></ul>`,
+code:`const p = new Promise((resolve, reject) => {\n  setTimeout(() => resolve("Done!"), 500);\n});\np.then(res => console.log(res))\n .catch(err => console.log(err))\n .finally(() => console.log("Finished"));`},
+{id:62,category:"JavaScript",question:"async / await?",lang:"js",
+answer:`<p><strong>async/await</strong> is syntactic sugar over Promises that makes async code read like synchronous code.</p>
+<ul><li><code>async</code> functions always return a Promise.</li><li><code>await</code> pauses until the Promise settles.</li><li>Use <code>try/catch</code> for error handling.</li></ul>`,
+code:`function wait(ms){return new Promise(r=>setTimeout(r,ms));}\nasync function run() {\n  console.log("Start");\n  await wait(500);\n  console.log("After 0.5s");\n}\nrun();`},
+{id:63,category:"JavaScript",question:"setTimeout?",lang:"js",
+answer:`<p><code>setTimeout(fn, ms)</code> schedules a function to run once after a minimum delay. The callback is placed in the <strong>macrotask queue</strong> and runs after the call stack is clear, so the delay is a minimum, not exact.</p>
+<p><code>setInterval</code> repeats; <code>clearTimeout</code> cancels.</p>`,
+code:`console.log("Now");\nsetTimeout(() => {\n  console.log("Runs after 1 second");\n}, 1000);`},
+{id:64,category:"JavaScript",question:"map(), filter(), reduce()?",lang:"js",
+answer:`<ul><li><strong>map()</strong> – transforms each element, returns a new array of the same length.</li><li><strong>filter()</strong> – keeps elements that pass a test.</li><li><strong>reduce()</strong> – boils the array down to a single value (sum, object, etc.).</li></ul>`,
+code:`const nums = [1,2,3,4,5];\nconst doubled = nums.map(n => n * 2);\nconst evens   = nums.filter(n => n % 2 === 0);\nconst total   = nums.reduce((acc, n) => acc + n, 0);\nconsole.log(doubled, evens, total);`},
+{id:65,category:"JavaScript",question:"Destructuring?",lang:"js",
+answer:`<p><strong>Destructuring</strong> unpacks values from arrays or properties from objects into variables.</p>
+<ul><li>Supports default values and renaming.</li><li>Works in function parameters too.</li></ul>`,
+code:`const [a, b] = [10, 20];\nconst { name, age = 18 } = { name: "Sha" };\nconst { name: who } = { name: "Sha" }; // rename\nconsole.log(a, b, name, age, who);`},
+{id:66,category:"JavaScript",question:"Spread operator?",lang:"js",
+answer:`<p>The <strong>spread operator</strong> <code>...</code> expands an iterable into individual elements. Used to copy/merge arrays and objects or pass array items as arguments.</p>`,
+code:`const arr1 = [1,2], arr2 = [3,4];\nconst merged = [...arr1, ...arr2];        // [1,2,3,4]\nconst obj = { ...{a:1}, b:2 };            // {a:1,b:2}\nconsole.log(Math.max(...[5,9,2]));        // 9\nconsole.log(merged, obj);`},
+{id:67,category:"JavaScript",question:"Rest operator?",lang:"js",
+answer:`<p>The <strong>rest operator</strong> <code>...</code> collects multiple elements into a single array. Same syntax as spread but used in <em>function parameters</em> or the left side of destructuring.</p>`,
+code:`function sum(...nums) {\n  return nums.reduce((a, n) => a + n, 0);\n}\nconsole.log(sum(1,2,3,4)); // 10\n\nconst [first, ...rest] = [1,2,3,4];\nconsole.log(first, rest);  // 1  [2,3,4]`},
+{id:68,category:"JavaScript",question:"Template literals?",lang:"js",
+answer:`<p><strong>Template literals</strong> use backticks and allow:</p>
+<ul><li><strong>Interpolation</strong> with <code>\${expression}</code>.</li><li><strong>Multiline</strong> strings without <code>\\n</code>.</li><li>Embedded expressions and function calls.</li></ul>`,
+code:`const name = "Sha", score = 95;\nconst msg = \`Hi \${name}, you scored \${score}%!\`;\nconst multi = \`Line 1\nLine 2\`;\nconsole.log(msg);\nconsole.log(multi);`},
+{id:69,category:"JavaScript",question:"Optional chaining?",lang:"js",
+answer:`<p><strong>Optional chaining</strong> <code>?.</code> safely accesses nested properties. If a reference is <code>null</code> or <code>undefined</code>, it short-circuits to <code>undefined</code> instead of throwing.</p>`,
+code:`const user = { profile: { name: "Sha" } };\nconsole.log(user.profile?.name);     // "Sha"\nconsole.log(user.address?.city);     // undefined\nconsole.log(user.getName?.());       // undefined (no error)`},
+{id:70,category:"JavaScript",question:"The this keyword?",lang:"js",
+answer:`<p><code>this</code> refers to the object that is executing the current function — its value depends on how the function is called.</p>
+<ul><li>Method call → the object.</li><li>Plain function → global/undefined (strict).</li><li>Arrow function → inherits from enclosing scope.</li><li><code>call/apply/bind</code> set <code>this</code> explicitly.</li></ul>`,
+code:`const obj = {\n  name: "Sha",\n  greet() { return "Hi " + this.name; }\n};\nconsole.log(obj.greet());\n\nfunction f(){ return this.x; }\nconsole.log(f.call({x:5})); // 5`},
+{id:71,category:"JavaScript",question:"Function declaration vs expression?",lang:"js",
+answer:`<ul><li><strong>Declaration</strong> – <code>function foo(){}</code>. Fully hoisted, callable before its line.</li><li><strong>Expression</strong> – <code>const foo = function(){}</code>. Only the variable is hoisted, not the assignment, so it can't be called early.</li></ul>`,
+code:`declared();  // works (hoisted)\nfunction declared(){ console.log("declaration"); }\n\nconst expressed = function(){ console.log("expression"); };\nexpressed();`},
+{id:72,category:"JavaScript",question:"Prototype?",lang:"js",
+answer:`<p>Every JS object has an internal link to a <strong>prototype</strong> object. When you access a property not on the object itself, JS looks up the <strong>prototype chain</strong> until found or it reaches <code>null</code>.</p>
+<p>This is how methods like <code>.toString()</code> are available everywhere.</p>`,
+code:`function Person(name){ this.name = name; }\nPerson.prototype.greet = function(){\n  return "Hi " + this.name;\n};\nconst p = new Person("Sha");\nconsole.log(p.greet()); // from prototype`},
+{id:73,category:"JavaScript",question:"Prototypal inheritance?",lang:"js",
+answer:`<p><strong>Prototypal inheritance</strong> lets one object inherit properties/methods from another via the prototype chain — using <code>Object.create()</code> or ES6 <code>class</code> syntax (which is sugar over prototypes).</p>`,
+code:`class Animal {\n  constructor(name){ this.name = name; }\n  speak(){ return this.name + " makes a sound"; }\n}\nclass Dog extends Animal {\n  speak(){ return this.name + " barks"; }\n}\nconsole.log(new Dog("Rex").speak());`},
+{id:74,category:"JavaScript",question:"What is JSON?",lang:"js",
+answer:`<p><strong>JSON (JavaScript Object Notation)</strong> is a lightweight, text-based data format for exchanging data, especially with APIs.</p>
+<ul><li><code>JSON.stringify()</code> – object → JSON string.</li><li><code>JSON.parse()</code> – JSON string → object.</li><li>Keys must be double-quoted; only basic data types allowed.</li></ul>`,
+code:`const obj = { name: "Sha", skills: ["JS","React"] };\nconst str = JSON.stringify(obj);\nconsole.log(str);\nconst back = JSON.parse(str);\nconsole.log(back.skills[0]); // JS`},
+{id:75,category:"JavaScript",question:"localStorage vs sessionStorage (Web Storage)?",lang:"js",
+answer:`<p>The Web Storage API stores string key/value pairs in the browser:</p>
+<ul><li><strong>localStorage</strong> – persistent, survives browser restarts, shared across tabs of an origin.</li><li><strong>sessionStorage</strong> – per-tab, cleared when the tab closes.</li></ul>
+<p>Methods: <code>setItem, getItem, removeItem, clear</code>. Store objects with JSON.</p>`,
+code:`localStorage.setItem('user', JSON.stringify({id:1}));\nconst u = JSON.parse(localStorage.getItem('user'));\nconsole.log(u.id);\n\nsessionStorage.setItem('temp', 'value');\nconsole.log(sessionStorage.getItem('temp'));`},
+{id:76,category:"JavaScript",question:"What is NaN?",lang:"js",
+answer:`<p><strong>NaN (Not a Number)</strong> is a special numeric value representing an invalid math result. Its type is <code>number</code> and, oddly, <code>NaN !== NaN</code>.</p>
+<ul><li><code>isNaN()</code> – coerces then checks (loose).</li><li><code>Number.isNaN()</code> – strict, no coercion (preferred).</li></ul>`,
+code:`console.log(0/0);            // NaN\nconsole.log(NaN === NaN);   // false\nconsole.log(isNaN("abc"));  // true (coerced)\nconsole.log(Number.isNaN("abc")); // false (strict)`},
+{id:77,category:"JavaScript",question:"Truthy and falsy values?",lang:"js",
+answer:`<p>Values are coerced to boolean in conditions.</p>
+<p><strong>Falsy values (8):</strong> <code>false</code>, <code>0</code>, <code>-0</code>, <code>0n</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>.</p>
+<p>Everything else is <strong>truthy</strong> — including <code>"0"</code>, <code>[]</code>, and <code>{}</code>.</p>`,
+code:`if ("hi")  console.log("truthy string");\nif ([])    console.log("empty array is truthy");\nconsole.log(Boolean(null), Boolean("x"));\nconsole.log(Boolean(0), Boolean(""));`},
+{id:78,category:"JavaScript",question:"What is debounce?",lang:"js",
+answer:`<p><strong>Debounce</strong> delays running a function until a pause in events. If the event keeps firing, the timer resets — so the function only runs once after activity stops.</p>
+<p>Great for search-as-you-type and window resize.</p>`,
+code:`function debounce(fn, delay) {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n}\nconst log = debounce(() => console.log("Fired!"), 300);\nlog(); log(); log(); // only last runs`},
+{id:79,category:"JavaScript",question:"What is throttle?",lang:"js",
+answer:`<p><strong>Throttle</strong> limits a function to run at most once per time interval, no matter how often the event fires. Useful for scroll and mousemove handlers.</p>
+<p>Debounce waits for a pause; throttle runs at a steady rate.</p>`,
+code:`function throttle(fn, limit) {\n  let wait = false;\n  return (...args) => {\n    if (!wait) {\n      fn(...args);\n      wait = true;\n      setTimeout(() => wait = false, limit);\n    }\n  };\n}\nconst log = throttle(() => console.log("tick"), 1000);\nlog(); log(); // only first runs immediately`},
+{id:80,category:"JavaScript",question:"What is currying?",lang:"js",
+answer:`<p><strong>Currying</strong> transforms a function with multiple arguments into a sequence of functions each taking one argument: <code>f(a,b,c)</code> → <code>f(a)(b)(c)</code>.</p>
+<p>Enables partial application and reusable specialised functions.</p>`,
+code:`const add = a => b => c => a + b + c;\nconsole.log(add(1)(2)(3)); // 6\n\nconst add5 = add(5);\nconsole.log(add5(10)(2));  // 17`},
 
-    categories.forEach(cat => {
-      let catVisible = 0;
-      cat.querySelectorAll('.q-item').forEach(item => {
-        const text = item.textContent.toLowerCase();
-        const show = !q || text.includes(q);
-        item.style.display = show ? 'flex' : 'none';
-        if (show) catVisible++;
-      });
-      cat.style.display = catVisible > 0 ? 'block' : 'none';
-      totalVisible += catVisible;
+{id:81,category:"React",question:"What is React?",lang:"js",
+answer:`<p><strong>React</strong> is a JavaScript library by Meta for building user interfaces with reusable <strong>components</strong>. It uses a <strong>Virtual DOM</strong> for efficient updates and a declarative programming model.</p>
+<ul><li>Component-based & composable.</li><li>One-way data flow.</li><li>JSX syntax.</li></ul>`,
+code:`// React component (conceptual)\nfunction App() {\n  return <h1>Hello React</h1>;\n}\n// ReactDOM.render(<App />, root);\nconsole.log("React builds UIs from components");`},
+{id:82,category:"React",question:"What are components?",lang:"js",
+answer:`<p><strong>Components</strong> are independent, reusable pieces of UI. They accept inputs (<strong>props</strong>) and return React elements describing what to render.</p>
+<p>Two types: <strong>function components</strong> (modern, with hooks) and <strong>class components</strong> (legacy).</p>`,
+code:`function Button({ label }) {\n  return <button>{label}</button>;\n}\nfunction App() {\n  return (\n    <div>\n      <Button label="Save" />\n      <Button label="Delete" />\n    </div>\n  );\n}`},
+{id:83,category:"React",question:"Functional vs class components?",lang:"js",
+answer:`<table><tr><th>Functional</th><th>Class</th></tr>
+<tr><td>Plain functions</td><td>ES6 classes</td></tr>
+<tr><td>Use Hooks for state</td><td>this.state / lifecycle</td></tr>
+<tr><td>Less boilerplate</td><td>More verbose</td></tr>
+<tr><td>Modern standard</td><td>Legacy</td></tr></table>`,
+code:`// Functional\nfunction Hello({name}) { return <p>Hi {name}</p>; }\n\n// Class\nclass Hello extends React.Component {\n  render() { return <p>Hi {this.props.name}</p>; }\n}`},
+{id:84,category:"React",question:"What is JSX?",lang:"js",
+answer:`<p><strong>JSX (JavaScript XML)</strong> is a syntax extension that lets you write HTML-like markup inside JavaScript. It compiles to <code>React.createElement()</code> calls.</p>
+<ul><li>Use <code>{}</code> to embed JS expressions.</li><li><code>className</code> instead of <code>class</code>.</li><li>Must return a single root element.</li></ul>`,
+code:`const name = "Sha";\nconst el = <h1 className="title">Hi {name}!</h1>;\n// compiles to:\n// React.createElement('h1', {className:'title'}, 'Hi ', name, '!')`},
+{id:85,category:"React",question:"What are props?",lang:"js",
+answer:`<p><strong>Props</strong> (properties) are read-only inputs passed from a parent component to a child. They make components configurable and reusable.</p>
+<p>Props are <strong>immutable</strong> — a child must never modify its own props.</p>`,
+code:`function Greeting(props) {\n  return <h2>Hello, {props.name}!</h2>;\n}\n// Usage:\n// <Greeting name="Sha" />\n// <Greeting name="Priya" />`},
+{id:86,category:"React",question:"What is state?",lang:"js",
+answer:`<p><strong>State</strong> is mutable data managed inside a component. When state changes, React <strong>re-renders</strong> the component to reflect the new data.</p>
+<p>In function components, use the <code>useState</code> hook.</p>`,
+code:`function Counter() {\n  const [count, setCount] = React.useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Clicked {count} times\n    </button>\n  );\n}`},
+{id:87,category:"React",question:"State vs props?",lang:"js",
+answer:`<table><tr><th>State</th><th>Props</th></tr>
+<tr><td>Internal to component</td><td>Passed from parent</td></tr>
+<tr><td>Mutable (via setState)</td><td>Read-only</td></tr>
+<tr><td>Triggers re-render</td><td>Configures component</td></tr></table>
+<p>Props flow down; state is local memory.</p>`,
+code:`function Child({ label }) {        // props\n  const [on, setOn] = useState(false); // state\n  return <button onClick={()=>setOn(!on)}>\n    {label}: {on ? "ON" : "OFF"}\n  </button>;\n}`},
+{id:88,category:"React",question:"useState hook?",lang:"js",
+answer:`<p><code>useState</code> adds state to function components. It returns an array: the current value and a setter function.</p>
+<ul><li>Setter triggers a re-render.</li><li>For updates based on previous state, pass a function.</li></ul>`,
+code:`function App() {\n  const [name, setName] = React.useState("Sha");\n  return (\n    <input\n      value={name}\n      onChange={e => setName(e.target.value)}\n    />\n  );\n}`},
+{id:89,category:"React",question:"useEffect hook?",lang:"js",
+answer:`<p><code>useEffect</code> runs <strong>side effects</strong> (data fetching, subscriptions, timers) after render.</p>
+<ul><li>Dependency array controls when it runs: <code>[]</code> = once on mount, <code>[x]</code> = when x changes, none = every render.</li><li>Return a cleanup function for unmount.</li></ul>`,
+code:`useEffect(() => {\n  const id = setInterval(() => console.log("tick"), 1000);\n  return () => clearInterval(id); // cleanup\n}, []); // run once on mount`},
+{id:90,category:"React",question:"Virtual DOM?",lang:"js",
+answer:`<p>The <strong>Virtual DOM</strong> is a lightweight in-memory copy of the real DOM. When state changes, React builds a new virtual tree, <strong>diffs</strong> it against the previous one, and updates only the changed real DOM nodes.</p>
+<p>This minimises expensive direct DOM operations.</p>`,
+code:`// 1. State changes\n// 2. New virtual DOM created\n// 3. Diff with old virtual DOM\n// 4. Patch only changed real nodes\nconsole.log("Efficient updates via diffing");`},
+{id:91,category:"React",question:"Reconciliation?",lang:"js",
+answer:`<p><strong>Reconciliation</strong> is React's algorithm for diffing the new and old Virtual DOM trees to figure out the minimal set of changes.</p>
+<ul><li>Compares elements by type.</li><li>Uses <strong>keys</strong> to match list items efficiently.</li><li>Different types → tear down and rebuild.</li></ul>`,
+code:`// keys help reconciliation match items\n// {items.map(item =>\n//   <li key={item.id}>{item.text}</li>\n// )}\nconsole.log("Stable keys = efficient list updates");`},
+{id:92,category:"React",question:"Keys in React?",lang:"js",
+answer:`<p><strong>Keys</strong> are special string attributes that help React identify which list items changed, were added, or removed — making list re-renders efficient and stable.</p>
+<p>Use a stable, unique ID. Avoid using the array index when the list can reorder.</p>`,
+code:`const users = [{id:1,name:'A'},{id:2,name:'B'}];\n// return (\n//   <ul>\n//     {users.map(u => <li key={u.id}>{u.name}</li>)}\n//   </ul>\n// );\nconsole.log("Keys must be unique & stable");`},
+{id:93,category:"React",question:"Prop drilling?",lang:"js",
+answer:`<p><strong>Prop drilling</strong> is passing props through many intermediate components that don't use them, just to reach a deeply nested child. It makes code verbose and hard to maintain.</p>
+<p>Solved with <strong>Context API</strong> or state libraries like Redux.</p>`,
+code:`// data passes through every level\n// <App data={x}>\n//   <Page data={x}>\n//     <Section data={x}>\n//       <Widget data={x} /> // finally used here\nconsole.log("Avoid with Context API");`},
+{id:94,category:"React",question:"Context API?",lang:"js",
+answer:`<p>The <strong>Context API</strong> shares data globally without prop drilling.</p>
+<ul><li><code>createContext()</code> – create a context.</li><li><code>&lt;Provider value={...}&gt;</code> – supply data.</li><li><code>useContext()</code> – consume data anywhere below.</li></ul>`,
+code:`const ThemeContext = React.createContext('light');\nfunction App() {\n  return (\n    <ThemeContext.Provider value="dark">\n      <Child />\n    </ThemeContext.Provider>\n  );\n}\nfunction Child() {\n  const theme = React.useContext(ThemeContext);\n  return <p>Theme: {theme}</p>;\n}`},
+{id:95,category:"React",question:"What is Redux?",lang:"js",
+answer:`<p><strong>Redux</strong> is a predictable state-management library using a single global <strong>store</strong>.</p>
+<ul><li><strong>Store</strong> – holds all state.</li><li><strong>Action</strong> – an object describing what happened.</li><li><strong>Reducer</strong> – pure function: (state, action) → new state.</li><li>One-way data flow, time-travel debugging.</li></ul>`,
+code:`function reducer(state = {count:0}, action) {\n  switch(action.type) {\n    case 'INC': return {count: state.count + 1};\n    default: return state;\n  }\n}\nconsole.log(reducer({count:0}, {type:'INC'}));`},
+{id:96,category:"React",question:"Redux vs Context API?",lang:"js",
+answer:`<table><tr><th>Context API</th><th>Redux</th></tr>
+<tr><td>Built into React</td><td>External library</td></tr>
+<tr><td>Simple shared state</td><td>Complex global state</td></tr>
+<tr><td>Can cause extra re-renders</td><td>Optimised selectors</td></tr>
+<tr><td>No devtools/middleware</td><td>DevTools, middleware, thunks</td></tr></table>
+<p>Use Context for small apps/themes; Redux for large apps with heavy state logic.</p>`,
+code:`// Context: lightweight, built-in\n// Redux: store + actions + reducers + middleware\nconsole.log("Choose based on app complexity");`},
+{id:97,category:"React",question:"React Hooks?",lang:"js",
+answer:`<p><strong>Hooks</strong> let function components use state and lifecycle features. Common hooks:</p>
+<ul><li><code>useState</code> – state.</li><li><code>useEffect</code> – side effects.</li><li><code>useContext</code> – context.</li><li><code>useRef</code> – refs/mutable values.</li><li><code>useMemo / useCallback</code> – memoisation.</li></ul>
+<p>Rules: only call hooks at the top level of components.</p>`,
+code:`function App() {\n  const [count, setCount] = useState(0);\n  useEffect(() => { document.title = count; }, [count]);\n  return <button onClick={()=>setCount(count+1)}>{count}</button>;\n}`},
+{id:98,category:"React",question:"useRef hook?",lang:"js",
+answer:`<p><code>useRef</code> returns a mutable object whose <code>.current</code> property persists across renders <strong>without causing re-renders</strong>.</p>
+<ul><li>Access DOM elements directly.</li><li>Store mutable values (timers, previous values).</li></ul>`,
+code:`function Input() {\n  const inputRef = React.useRef(null);\n  const focus = () => inputRef.current.focus();\n  return (\n    <>\n      <input ref={inputRef} />\n      <button onClick={focus}>Focus</button>\n    </>\n  );\n}`},
+{id:99,category:"React",question:"useMemo hook?",lang:"js",
+answer:`<p><code>useMemo</code> <strong>memoises</strong> (caches) the result of an expensive calculation, recomputing only when its dependencies change. This avoids wasteful recalculation on every render.</p>`,
+code:`const expensive = React.useMemo(() => {\n  return hugeArray.filter(x => x > 100).length;\n}, [hugeArray]);\n// recalculates only when hugeArray changes`},
+{id:100,category:"React",question:"useCallback hook?",lang:"js",
+answer:`<p><code>useCallback</code> memoises a <strong>function reference</strong> so it isn't recreated on every render. Useful when passing callbacks to memoised child components to prevent unnecessary re-renders.</p>
+<p><code>useCallback(fn, deps)</code> ≈ <code>useMemo(() => fn, deps)</code>.</p>`,
+code:`const handleClick = React.useCallback(() => {\n  console.log("clicked", id);\n}, [id]);\n// same function reference until id changes`},
+{id:101,category:"React",question:"Lazy loading in React?",lang:"js",
+answer:`<p><strong>Lazy loading</strong> defers loading components until they're needed, splitting the bundle for faster initial load.</p>
+<ul><li><code>React.lazy()</code> – dynamically import a component.</li><li><code>&lt;Suspense fallback={...}&gt;</code> – show a loader while it loads.</li></ul>`,
+code:`const Profile = React.lazy(() => import('./Profile'));\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <Profile />\n    </Suspense>\n  );\n}`},
+{id:102,category:"React",question:"React Router?",lang:"js",
+answer:`<p><strong>React Router</strong> enables client-side routing — navigating between views without full page reloads.</p>
+<ul><li><code>&lt;Routes&gt;</code> / <code>&lt;Route&gt;</code> – map paths to components.</li><li><code>&lt;Link&gt;</code> – navigation.</li><li><code>useNavigate</code>, <code>useParams</code> – programmatic routing.</li></ul>`,
+code:`<BrowserRouter>\n  <Routes>\n    <Route path="/" element={<Home/>} />\n    <Route path="/about" element={<About/>} />\n  </Routes>\n</BrowserRouter>`},
+{id:103,category:"React",question:"Controlled components?",lang:"js",
+answer:`<p>A <strong>controlled component</strong> has its form value driven by React state. The input's <code>value</code> comes from state and updates via <code>onChange</code> — React is the single source of truth.</p>`,
+code:`function Form() {\n  const [text, setText] = React.useState("");\n  return (\n    <input\n      value={text}\n      onChange={e => setText(e.target.value)}\n    />\n  );\n}`},
+{id:104,category:"React",question:"Uncontrolled components?",lang:"js",
+answer:`<p>An <strong>uncontrolled component</strong> keeps its own state in the DOM. You read the value when needed using a <strong>ref</strong>, rather than tracking every keystroke in React state.</p>
+<p>Useful for simple forms and integrating non-React code.</p>`,
+code:`function Form() {\n  const inputRef = React.useRef();\n  const submit = () => alert(inputRef.current.value);\n  return (\n    <>\n      <input ref={inputRef} defaultValue="hi" />\n      <button onClick={submit}>Submit</button>\n    </>\n  );\n}`},
+{id:105,category:"React",question:"Lifting state up?",lang:"js",
+answer:`<p><strong>Lifting state up</strong> means moving shared state to the closest common ancestor of components that need it, then passing it down via props. This keeps components in sync with a single source of truth.</p>`,
+code:`function Parent() {\n  const [value, setValue] = React.useState("");\n  return (\n    <>\n      <Input value={value} onChange={setValue} />\n      <Display value={value} />\n    </>\n  );\n}`},
+{id:106,category:"React",question:"Higher-Order Components (HOC)?",lang:"js",
+answer:`<p>A <strong>HOC</strong> is a function that takes a component and returns a new enhanced component. It's a pattern for reusing cross-cutting logic (auth, logging, data).</p>`,
+code:`function withLogger(Component) {\n  return function(props) {\n    console.log("Rendering", Component.name);\n    return <Component {...props} />;\n  };\n}\nconst EnhancedButton = withLogger(Button);`},
+{id:107,category:"React",question:"Custom hooks?",lang:"js",
+answer:`<p><strong>Custom hooks</strong> extract reusable stateful logic into a function whose name starts with <code>use</code>. They can call other hooks and be shared across components.</p>`,
+code:`function useCounter(start = 0) {\n  const [count, setCount] = React.useState(start);\n  const inc = () => setCount(c => c + 1);\n  return { count, inc };\n}\n// const { count, inc } = useCounter(10);`},
+{id:108,category:"React",question:"React Strict Mode?",lang:"js",
+answer:`<p><strong>StrictMode</strong> is a development-only wrapper that highlights potential problems: unsafe lifecycles, deprecated APIs, and side-effect bugs.</p>
+<p>It intentionally <strong>double-invokes</strong> render and effect functions in dev to surface impurities. It renders no visible UI and has no production effect.</p>`,
+code:`<React.StrictMode>\n  <App />\n</React.StrictMode>\n// helps catch bugs during development`},
+{id:109,category:"React",question:"Server-Side Rendering (SSR)?",lang:"js",
+answer:`<p><strong>SSR</strong> renders React components to HTML on the server and sends a fully-formed page to the browser. The client then "hydrates" it to make it interactive.</p>
+<ul><li>Faster first paint and better SEO.</li><li>Frameworks: Next.js, Remix.</li></ul>`,
+code:`// Server\nimport { renderToString } from 'react-dom/server';\nconst html = renderToString(<App />);\n// send html to browser, then hydrate on client`},
+{id:110,category:"React",question:"CSR vs SSR?",lang:"js",
+answer:`<table><tr><th>CSR</th><th>SSR</th></tr>
+<tr><td>Browser renders JS</td><td>Server renders HTML</td></tr>
+<tr><td>Blank page first, then JS fills</td><td>Content visible immediately</td></tr>
+<tr><td>Weaker SEO</td><td>Better SEO</td></tr>
+<tr><td>Less server load</td><td>More server load</td></tr></table>`,
+code:`// CSR: <div id="root"></div> + bundle.js renders\n// SSR: server sends full HTML, client hydrates\nconsole.log("Trade-off: SEO/speed vs server cost");`},
+
+{id:111,category:"Node.js",question:"What is Node.js?",lang:"js",
+answer:`<p><strong>Node.js</strong> is a runtime that lets JavaScript run outside the browser, on the server, built on Chrome's V8 engine. It uses a <strong>non-blocking, event-driven</strong> model — ideal for scalable I/O-heavy apps.</p>`,
+code:`console.log("Running on Node.js!");\n// const os = require('os');\n// console.log("Platform:", os.platform());`},
+{id:112,category:"Node.js",question:"Node.js vs browser JavaScript?",lang:"js",
+answer:`<ul><li><strong>Browser JS</strong> – has <code>window</code>, <code>document</code>, DOM APIs; sandboxed.</li><li><strong>Node JS</strong> – has <code>global</code>, <code>process</code>, file system, networking; no DOM. Uses CommonJS/ESM modules.</li></ul>`,
+code:`// Node-only globals\n// console.log(process.version);\n// console.log(__dirname);\n// const fs = require('fs'); // file system access\nconsole.log("Node has no DOM, browser has no fs");`},
+{id:113,category:"Node.js",question:"The event loop in Node?",lang:"js",
+answer:`<p>The <strong>event loop</strong> lets single-threaded Node handle many concurrent operations. It offloads I/O to the system, then processes callbacks in phases (timers, I/O, check) when the call stack is empty.</p>
+<p>Order: synchronous → microtasks (Promises, <code>process.nextTick</code>) → macrotasks.</p>`,
+code:`console.log("1 sync");\nPromise.resolve().then(() => console.log("3 microtask"));\nsetTimeout(() => console.log("4 macrotask"), 0);\nconsole.log("2 sync");`},
+{id:114,category:"Node.js",question:"What is npm?",lang:"none",
+answer:`<p><strong>npm (Node Package Manager)</strong> is the default package manager for Node. It installs, manages and shares reusable JavaScript packages.</p>
+<ul><li><code>package.json</code> – project metadata & dependencies.</li><li><code>npm install</code> – install packages.</li><li><code>dependencies</code> vs <code>devDependencies</code>.</li></ul>`,
+code:`# install a package\nnpm install express\n\n# install dev dependency\nnpm install --save-dev nodemon\n\n# run a script\nnpm run start`},
+{id:115,category:"Node.js",question:"CommonJS vs ES Modules?",lang:"js",
+answer:`<ul><li><strong>CommonJS</strong> – Node's original system: <code>require()</code> and <code>module.exports</code>. Synchronous.</li><li><strong>ES Modules (ESM)</strong> – standard: <code>import/export</code>. Asynchronous, supports tree-shaking. Enabled via <code>.mjs</code> or <code>"type":"module"</code>.</li></ul>`,
+code:`// CommonJS\nconst fs = require('fs');\nmodule.exports = myFunc;\n\n// ES Modules\nimport fs from 'fs';\nexport default myFunc;`},
+{id:116,category:"Node.js",question:"What is Express.js?",lang:"js",
+answer:`<p><strong>Express.js</strong> is a minimal, flexible web framework for Node that simplifies building servers and REST APIs with routing and middleware.</p>`,
+code:`const express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('Hello from Express!');\n});\n\napp.listen(3000, () => console.log('Port 3000'));`},
+{id:117,category:"Node.js",question:"What is middleware in Express?",lang:"js",
+answer:`<p><strong>Middleware</strong> are functions that run during the request-response cycle. They have access to <code>req</code>, <code>res</code>, and <code>next()</code>, and can modify requests, end responses, or pass control onward.</p>
+<p>Used for logging, auth, body parsing, error handling.</p>`,
+code:`app.use((req, res, next) => {\n  console.log(req.method + ' ' + req.url);\n  next(); // pass to next middleware\n});\n\napp.use(express.json()); // body parser`},
+{id:118,category:"Node.js",question:"Synchronous vs asynchronous in Node?",lang:"js",
+answer:`<p>Node prefers <strong>asynchronous</strong>, non-blocking APIs so the single thread isn't held up by slow I/O.</p>
+<ul><li>Sync (e.g. <code>fs.readFileSync</code>) blocks the event loop.</li><li>Async (callbacks/Promises) lets other work proceed.</li></ul>`,
+code:`const fs = require('fs');\n// Async (preferred)\nfs.readFile('a.txt', 'utf8', (err, data) => {\n  console.log(data);\n});\n// Sync (blocks)\n// const data = fs.readFileSync('a.txt','utf8');`},
+{id:119,category:"Node.js",question:"What are streams in Node?",lang:"js",
+answer:`<p><strong>Streams</strong> process data in chunks instead of loading everything into memory — efficient for large files and network data.</p>
+<ul><li>Types: Readable, Writable, Duplex, Transform.</li><li><code>pipe()</code> connects streams.</li></ul>`,
+code:`const fs = require('fs');\nconst read = fs.createReadStream('big.txt');\nconst write = fs.createWriteStream('copy.txt');\nread.pipe(write); // stream chunks efficiently`},
+{id:120,category:"Node.js",question:"The Buffer in Node?",lang:"js",
+answer:`<p>A <strong>Buffer</strong> is a fixed-size chunk of raw binary memory outside V8's heap. It handles binary data like files, TCP streams, and images that strings can't represent well.</p>`,
+code:`const buf = Buffer.from('Hello');\nconsole.log(buf);            // <Buffer 48 65 6c 6c 6f>\nconsole.log(buf.toString()); // Hello\nconsole.log(buf.length);     // 5`},
+{id:121,category:"Node.js",question:"process object in Node?",lang:"js",
+answer:`<p>The global <strong>process</strong> object provides info about and control over the current Node process.</p>
+<ul><li><code>process.argv</code> – CLI arguments.</li><li><code>process.env</code> – environment variables.</li><li><code>process.exit()</code> – end the process.</li></ul>`,
+code:`// console.log(process.argv);       // command-line args\n// console.log(process.env.NODE_ENV);\n// console.log(process.platform);\nconsole.log("process gives runtime info & control");`},
+{id:122,category:"Node.js",question:"Environment variables?",lang:"js",
+answer:`<p><strong>Environment variables</strong> store config (API keys, DB URLs, ports) outside the code, keeping secrets safe and enabling per-environment settings.</p>
+<p>Accessed via <code>process.env</code>; often loaded from a <code>.env</code> file with the <code>dotenv</code> package.</p>`,
+code:`require('dotenv').config();\nconst PORT = process.env.PORT || 3000;\nconst DB = process.env.DATABASE_URL;\nconsole.log("Running on port", PORT);`},
+{id:123,category:"Node.js",question:"Error handling in Node?",lang:"js",
+answer:`<p>Common patterns:</p>
+<ul><li><strong>try/catch</strong> for sync & async/await.</li><li><strong>Error-first callbacks</strong> – <code>(err, data) => {}</code>.</li><li><code>.catch()</code> on Promises.</li><li>Global handlers for <code>uncaughtException</code> / <code>unhandledRejection</code>.</li></ul>`,
+code:`async function load() {\n  try {\n    const data = await fetchData();\n    return data;\n  } catch (err) {\n    console.error("Failed:", err.message);\n  }\n}`},
+{id:124,category:"Node.js",question:"What is a REST API in Node?",lang:"js",
+answer:`<p>A <strong>REST API</strong> exposes resources over HTTP using standard verbs. In Express you map verbs + routes to handlers.</p>
+<ul><li>GET – read, POST – create, PUT/PATCH – update, DELETE – remove.</li><li>Returns JSON with appropriate status codes.</li></ul>`,
+code:`app.get('/users', (req,res) => res.json(users));\napp.post('/users', (req,res) => {\n  users.push(req.body);\n  res.status(201).json(req.body);\n});\napp.delete('/users/:id', (req,res) => res.sendStatus(204));`},
+{id:125,category:"Node.js",question:"What is the cluster module?",lang:"js",
+answer:`<p>Node is single-threaded, so the <strong>cluster module</strong> forks multiple worker processes that share the same server port, using all CPU cores for better throughput.</p>`,
+code:`const cluster = require('cluster');\nconst os = require('os');\nif (cluster.isPrimary) {\n  os.cpus().forEach(() => cluster.fork());\n} else {\n  require('./server'); // each worker runs server\n}`},
+{id:126,category:"Node.js",question:"package.json vs package-lock.json?",lang:"none",
+answer:`<ul><li><strong>package.json</strong> – lists dependencies with version <em>ranges</em> (<code>^1.2.0</code>) plus scripts and metadata.</li><li><strong>package-lock.json</strong> – records the <em>exact</em> resolved versions of every dependency for reproducible installs.</li></ul>`,
+code:`// package.json\n"dependencies": { "express": "^4.18.0" }\n\n// package-lock.json pins exact:\n// "express": { "version": "4.18.2" }`},
+{id:127,category:"Node.js",question:"What is nodemon?",lang:"none",
+answer:`<p><strong>nodemon</strong> is a development tool that automatically restarts your Node application whenever it detects file changes — no manual restarts needed.</p>`,
+code:`# install\nnpm install --save-dev nodemon\n\n# run (auto-restarts on save)\nnpx nodemon server.js`},
+{id:128,category:"Node.js",question:"What is CORS?",lang:"js",
+answer:`<p><strong>CORS (Cross-Origin Resource Sharing)</strong> is a browser security mechanism controlling which origins can call your API. Servers send <code>Access-Control-Allow-Origin</code> headers to permit cross-origin requests.</p>`,
+code:`const cors = require('cors');\napp.use(cors({ origin: 'https://sha.dev' }));\n// or allow all:\napp.use(cors());`},
+{id:129,category:"Node.js",question:"What is JWT?",lang:"js",
+answer:`<p><strong>JWT (JSON Web Token)</strong> is a compact, signed token for stateless authentication. It has three parts: <strong>header.payload.signature</strong>. The server verifies the signature without storing sessions.</p>`,
+code:`const jwt = require('jsonwebtoken');\nconst token = jwt.sign({ id: 1 }, 'secret', { expiresIn: '1h' });\nconst decoded = jwt.verify(token, 'secret');\nconsole.log(decoded.id);`},
+{id:130,category:"Node.js",question:"How to scale a Node app?",lang:"none",
+answer:`<p>Strategies to scale Node apps:</p>
+<ul><li><strong>Clustering / PM2</strong> – use all CPU cores.</li><li><strong>Load balancing</strong> – distribute traffic (Nginx).</li><li><strong>Caching</strong> – Redis for hot data.</li><li><strong>Horizontal scaling</strong> – more server instances.</li><li><strong>Async/non-blocking</strong> code & a message queue for heavy jobs.</li></ul>`,
+code:`# Run with PM2 in cluster mode across all cores\npm2 start server.js -i max\n\n# Monitor\npm2 monit`},
+
+{id:131,category:"Databases",question:"SQL vs NoSQL?",lang:"none",
+answer:`<table><tr><th>SQL</th><th>NoSQL</th></tr>
+<tr><td>Relational, tables/rows</td><td>Documents, key-value, graph</td></tr>
+<tr><td>Fixed schema</td><td>Flexible schema</td></tr>
+<tr><td>Vertical scaling</td><td>Horizontal scaling</td></tr>
+<tr><td>ACID, joins</td><td>High write throughput</td></tr>
+<tr><td>MySQL, PostgreSQL</td><td>MongoDB, Redis</td></tr></table>`,
+code:`-- SQL\nSELECT * FROM users WHERE age > 18;\n\n// NoSQL (MongoDB)\ndb.users.find({ age: { $gt: 18 } });`},
+{id:132,category:"Databases",question:"What is a primary key?",lang:"none",
+answer:`<p>A <strong>primary key</strong> uniquely identifies each row in a table. It must be <strong>unique</strong> and <strong>not null</strong>, and there is only one per table. It's often auto-incremented.</p>`,
+code:`CREATE TABLE users (\n  id INT PRIMARY KEY AUTO_INCREMENT,\n  name VARCHAR(50),\n  email VARCHAR(100) UNIQUE\n);`},
+{id:133,category:"Databases",question:"What is a foreign key?",lang:"none",
+answer:`<p>A <strong>foreign key</strong> is a column that references the primary key of another table, creating a relationship and enforcing <strong>referential integrity</strong>.</p>`,
+code:`CREATE TABLE orders (\n  id INT PRIMARY KEY,\n  user_id INT,\n  FOREIGN KEY (user_id) REFERENCES users(id)\n);`},
+{id:134,category:"Databases",question:"Database normalization?",lang:"none",
+answer:`<p><strong>Normalization</strong> organises data to reduce redundancy and improve integrity by splitting data into related tables.</p>
+<ul><li><strong>1NF</strong> – atomic values, no repeating groups.</li><li><strong>2NF</strong> – no partial dependency on a composite key.</li><li><strong>3NF</strong> – no transitive dependency.</li></ul>`,
+code:`-- Split into customers + orders tables linked by id\nSELECT o.id, c.name\nFROM orders o JOIN customers c ON o.cust_id = c.id;`},
+{id:135,category:"Databases",question:"SQL JOINs?",lang:"none",
+answer:`<ul><li><strong>INNER JOIN</strong> – rows matching in both tables.</li><li><strong>LEFT JOIN</strong> – all left rows + matches.</li><li><strong>RIGHT JOIN</strong> – all right rows + matches.</li><li><strong>FULL JOIN</strong> – all rows from both.</li></ul>`,
+code:`SELECT users.name, orders.total\nFROM users\nINNER JOIN orders ON users.id = orders.user_id;\n\nSELECT users.name, orders.total\nFROM users\nLEFT JOIN orders ON users.id = orders.user_id;`},
+{id:136,category:"Databases",question:"What is an index?",lang:"none",
+answer:`<p>An <strong>index</strong> is a data structure (usually a B-tree) that speeds up reads by letting the database find rows without scanning the whole table.</p>
+<p>Trade-off: faster reads but slower writes and extra storage.</p>`,
+code:`CREATE INDEX idx_email ON users(email);\n\n-- now this query is much faster\nSELECT * FROM users WHERE email = 'a@b.com';`},
+{id:137,category:"Databases",question:"ACID properties?",lang:"none",
+answer:`<p><strong>ACID</strong> guarantees reliable transactions:</p>
+<ul><li><strong>Atomicity</strong> – all or nothing.</li><li><strong>Consistency</strong> – valid state to valid state.</li><li><strong>Isolation</strong> – concurrent transactions don't interfere.</li><li><strong>Durability</strong> – committed data survives crashes.</li></ul>`,
+code:`BEGIN TRANSACTION;\n  UPDATE accounts SET balance = balance - 100 WHERE id = 1;\n  UPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT; -- both succeed or both roll back`},
+{id:138,category:"Databases",question:"What is a transaction?",lang:"none",
+answer:`<p>A <strong>transaction</strong> is a sequence of operations treated as a single unit. It either fully completes (<code>COMMIT</code>) or fully undoes (<code>ROLLBACK</code>), preserving data integrity.</p>`,
+code:`BEGIN;\nINSERT INTO orders VALUES (1, 500);\nUPDATE stock SET qty = qty - 1 WHERE id = 7;\n-- if anything fails:\nROLLBACK;\n-- else:\nCOMMIT;`},
+{id:139,category:"Databases",question:"What is MongoDB?",lang:"js",
+answer:`<p><strong>MongoDB</strong> is a popular NoSQL <strong>document database</strong>. It stores data as flexible, JSON-like <strong>BSON documents</strong> in collections, with no fixed schema.</p>`,
+code:`// MongoDB documents\ndb.users.insertOne({\n  name: "Sha",\n  skills: ["JS", "React"],\n  age: 28\n});\ndb.users.find({ age: { $gte: 18 } });`},
+{id:140,category:"Databases",question:"What is aggregation in MongoDB?",lang:"js",
+answer:`<p><strong>Aggregation</strong> processes documents through a <strong>pipeline</strong> of stages to compute grouped/transformed results (like SQL GROUP BY).</p>
+<p>Stages: <code>$match</code>, <code>$group</code>, <code>$sort</code>, <code>$project</code>.</p>`,
+code:`db.orders.aggregate([\n  { $match: { status: "paid" } },\n  { $group: { _id: "$userId", total: { $sum: "$amount" } } },\n  { $sort: { total: -1 } }\n]);`},
+{id:141,category:"Databases",question:"What is Redis?",lang:"none",
+answer:`<p><strong>Redis</strong> is an in-memory key-value data store, extremely fast, used for <strong>caching</strong>, sessions, rate limiting, queues and real-time leaderboards.</p>
+<p>Supports strings, lists, sets, hashes; can persist to disk.</p>`,
+code:`SET user:1 "Sha"\nGET user:1\nEXPIRE user:1 3600   # auto-delete after 1 hour\nINCR page:views      # atomic counter`},
+{id:142,category:"Databases",question:"What is connection pooling?",lang:"js",
+answer:`<p><strong>Connection pooling</strong> reuses a set of open database connections instead of opening a new one per request. This reduces overhead and improves performance under load.</p>`,
+code:`const pool = mysql.createPool({\n  host: 'localhost', user: 'root',\n  database: 'app', connectionLimit: 10\n});\npool.query('SELECT * FROM users', (e, rows) => {});`},
+{id:143,category:"Databases",question:"What is SQL injection?",lang:"js",
+answer:`<p><strong>SQL injection</strong> is an attack where malicious input is inserted into a query to manipulate the database. Prevent it with <strong>parameterised queries</strong> (prepared statements), never string concatenation.</p>`,
+code:`// vulnerable\ndb.query("SELECT * FROM users WHERE id = " + userInput);\n\n// safe — parameterised\ndb.query("SELECT * FROM users WHERE id = ?", [userInput]);`},
+{id:144,category:"Databases",question:"GROUP BY and HAVING?",lang:"none",
+answer:`<ul><li><strong>GROUP BY</strong> – groups rows sharing a value, used with aggregate functions (COUNT, SUM, AVG).</li><li><strong>HAVING</strong> – filters groups (WHERE filters rows before grouping).</li></ul>`,
+code:`SELECT country, COUNT(*) AS users\nFROM customers\nGROUP BY country\nHAVING COUNT(*) > 100\nORDER BY users DESC;`},
+{id:145,category:"Databases",question:"DELETE vs TRUNCATE vs DROP?",lang:"none",
+answer:`<ul><li><strong>DELETE</strong> – removes specific rows (with WHERE); can be rolled back; slower.</li><li><strong>TRUNCATE</strong> – removes all rows fast, resets identity, can't use WHERE.</li><li><strong>DROP</strong> – removes the entire table (structure + data).</li></ul>`,
+code:`DELETE FROM users WHERE id = 5;  -- specific rows\nTRUNCATE TABLE logs;             -- empty table fast\nDROP TABLE temp;                 -- remove table entirely`},
+{id:146,category:"Databases",question:"What is an ORM?",lang:"js",
+answer:`<p>An <strong>ORM (Object-Relational Mapping)</strong> library lets you interact with the database using objects/methods instead of raw SQL. Examples: Sequelize, Prisma, TypeORM, Mongoose.</p>
+<p>Benefits: cleaner code, less boilerplate, DB-agnostic. Trade-off: less control, possible performance overhead.</p>`,
+code:`// Prisma ORM example\nconst users = await prisma.user.findMany({\n  where: { age: { gt: 18 } },\n  orderBy: { name: 'asc' }\n});`},
+{id:147,category:"Databases",question:"What is sharding?",lang:"none",
+answer:`<p><strong>Sharding</strong> splits a large database horizontally across multiple servers (shards), each holding a subset of the data. It enables horizontal scaling for huge datasets and high traffic.</p>`,
+code:`// Conceptual: route by key range\n// Shard 1: user_id 1 - 1,000,000\n// Shard 2: user_id 1,000,001 - 2,000,000\n// Each shard is its own DB server`},
+{id:148,category:"Databases",question:"What is replication?",lang:"none",
+answer:`<p><strong>Replication</strong> copies data across multiple database servers. A <strong>primary</strong> handles writes and replicates to <strong>replicas</strong> that serve reads, improving availability, read scaling and failover.</p>`,
+code:`// Primary  -> writes\n//   |  replicate\n//   v\n// Replica 1, Replica 2 -> reads (load balanced)`},
+{id:149,category:"Databases",question:"What is caching?",lang:"js",
+answer:`<p><strong>Caching</strong> stores frequently accessed data in fast storage (memory/Redis) so repeated requests don't hit the slower database. It reduces latency and load.</p>
+<p>Strategies: cache-aside, write-through, TTL expiry; watch for cache invalidation.</p>`,
+code:`async function getUser(id) {\n  let user = await redis.get('user:' + id);\n  if (!user) {\n    user = await db.findUser(id);\n    await redis.set('user:' + id, user, 'EX', 3600);\n  }\n  return user;\n}`},
+{id:150,category:"Databases",question:"OLTP vs OLAP?",lang:"none",
+answer:`<table><tr><th>OLTP</th><th>OLAP</th></tr>
+<tr><td>Transaction processing</td><td>Analytical processing</td></tr>
+<tr><td>Many small fast writes</td><td>Complex read queries</td></tr>
+<tr><td>Current operational data</td><td>Historical/aggregated data</td></tr>
+<tr><td>e.g. e-commerce orders</td><td>e.g. BI dashboards / warehouses</td></tr></table>`,
+code:`-- OLTP: quick insert\nINSERT INTO orders VALUES (...);\n\n-- OLAP: heavy analytical query\nSELECT region, SUM(sales) FROM facts\nGROUP BY region, year;`},
+
+{id:151,category:"Security",question:"What is XSS?",lang:"js",
+answer:`<p><strong>XSS (Cross-Site Scripting)</strong> injects malicious scripts into web pages viewed by others, stealing cookies or hijacking sessions.</p>
+<p>Prevent by <strong>escaping/sanitising</strong> output, using a Content-Security-Policy, and avoiding <code>innerHTML</code> with untrusted data.</p>`,
+code:`// vulnerable\nel.innerHTML = userInput;\n\n// safe\nel.textContent = userInput;\n// or sanitize with DOMPurify\n// el.innerHTML = DOMPurify.sanitize(userInput);`},
+{id:152,category:"Security",question:"What is CSRF?",lang:"none",
+answer:`<p><strong>CSRF (Cross-Site Request Forgery)</strong> tricks a logged-in user's browser into sending unwanted authenticated requests.</p>
+<p>Prevent with <strong>CSRF tokens</strong>, <code>SameSite</code> cookies, and checking the Origin/Referer.</p>`,
+code:`<!-- Server issues a token, form echoes it back -->\n<form method="POST">\n  <input type="hidden" name="_csrf" value="TOKEN">\n</form>\n<!-- Cookie: Set-Cookie: sid=...; SameSite=Strict -->`},
+{id:153,category:"Security",question:"HTTP vs HTTPS?",lang:"none",
+answer:`<ul><li><strong>HTTP</strong> – plaintext, data can be intercepted.</li><li><strong>HTTPS</strong> – HTTP over <strong>TLS/SSL</strong>, encrypting traffic, verifying server identity and ensuring integrity. Required for security, trust, and SEO.</li></ul>`,
+code:`// HTTP  -> http://site.com  (insecure)\n// HTTPS -> https://site.com (encrypted, padlock)\n// Get a free certificate via Let's Encrypt`},
+{id:154,category:"Security",question:"What is hashing?",lang:"js",
+answer:`<p><strong>Hashing</strong> converts data into a fixed-length irreversible string. Passwords must be hashed (not encrypted) with slow algorithms like <strong>bcrypt</strong> plus a <strong>salt</strong> to resist brute-force and rainbow tables.</p>`,
+code:`const bcrypt = require('bcrypt');\nconst hash = await bcrypt.hash('myPassword', 10);\nconst ok   = await bcrypt.compare('myPassword', hash);\nconsole.log(ok); // true`},
+{id:155,category:"Security",question:"Encryption vs hashing?",lang:"none",
+answer:`<table><tr><th>Hashing</th><th>Encryption</th></tr>
+<tr><td>One-way (irreversible)</td><td>Two-way (reversible with key)</td></tr>
+<tr><td>For passwords/integrity</td><td>For confidential data transfer</td></tr>
+<tr><td>bcrypt, SHA-256</td><td>AES, RSA</td></tr></table>`,
+code:`// Hash (one-way): password -> hash (can't reverse)\n// Encrypt (two-way): data + key -> cipher -> data\n// Hash passwords, encrypt data at rest`},
+{id:156,category:"Security",question:"Authentication vs authorization?",lang:"js",
+answer:`<ul><li><strong>Authentication</strong> – verifying <em>who</em> you are (login, password, OTP).</li><li><strong>Authorization</strong> – verifying <em>what</em> you're allowed to do (roles, permissions).</li></ul>
+<p>Authentication comes first, then authorization.</p>`,
+code:`// 1. Authentication: verify identity\nif (!validUser(token)) return res.sendStatus(401);\n// 2. Authorization: check permission\nif (user.role !== 'admin') return res.sendStatus(403);`},
+{id:157,category:"Security",question:"What is OAuth?",lang:"none",
+answer:`<p><strong>OAuth 2.0</strong> is an authorization framework allowing apps to access a user's data on another service (Google, GitHub) without sharing passwords. The user grants a scoped <strong>access token</strong>.</p>`,
+code:`// Flow:\n// 1. App redirects to provider login\n// 2. User consents\n// 3. Provider returns auth code\n// 4. App exchanges code for access token\n// 5. App calls API with the token`},
+{id:158,category:"Security",question:"What are security headers?",lang:"js",
+answer:`<p><strong>HTTP security headers</strong> harden apps against attacks:</p>
+<ul><li><code>Content-Security-Policy</code> – restrict resource sources (anti-XSS).</li><li><code>X-Frame-Options</code> – prevent clickjacking.</li><li><code>Strict-Transport-Security</code> – force HTTPS.</li><li><code>X-Content-Type-Options: nosniff</code>.</li></ul>`,
+code:`const helmet = require('helmet');\napp.use(helmet()); // sets secure headers automatically`},
+{id:159,category:"Security",question:"What is rate limiting?",lang:"js",
+answer:`<p><strong>Rate limiting</strong> caps how many requests a client can make in a time window. It protects against brute-force attacks, DDoS, and API abuse.</p>`,
+code:`const rateLimit = require('express-rate-limit');\napp.use(rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 min\n  max: 100                  // 100 requests/IP\n}));`},
+{id:160,category:"Security",question:"What is the same-origin policy?",lang:"none",
+answer:`<p>The <strong>same-origin policy</strong> is a browser rule that restricts how a document/script from one origin (protocol + host + port) can interact with resources from another origin — preventing malicious cross-site data access.</p>
+<p>CORS relaxes it in a controlled way.</p>`,
+code:`// Same origin: https://sha.dev/a  &  https://sha.dev/b\n// Different origin (blocked by default):\n//   https://sha.dev  vs  https://api.other.com`},
+{id:161,category:"Security",question:"Man-in-the-middle attack?",lang:"none",
+answer:`<p>A <strong>man-in-the-middle (MITM)</strong> attack intercepts communication between two parties to eavesdrop or alter data. Defences: <strong>HTTPS/TLS</strong>, certificate pinning, HSTS, and avoiding untrusted networks.</p>`,
+code:`// Without TLS: attacker reads/modifies traffic\n// Client <---> [Attacker] <---> Server\n// With HTTPS: traffic is encrypted end-to-end`},
+{id:162,category:"Security",question:"What is input validation?",lang:"js",
+answer:`<p><strong>Input validation</strong> ensures user data is well-formed and safe before processing. Always validate on the <strong>server</strong> (client validation is for UX only) to prevent injection and bad data.</p>`,
+code:`const { z } = require('zod');\nconst schema = z.object({\n  email: z.string().email(),\n  age: z.number().min(18)\n});\nschema.parse(req.body); // throws if invalid`},
+{id:163,category:"Security",question:"What are environment secrets?",lang:"none",
+answer:`<p><strong>Secrets</strong> (API keys, DB passwords, JWT secrets) should never be hard-coded or committed to Git. Store them in environment variables or a secrets manager (AWS Secrets Manager, Vault) and add <code>.env</code> to <code>.gitignore</code>.</p>`,
+code:`# .gitignore\n.env\n\n# .env (never commit)\nDB_PASSWORD=supersecret\nJWT_SECRET=xyz123`},
+{id:164,category:"Security",question:"The HTTPS/SSL handshake?",lang:"none",
+answer:`<p>The <strong>TLS handshake</strong> establishes a secure connection:</p>
+<ol><li>Client says hello with supported ciphers.</li><li>Server sends its certificate (public key).</li><li>They agree on a session key via asymmetric crypto.</li><li>Encrypted communication begins with the symmetric key.</li></ol>`,
+code:`// 1. ClientHello\n// 2. ServerHello + Certificate\n// 3. Key exchange -> shared session key\n// 4. Encrypted data flows`},
+{id:165,category:"Security",question:"Principle of least privilege?",lang:"none",
+answer:`<p>The <strong>principle of least privilege</strong> means giving users, processes, and services only the minimum permissions needed to do their job. This limits damage if an account is compromised.</p>`,
+code:`-- App DB user with only needed rights\nGRANT SELECT, INSERT ON app.orders TO 'app_user';\n-- not full admin access`},
+
+{id:166,category:"APIs",question:"What is an API?",lang:"js",
+answer:`<p>An <strong>API (Application Programming Interface)</strong> is a contract that lets software components communicate. Web APIs expose endpoints over HTTP so clients can request and exchange data (usually JSON).</p>`,
+code:`fetch('https://api.example.com/users')\n  .then(res => res.json())\n  .then(data => console.log(data));`},
+{id:167,category:"APIs",question:"REST vs GraphQL?",lang:"none",
+answer:`<table><tr><th>REST</th><th>GraphQL</th></tr>
+<tr><td>Multiple endpoints</td><td>Single endpoint</td></tr>
+<tr><td>Fixed response shape</td><td>Client picks fields</td></tr>
+<tr><td>Over/under-fetching</td><td>Exact data needed</td></tr>
+<tr><td>Simpler, cacheable</td><td>Flexible, fewer round-trips</td></tr></table>`,
+code:`# GraphQL: ask for exactly what you need\nquery {\n  user(id: 1) {\n    name\n    posts { title }\n  }\n}`},
+{id:168,category:"APIs",question:"HTTP methods (verbs)?",lang:"none",
+answer:`<ul><li><strong>GET</strong> – read data.</li><li><strong>POST</strong> – create data.</li><li><strong>PUT</strong> – replace a resource.</li><li><strong>PATCH</strong> – partial update.</li><li><strong>DELETE</strong> – remove.</li></ul>
+<p>GET is safe & idempotent; POST is not idempotent.</p>`,
+code:`GET    /users        # list\nPOST   /users        # create\nPUT    /users/1      # replace\nPATCH  /users/1      # update part\nDELETE /users/1      # remove`},
+{id:169,category:"APIs",question:"HTTP status codes?",lang:"js",
+answer:`<ul><li><strong>2xx</strong> success – 200 OK, 201 Created, 204 No Content.</li><li><strong>3xx</strong> redirect – 301, 304 Not Modified.</li><li><strong>4xx</strong> client error – 400, 401, 403, 404, 429.</li><li><strong>5xx</strong> server error – 500, 502, 503.</li></ul>`,
+code:`// res.status(200).json(data);        // OK\n// res.status(201).json(newItem);     // Created\n// res.status(404).send('Not found'); // Client error\n// res.status(500).send('Error');     // Server error\nconsole.log("2xx ok, 4xx client, 5xx server");`},
+{id:170,category:"APIs",question:"What is the fetch API?",lang:"js",
+answer:`<p>The <strong>Fetch API</strong> is the modern, Promise-based way to make HTTP requests in the browser, replacing XMLHttpRequest.</p>`,
+code:`async function getData() {\n  const res = await fetch('/api/data');\n  if (!res.ok) throw new Error('HTTP ' + res.status);\n  const data = await res.json();\n  return data;\n}`},
+{id:171,category:"APIs",question:"What is Axios?",lang:"js",
+answer:`<p><strong>Axios</strong> is a popular Promise-based HTTP client. Advantages over fetch: automatic JSON parsing, interceptors, request cancellation, timeouts, and better error handling.</p>`,
+code:`import axios from 'axios';\nconst { data } = await axios.get('/api/users');\nawait axios.post('/api/users', { name: 'Sha' });\n// interceptors, baseURL, timeouts built-in`},
+{id:172,category:"APIs",question:"What is API authentication?",lang:"js",
+answer:`<p>APIs verify callers using methods like:</p>
+<ul><li><strong>API keys</strong> – simple token in a header.</li><li><strong>JWT</strong> – signed bearer tokens.</li><li><strong>OAuth 2.0</strong> – delegated access.</li></ul>`,
+code:`fetch('/api/data', {\n  headers: { 'Authorization': 'Bearer ' + token }\n});`},
+{id:173,category:"APIs",question:"Rate limiting in APIs?",lang:"none",
+answer:`<p>API <strong>rate limiting</strong> restricts how many requests a client may make in a window, returning <strong>429 Too Many Requests</strong> when exceeded. It protects the server and ensures fair usage. Often communicated via <code>X-RateLimit-*</code> headers.</p>`,
+code:`HTTP/1.1 429 Too Many Requests\nX-RateLimit-Limit: 100\nX-RateLimit-Remaining: 0\nRetry-After: 60`},
+{id:174,category:"APIs",question:"What is pagination?",lang:"none",
+answer:`<p><strong>Pagination</strong> splits large result sets into pages so responses stay fast and small.</p>
+<ul><li><strong>Offset/limit</strong> – <code>?page=2&limit=20</code>.</li><li><strong>Cursor-based</strong> – use a pointer to the last item (more stable).</li></ul>`,
+code:`GET /products?page=2&limit=20\n\n// response\n{ "data": [], "page": 2, "total": 540 }`},
+{id:175,category:"APIs",question:"What is API versioning?",lang:"none",
+answer:`<p><strong>API versioning</strong> lets you change an API without breaking existing clients. Common strategies: URL path (<code>/v1/</code>), header, or query parameter.</p>`,
+code:`GET /v1/users   # old clients\nGET /v2/users   # new features\n\n// or via header:\n// Accept: application/vnd.api.v2+json`},
+{id:176,category:"APIs",question:"What is a webhook?",lang:"js",
+answer:`<p>A <strong>webhook</strong> is a reverse API: instead of you polling, the server <strong>pushes</strong> an HTTP POST to your URL when an event happens (payment, new message). Real-time and efficient.</p>`,
+code:`// Your endpoint receives events\napp.post('/webhook', (req, res) => {\n  const event = req.body;\n  if (event.type === 'payment.success') handle(event);\n  res.sendStatus(200);\n});`},
+{id:177,category:"APIs",question:"What is idempotency?",lang:"none",
+answer:`<p>An operation is <strong>idempotent</strong> if making the same request multiple times has the same effect as making it once. GET, PUT, DELETE are idempotent; POST usually isn't.</p>
+<p>Idempotency keys prevent duplicate charges on retries.</p>`,
+code:`PUT /users/1 { name: 'Sha' }  // same result if repeated\nPOST /charge\nHeader: Idempotency-Key: abc123 // safe to retry`},
+{id:178,category:"APIs",question:"What is CORS preflight?",lang:"none",
+answer:`<p>For "non-simple" cross-origin requests, the browser first sends an <strong>OPTIONS preflight</strong> request to check if the actual request is allowed. The server responds with allowed methods/headers/origin.</p>`,
+code:`OPTIONS /api/data        # preflight\nAccess-Control-Request-Method: POST\n\n// Server replies:\nAccess-Control-Allow-Origin: https://sha.dev\nAccess-Control-Allow-Methods: POST, GET`},
+{id:179,category:"APIs",question:"GraphQL query vs mutation?",lang:"none",
+answer:`<ul><li><strong>Query</strong> – reads data (like GET).</li><li><strong>Mutation</strong> – writes/changes data (like POST/PUT/DELETE).</li><li><strong>Subscription</strong> – real-time updates via WebSockets.</li></ul>`,
+code:`query { user(id:1) { name } }\n\nmutation {\n  addUser(name: "Sha") { id name }\n}`},
+{id:180,category:"APIs",question:"What is WebSocket?",lang:"js",
+answer:`<p><strong>WebSocket</strong> provides a persistent, full-duplex connection between client and server over a single TCP connection — ideal for real-time apps (chat, live data, games). Unlike HTTP, the server can push data anytime.</p>`,
+code:`const ws = new WebSocket('wss://server.com');\nws.onmessage = e => console.log('Received:', e.data);\nws.onopen = () => ws.send('Hello server');`},
+
+{id:181,category:"DevOps",question:"What is Git?",lang:"none",
+answer:`<p><strong>Git</strong> is a distributed version control system that tracks changes to code, enables collaboration, branching, and history. Every developer has a full copy of the repository.</p>`,
+code:`git init\ngit add .\ngit commit -m "Initial commit"\ngit push origin main`},
+{id:182,category:"DevOps",question:"git merge vs rebase?",lang:"none",
+answer:`<ul><li><strong>merge</strong> – combines branches, creating a merge commit; preserves history (non-linear).</li><li><strong>rebase</strong> – replays your commits on top of another branch; produces a clean, linear history but rewrites commits.</li></ul>
+<p>Don't rebase shared/public branches.</p>`,
+code:`# merge\ngit checkout main\ngit merge feature\n\n# rebase\ngit checkout feature\ngit rebase main`},
+{id:183,category:"DevOps",question:"What is CI/CD?",lang:"none",
+answer:`<ul><li><strong>CI (Continuous Integration)</strong> – automatically build & test code on every push.</li><li><strong>CD (Continuous Delivery/Deployment)</strong> – automatically release to staging/production.</li></ul>
+<p>Tools: GitHub Actions, GitLab CI, Jenkins, CircleCI.</p>`,
+code:`# GitHub Actions snippet\nname: CI\non: [push]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm install && npm test`},
+{id:184,category:"DevOps",question:"What is Docker?",lang:"none",
+answer:`<p><strong>Docker</strong> packages an app and its dependencies into a portable <strong>container</strong> that runs the same everywhere. Containers are lightweight and share the host OS kernel (unlike VMs).</p>`,
+code:`# Dockerfile\nFROM node:20\nWORKDIR /app\nCOPY . .\nRUN npm install\nCMD ["node", "server.js"]\n# docker build -t app . && docker run -p 3000:3000 app`},
+{id:185,category:"DevOps",question:"What is Kubernetes?",lang:"none",
+answer:`<p><strong>Kubernetes (K8s)</strong> is a container orchestration platform that automates deploying, scaling, and managing containerised apps across clusters — handling load balancing, self-healing, and rolling updates.</p>`,
+code:`# deployment.yaml (concept)\nkind: Deployment\nspec:\n  replicas: 3        # run 3 pods\n  template:\n    spec:\n      containers:\n        - image: myapp:1.0`},
+{id:186,category:"DevOps",question:"Container vs virtual machine?",lang:"none",
+answer:`<table><tr><th>Container</th><th>VM</th></tr>
+<tr><td>Shares host OS kernel</td><td>Full guest OS</td></tr>
+<tr><td>MBs, starts in seconds</td><td>GBs, starts in minutes</td></tr>
+<tr><td>Lightweight, dense</td><td>Stronger isolation</td></tr></table>`,
+code:`// Container: app + libs on shared kernel\n// VM: app + libs + full OS on hypervisor`},
+{id:187,category:"DevOps",question:"What is a load balancer?",lang:"none",
+answer:`<p>A <strong>load balancer</strong> distributes incoming traffic across multiple servers to improve availability, scalability, and reliability. Algorithms: round-robin, least-connections, IP hash.</p>`,
+code:`# Nginx load balancing\nupstream app {\n  server app1:3000;\n  server app2:3000;\n}\nserver { location / { proxy_pass http://app; } }`},
+{id:188,category:"DevOps",question:"Infrastructure as code?",lang:"none",
+answer:`<p><strong>Infrastructure as Code (IaC)</strong> manages servers and resources through declarative config files instead of manual setup. It's version-controlled, repeatable, and automated. Tools: Terraform, CloudFormation, Ansible.</p>`,
+code:`# Terraform (concept)\nresource "aws_instance" "web" {\n  ami           = "ami-123"\n  instance_type = "t2.micro"\n}`},
+{id:189,category:"DevOps",question:"Monitoring and logging?",lang:"js",
+answer:`<ul><li><strong>Monitoring</strong> – track metrics (CPU, latency, errors) and alert on issues. Tools: Prometheus, Grafana, Datadog.</li><li><strong>Logging</strong> – record events for debugging/audit. Centralise with ELK stack or Loki.</li></ul>`,
+code:`// Structured log\nconsole.log(JSON.stringify({ event: 'login', userId: 42, ms: 120 }));\n// Metric: httpRequestDuration.observe(0.12);`},
+{id:190,category:"DevOps",question:"Blue-green deployment?",lang:"none",
+answer:`<p><strong>Blue-green deployment</strong> runs two identical environments. "Blue" serves live traffic while "green" gets the new release; you switch traffic to green once verified, enabling zero-downtime releases and instant rollback.</p>`,
+code:`// Blue (v1) = live\n// Green (v2) = new, tested\n// Switch router: traffic -> Green\n// Problem? Switch back to Blue instantly`},
+
+{id:191,category:"Advanced",question:"The event loop (deep dive)?",lang:"js",
+answer:`<p>The <strong>event loop</strong> coordinates the call stack, microtask queue, and macrotask queue. After each synchronous run, <strong>all microtasks</strong> (Promises, queueMicrotask) drain before the next macrotask (setTimeout, I/O).</p>`,
+code:`console.log('1');\nsetTimeout(() => console.log('4'), 0);\nPromise.resolve().then(() => console.log('3'));\nconsole.log('2');\n// Output: 1, 2, 3, 4 (microtasks before macrotasks)`},
+{id:192,category:"Advanced",question:"What is memoization?",lang:"js",
+answer:`<p><strong>Memoization</strong> is an optimization that caches the results of expensive function calls keyed by their arguments, returning the cached value on repeat calls. A specialized form of caching.</p>`,
+code:`function memoize(fn) {\n  const cache = {};\n  return (n) => n in cache ? cache[n] : (cache[n] = fn(n));\n}\nconst slow = n => { for(let i=0;i<1e6;i++); return n*2; };\nconst fast = memoize(slow);\nconsole.log(fast(5), fast(5)); // 2nd is instant`},
+{id:193,category:"Advanced",question:"Deep copy vs shallow copy?",lang:"js",
+answer:`<ul><li><strong>Shallow copy</strong> – copies top-level properties; nested objects are shared by reference.</li><li><strong>Deep copy</strong> – recursively copies everything; fully independent.</li></ul>
+<p>Deep copy via <code>structuredClone()</code> or <code>JSON.parse(JSON.stringify())</code>.</p>`,
+code:`const obj = { a: 1, nested: { b: 2 } };\nconst shallow = { ...obj };\nshallow.nested.b = 99; // also changes obj!\nconsole.log(obj.nested.b); // 99\n\nconst deep = structuredClone(obj);\ndeep.nested.b = 0;    // obj unaffected\nconsole.log(obj.nested.b); // still 99`},
+{id:194,category:"Advanced",question:"What is functional programming?",lang:"js",
+answer:`<p><strong>Functional programming</strong> builds software from pure functions, avoiding shared state and mutation.</p>
+<ul><li><strong>Pure functions</strong> – same input → same output, no side effects.</li><li><strong>Immutability</strong>.</li><li><strong>Higher-order functions</strong> & composition.</li></ul>`,
+code:`const double = x => x * 2;\nconst inc = x => x + 1;\nconst compose = (f, g) => x => f(g(x));\nconsole.log(compose(double, inc)(5)); // 12`},
+{id:195,category:"Advanced",question:"What is Big O notation?",lang:"none",
+answer:`<p><strong>Big O</strong> describes how an algorithm's time/space grows with input size.</p>
+<ul><li><strong>O(1)</strong> – constant.</li><li><strong>O(log n)</strong> – binary search.</li><li><strong>O(n)</strong> – linear loop.</li><li><strong>O(n log n)</strong> – good sorts.</li><li><strong>O(n²)</strong> – nested loops.</li></ul>`,
+code:`// O(1) - direct access\narr[0];\n// O(n) - single loop\nfor (let i = 0; i < n; i++) {}\n// O(n^2) - nested loops\nfor (i) for (j) {}`},
+{id:196,category:"Advanced",question:"Debouncing vs throttling (recap)?",lang:"none",
+answer:`<ul><li><strong>Debounce</strong> – run after activity <em>stops</em> (e.g. search input).</li><li><strong>Throttle</strong> – run at most once per interval during activity (e.g. scroll).</li></ul>
+<p>Both limit how often a function fires to improve performance.</p>`,
+code:`// Debounce: waits for pause\n// [type][type][type]...pause -> fire once\n\n// Throttle: steady rate\n// [scroll scroll scroll] -> fire every 200ms`},
+{id:197,category:"Advanced",question:"Web performance optimization?",lang:"html",
+answer:`<p>Techniques to speed up web apps:</p>
+<ul><li><strong>Minify & bundle</strong> JS/CSS; tree-shake.</li><li><strong>Lazy-load</strong> images & code splitting.</li><li><strong>Caching</strong> & CDN.</li><li><strong>Compress</strong> (gzip/Brotli), optimise images (WebP).</li><li>Reduce render-blocking resources; measure with Lighthouse.</li></ul>`,
+code:`<img loading="lazy" src="photo.webp" alt="photo">\n<link rel="preload" href="font.woff2" as="font">\n<script src="app.js" defer><\/script>`},
+{id:198,category:"Advanced",question:"What is a Progressive Web App (PWA)?",lang:"js",
+answer:`<p>A <strong>PWA</strong> is a web app that behaves like a native app: installable, works offline (via <strong>service workers</strong>), supports push notifications, and is fast. Key parts: manifest + service worker + HTTPS.</p>`,
+code:`// Register a service worker\nif ('serviceWorker' in navigator) {\n  navigator.serviceWorker.register('/sw.js');\n}\n// sw.js caches assets for offline use`},
+{id:199,category:"Advanced",question:"What is a service worker?",lang:"js",
+answer:`<p>A <strong>service worker</strong> is a background script that sits between the app and the network. It enables offline support, caching strategies, background sync and push notifications. It runs separately from the page and can intercept network requests.</p>`,
+code:`// sw.js\nself.addEventListener('fetch', e => {\n  e.respondWith(\n    caches.match(e.request)\n      .then(res => res || fetch(e.request))\n  );\n});`},
+{id:200,category:"Advanced",question:"Microservices / microfrontend architecture?",lang:"none",
+answer:`<ul><li><strong>Microservices</strong> – backend split into small, independently deployable services, each owning one business capability and its data.</li><li><strong>Microfrontends</strong> – the same idea on the frontend: independent teams build and deploy separate UI pieces composed into one app.</li></ul>
+<p>Benefits: independent scaling/deployment; trade-off: added complexity.</p>`,
+code:`// Microservices\n// [Auth Service] [Order Service] [Payment Service]\n//   each: own DB, own deploy, talk via API/queue\n\n// Microfrontend\n// Shell loads: Header MFE + Cart MFE + Product MFE`}
+];
+
+/* ============ APP LOGIC ============ */
+const STORE_KEY='sha_webdev_progress';
+const THEME_KEY='sha_webdev_theme';
+let doneSet=new Set(JSON.parse(localStorage.getItem(STORE_KEY)||'[]'));
+let currentId=1;
+
+const catList=document.getElementById('catList');
+const crumb=document.getElementById('crumb');
+const qTitle=document.getElementById('qTitle');
+const answerEl=document.getElementById('answer');
+const editorSection=document.getElementById('editorSection');
+const editor=document.getElementById('editor');
+const preview=document.getElementById('preview');
+const langLabel=document.getElementById('langLabel');
+const doneBtn=document.getElementById('doneBtn');
+const search=document.getElementById('search');
+const sidebar=document.getElementById('sidebar');
+const overlay=document.getElementById('overlay');
+
+const categories=[];
+const catMap={};
+QUESTIONS.forEach(q=>{
+  if(!catMap[q.category]){catMap[q.category]={name:q.category,icon:ICONS[q.category]||'📘',items:[]};categories.push(catMap[q.category]);}
+  catMap[q.category].items.push(q);
+});
+
+function buildSidebar(filter=''){
+  catList.innerHTML='';
+  const f=(filter||'').trim().toLowerCase();
+  categories.forEach(cat=>{
+    const matches=cat.items.filter(q=>!f||q.question.toLowerCase().includes(f)||q.category.toLowerCase().includes(f)||(''+q.id)===f);
+    if(matches.length===0)return;
+    const catDiv=document.createElement('div');
+    catDiv.className='cat'+((f||cat.items.some(q=>q.id===currentId))?' open':'');
+    const head=document.createElement('div');
+    head.className='cat-head';
+    head.innerHTML='<span>'+cat.icon+'</span><span>'+cat.name+'</span><span class="cat-count">'+matches.length+'</span><span class="chev">▶</span>';
+    head.onclick=()=>catDiv.classList.toggle('open');
+    catDiv.appendChild(head);
+    const list=document.createElement('div');
+    list.className='q-list';
+    matches.forEach(q=>{
+      const item=document.createElement('div');
+      item.className='q-item'+(q.id===currentId?' active':'')+(doneSet.has(q.id)?' done':'');
+      item.dataset.id=q.id;
+      item.innerHTML='<span class="qid">'+q.id+'.</span><span>'+q.question+'</span><span class="check">✓</span>';
+      item.onclick=()=>{loadQuestion(q.id);if(window.innerWidth<=900)closeSidebar();};
+      list.appendChild(item);
     });
-
-    noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+    catDiv.appendChild(list);
+    catList.appendChild(catDiv);
   });
+}
+
+function loadQuestion(id){
+  const q=QUESTIONS.find(x=>x.id===id);
+  if(!q)return;
+  currentId=id;
+  crumb.innerHTML='<span class="ic">'+(ICONS[q.category]||'📘')+'</span>'+q.category+' · Question '+q.id+' of 200';
+  qTitle.textContent=q.id+'. '+q.question;
+  answerEl.innerHTML=q.answer;
+
+  if(q.code){
+    editorSection.style.display='';
+    editor.value=q.code;
+    editor.dataset.original=q.code;
+    langLabel.textContent=(q.lang&&q.lang!=='none'?q.lang:'CODE').toUpperCase();
+    runCode();
+  }else{
+    editorSection.style.display='none';
+  }
+
+  updateDoneBtn();
+  updateNavBtns();
+  buildSidebar(search.value);
+  history.replaceState(null,'','#q'+id);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function escForJs(code){return code.replace(/<\/script>/gi,'<\\/script>');}
+
+function buildSrcDoc(code,lang){
+  if(lang==='html'){
+    return '<!DOCTYPE html><html><head><style>body{font-family:Inter,sans-serif;padding:14px;color:#111}</style></head><body>'+code+consoleScript()+'</body></html>';
+  }
+  if(lang==='css'){
+    return '<!DOCTYPE html><html><body style="font-family:Inter,sans-serif;padding:14px;color:#111">'+code+'</body></html>';
+  }
+  // js / none / sql etc: run as JS and capture console output
+  return '<!DOCTYPE html><html><head><style>body{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;padding:14px;white-space:pre-wrap;color:#111}.err{color:#c0392b}</style></head><body><div id="__c"></div>'+consoleScript()+'<scr'+'ipt>try{\n'+escForJs(code)+'\n}catch(e){__log("Error: "+e.message,true);}<\/scr'+'ipt></body></html>';
+}
+function consoleScript(){
+  return '<scr'+'ipt>function __log(m,err){var d=document.getElementById("__c");if(!d){d=document.createElement("div");d.id="__c";d.style.cssText="font-family:ui-monospace,monospace;font-size:13px;white-space:pre-wrap;color:#0a5e3e;margin-top:8px";document.body.appendChild(d);}var line=document.createElement("div");if(err)line.className="err";line.textContent=m;d.appendChild(line);}var __ol=console.log;console.log=function(){var a=[].slice.call(arguments).map(function(x){try{return (typeof x==="object"&&x!==null)?JSON.stringify(x):String(x);}catch(e){return String(x);}}).join(" ");__log(a);try{__ol.apply(console,arguments);}catch(e){}};window.onerror=function(m){__log("Error: "+m,true);return true;};<\/scr'+'ipt>';
+}
+
+function runCode(){
+  const q=QUESTIONS.find(x=>x.id===currentId);
+  const lang=(q&&q.lang&&q.lang!=='none')?q.lang:'js';
+  preview.srcdoc=buildSrcDoc(editor.value,lang);
+}
+
+function updateDoneBtn(){
+  const done=doneSet.has(currentId);
+  doneBtn.textContent=done?'✓ Completed':'Mark as Done';
+  doneBtn.classList.toggle('is-done',done);
+}
+function toggleDone(){
+  if(doneSet.has(currentId))doneSet.delete(currentId);
+  else doneSet.add(currentId);
+  localStorage.setItem(STORE_KEY,JSON.stringify([...doneSet]));
+  updateDoneBtn();updateProgress();
+  document.querySelectorAll('.q-item').forEach(el=>{
+    el.classList.toggle('done',doneSet.has(+el.dataset.id));
+  });
+}
+function updateProgress(){
+  const pct=Math.round(doneSet.size/QUESTIONS.length*100);
+  document.getElementById('doneCount').textContent=doneSet.size;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressPct').textContent=pct+'%';
+}
+function updateNavBtns(){
+  const prev=QUESTIONS.find(x=>x.id===currentId-1);
+  const next=QUESTIONS.find(x=>x.id===currentId+1);
+  const pb=document.getElementById('prevBtn'),nb=document.getElementById('nextBtn');
+  pb.disabled=!prev;nb.disabled=!next;
+  document.getElementById('prevTtl').textContent=prev?prev.question.slice(0,26):'—';
+  document.getElementById('nextTtl').textContent=next?next.question.slice(0,26):'—';
+}
+function goPrev(){if(QUESTIONS.find(x=>x.id===currentId-1))loadQuestion(currentId-1);}
+function goNext(){if(QUESTIONS.find(x=>x.id===currentId+1))loadQuestion(currentId+1);}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+function shareQuestion(){
+  const url=location.origin+location.pathname+'#q'+currentId;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(()=>showToast('Link copied!'),()=>prompt('Copy this link:',url));
+  }else prompt('Copy this link:',url);
+}
+function closeSidebar(){sidebar.classList.remove('open');overlay.classList.remove('show');}
+function openSidebar(){sidebar.classList.add('open');overlay.classList.add('show');}
+function applyTheme(dark){
+  document.body.classList.toggle('dark',dark);
+  document.getElementById('themeToggle').textContent=dark?'☀️':'🌙';
+  localStorage.setItem(THEME_KEY,dark?'dark':'light');
+}
+
+document.getElementById('runBtn').onclick=runCode;
+document.getElementById('resetBtn').onclick=()=>{editor.value=editor.dataset.original;runCode();};
+doneBtn.onclick=toggleDone;
+document.getElementById('shareBtn').onclick=shareQuestion;
+document.getElementById('prevBtn').onclick=goPrev;
+document.getElementById('nextBtn').onclick=goNext;
+document.getElementById('themeToggle').onclick=()=>applyTheme(!document.body.classList.contains('dark'));
+document.getElementById('hamburger').onclick=()=>sidebar.classList.contains('open')?closeSidebar():openSidebar();
+overlay.onclick=closeSidebar;
+search.addEventListener('input',()=>buildSidebar(search.value));
+editor.addEventListener('keydown',e=>{
+  if(e.key==='Tab'){e.preventDefault();const s=editor.selectionStart;editor.value=editor.value.slice(0,s)+'  '+editor.value.slice(editor.selectionEnd);editor.selectionStart=editor.selectionEnd=s+2;}
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight')goNext();
+  if(e.key==='ArrowLeft')goPrev();
+});
+
+applyTheme(localStorage.getItem(THEME_KEY)==='dark');
+buildSidebar();
+updateProgress();
+const m=location.hash.match(/#q(\d+)/);
+const startId=m?Math.min(200,Math.max(1,+m[1])):1;
+loadQuestion(startId);
 </script>
 </body>
 </html>
