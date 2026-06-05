@@ -5,11 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SEO Analyzer — Free Meta Tags, Schema & Keyword Audit Tool</title>
   <meta name="description" content="Analyze any website for SEO issues. Check meta tags, schema markup, keywords, and get AI-powered recommendations." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    .site-topbar{display:flex;align-items:center;gap:16px;padding:12px 24px;background:#fff;border-bottom:1px solid #e0e0d4;font-family:'Inter',sans-serif;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+    .site-topbar .logo{font-size:1.1rem;font-weight:800;color:#0f7a52;text-decoration:none;}
+    .site-topbar .logo span{color:#c07e1a;}
+    .site-topbar a{font-size:.82rem;font-weight:600;color:#555;text-decoration:none;padding:4px 10px;border-radius:20px;}
+    .site-topbar a:hover{color:#0f7a52;background:#0f7a5210;}
+    .site-topbar a.active{background:#0f7a5215;color:#0f7a52;border:1px solid #0f7a5230;}
+    .site-topbar .tb-spacer{flex:1;}
+    .site-topbar .tb-cta{background:#0f7a52;color:#fff !important;padding:7px 16px;border-radius:8px;font-weight:700;}
+    .site-topbar .tb-cta:hover{background:#0a5e3e !important;}
+    @media(max-width:600px){.site-topbar .tb-hide{display:none;}}
+  </style>
 </head>
 <body>
+  <nav class="site-topbar">
+    <a href="index.html" class="logo">sha<span>.</span>dev</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#services" class="tb-hide">Services</a>
+    <a href="seo-analyzer.html" class="active">🔍 SEO Analyzer</a>
+    <a href="web-dev-interview-questions.html" class="tb-hide">📚 Interview Course</a>
+    <a href="ai-agent.html" class="tb-hide">🤖 AI Agent</a>
+    <span class="tb-spacer"></span>
+    <a href="index.html#contact" class="tb-cta">Contact</a>
+  </nav>
   <div id="root"></div>
 
   <script type="text/babel">

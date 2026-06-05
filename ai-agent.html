@@ -218,24 +218,37 @@
       /* Nav */
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      nav { padding: 14px 4%; }
-      .nav-links.open {
-        display: flex; flex-direction: column; position: fixed;
-        top: 52px; left: 0; right: 0; bottom: 0;
-        background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
-        padding: 32px 6%; gap: 0; z-index: 99; overflow-y: auto;
+      nav { padding: 14px 4%; z-index: 9999; }
+      .mobile-menu-overlay {
+        display: none; position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #fff; z-index: 9000;
+        flex-direction: column; overflow-y: auto;
       }
-      .nav-links.open a {
-        font-size: 1.3rem; font-weight: 700; color: #111111;
-        padding: 16px 0; border-bottom: 1px solid var(--border);
+      .mobile-menu-overlay.open { display: flex; }
+      .mobile-menu-top {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 6%; border-bottom: 1px solid var(--border); flex-shrink: 0;
       }
-      .nav-links.open a:last-child { border-bottom: none; }
-      .nav-cta.open {
-        display: block; position: fixed;
-        bottom: 24px; left: 6%; right: 6%; z-index: 100;
-        background: var(--accent); color: #fff;
+      .mobile-menu-top .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+      .mobile-menu-top .logo span { color: var(--orange); }
+      .mobile-close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #444; padding: 4px 8px; }
+      .mobile-menu-links { flex: 1; padding: 12px 6%; }
+      .mobile-menu-links a {
+        display: block; font-size: 1.15rem; font-weight: 700; color: #111;
+        padding: 16px 0; border-bottom: 1px solid var(--border); text-decoration: none;
+      }
+      .mobile-menu-links a:last-child { border-bottom: none; }
+      .mobile-menu-links a.tool-link {
+        color: var(--accent); background: #0f7a5210;
+        border-radius: 10px; padding: 14px 16px;
+        border: 1px solid #0f7a5225; margin: 6px 0;
+      }
+      .mobile-menu-cta { padding: 16px 6% 32px; flex-shrink: 0; }
+      .mobile-menu-cta a {
+        display: block; background: var(--accent); color: #fff;
         text-align: center; padding: 15px; border-radius: 14px;
-        font-weight: 800; font-size: 1rem;
+        font-weight: 800; font-size: 1rem; text-decoration: none;
       }
 
       /* Hero */
@@ -285,19 +298,39 @@
 
 <!-- ── Navbar ───────────────────────────────────────────────── -->
 <nav id="navbar">
-  <div class="logo"><a href="/">sha<span>.</span>dev</a></div>
+  <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">sha<span>.</span>dev</a></div>
   <div class="nav-links" id="nav-links">
-    <a href="/">🏠 Home</a>
-    <a href="/#services">Services</a>
-    <a href="/#why">Why Me</a>
-    <a href="/#process">Process</a>
-    <a href="/#contact">Contact</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="seo-analyzer.html" style="background:#0f7a5212;color:var(--accent);border:1px solid #0f7a5230;padding:4px 10px;border-radius:20px;font-weight:600;font-size:.76rem;">🔍 SEO Tool</a>
+    <a href="web-dev-interview-questions.html" style="background:#0f7a5212;color:var(--accent);border:1px solid #0f7a5230;padding:4px 10px;border-radius:20px;font-weight:600;font-size:.76rem;">📚 Course</a>
   </div>
   <a href="#enquiry-form" class="nav-cta" id="nav-cta">Book Free Call</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- Mobile Full-Screen Menu -->
+<div class="mobile-menu-overlay" id="mobile-menu">
+  <div class="mobile-menu-top">
+    <div class="logo">sha<span>.</span>dev</div>
+    <button class="mobile-close-btn" onclick="closeMobileMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="index.html" onclick="closeMobileMenu()">🏠 Home</a>
+    <a href="index.html#services" onclick="closeMobileMenu()">Services</a>
+    <a href="index.html#why" onclick="closeMobileMenu()">Why Me</a>
+    <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#enquiry-form" onclick="closeMobileMenu()">📞 Book Free Call</a>
+    <a href="seo-analyzer.html" class="tool-link">🔍 SEO Analyzer</a>
+    <a href="web-dev-interview-questions.html" class="tool-link">📚 Interview Course</a>
+  </div>
+  <div class="mobile-menu-cta">
+    <a href="#enquiry-form" onclick="closeMobileMenu()">Book Free Strategy Call →</a>
+  </div>
+</div>
 
 <!-- ── Hero ─────────────────────────────────────────────────── -->
 <div class="hero">
@@ -531,30 +564,27 @@
 
 <script>
   /* ── Mobile menu ──────────────────────────────────────── */
-  const navLinks  = document.getElementById("nav-links");
-  const navCta    = document.getElementById("nav-cta");
-  const hamburger = document.getElementById("hamburger");
-  let menuOpen    = false;
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburger  = document.getElementById("hamburger");
 
   function toggleMenu() {
-    menuOpen = !menuOpen;
-    navLinks.classList.toggle("open", menuOpen);
-    navCta.classList.toggle("open",   menuOpen);
+    const isOpen = mobileMenu.classList.toggle("open");
+    document.body.style.overflow = isOpen ? "hidden" : "";
     const bars = hamburger.querySelectorAll("span");
-    if (menuOpen) {
+    if (isOpen) {
       bars[0].style.cssText = "transform:rotate(45deg) translate(5px,5px)";
       bars[1].style.cssText = "opacity:0";
       bars[2].style.cssText = "transform:rotate(-45deg) translate(5px,-5px)";
-      document.body.style.overflow = "hidden";
     } else {
       bars.forEach(b => b.style.cssText = "");
-      document.body.style.overflow = "";
     }
   }
 
-  document.querySelectorAll(".nav-links a").forEach(a => {
-    a.addEventListener("click", () => { if (menuOpen) toggleMenu(); });
-  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
+    hamburger.querySelectorAll("span").forEach(b => b.style.cssText = "");
+  }
 
   window.addEventListener("scroll", () => {
     document.getElementById("navbar").style.boxShadow =
