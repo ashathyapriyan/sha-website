@@ -1,0 +1,21 @@
+<article class="article" style="--accent: {{accent}}">
+  <div class="article-head">
+    <a href="{{backPath}}" class="back-link">← {{backLabel}}</a>
+    <span class="article-tag">{{categoryLabel}}</span>
+    <h1>{{article.title}}</h1>
+    <div class="article-meta">
+      {{#if article.author}}<span>By {{article.author}}</span>{{/if}}
+      {{#if article.level}}<span>{{article.level}}</span>{{/if}}
+      <span>{{formatDate article.createdAt}}</span>
+    </div>
+  </div>
+  {{#if article.imageUrl}}
+    <div class="article-hero-image" style="background-image:url('{{article.imageUrl}}')"></div>
+  {{/if}}
+  <div class="article-body">
+    <p>{{article.content}}</p>
+  </div>
+  <div class="article-foot">
+    <a href="{{backPath}}" class="btn btn-ghost">← Back to {{backLabel}}</a>
+  </div>
+</article>

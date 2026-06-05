@@ -1,0 +1,8 @@
+<section class="notfound">
+  <div class="notfound-inner">
+    <span class="notfound-code">404</span>
+    <h1>{{#if errorMessage}}Something went wrong{{else}}Page not found{{/if}}</h1>
+    <p>{{#if errorMessage}}{{errorMessage}}{{else}}We couldn't find <code>{{path}}</code>. It may have moved or never existed.{{/if}}</p>
+    <a href="/" class="btn btn-primary">Back home</a>
+  </div>
+</section>

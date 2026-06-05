@@ -1,0 +1,27 @@
+<section class="cat-hero" style="--accent: {{accent}}">
+  <div class="cat-hero-inner">
+    <span class="cat-hero-label">{{categoryLabel}}</span>
+    <p>{{categoryDescription}}</p>
+  </div>
+</section>
+
+<section class="section">
+  {{#if articles.length}}
+    <div class="card-grid">
+      {{#each articles}}
+        <article class="card">
+          <a href="{{../basePath}}/{{this.slug}}" class="card-link">
+            <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+            <div class="card-body">
+              <h3 class="card-title">{{this.title}}</h3>
+              <p class="card-excerpt">{{excerpt this.content 140}}</p>
+              <div class="card-meta"><span>{{formatDate this.createdAt}}</span></div>
+            </div>
+          </a>
+        </article>
+      {{/each}}
+    </div>
+  {{else}}
+    <p class="empty-state">No articles published yet. Check back soon.</p>
+  {{/if}}
+</section>

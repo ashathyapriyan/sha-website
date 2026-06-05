@@ -1,0 +1,35 @@
+<section class="cat-hero" style="--accent: {{accent}}">
+  <div class="cat-hero-inner">
+    <span class="cat-hero-label">📬 Contact</span>
+    <p>Have a question, a project, or just want to say hi? Send a message.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="contact-wrap">
+    {{#if success}}
+      <div class="alert alert-success">
+        Thanks, {{name}}! Your message has been received. I'll get back to you soon.
+      </div>
+    {{/if}}
+    <form class="contact-form" method="POST" action="/contact">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" minlength="2" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" minlength="2" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" minlength="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send message</button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,104 @@
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker">shadev.in</span>
+    <h1>Tech News, Tutorials &amp; Tools</h1>
+    <p>The latest in AI, space, technology, web development and digital marketing — plus hands-on tutorials and free tools, all in one place.</p>
+    <div class="hero-cta">
+      <a href="/ai-news" class="btn btn-primary">Read the latest</a>
+      <a href="/tools" class="btn btn-ghost">Explore tools</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>🤖 Latest AI News</h2>
+    <a href="/ai-news" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    {{#each aiNews}}
+      <article class="card">
+        <a href="/ai-news/{{this.slug}}" class="card-link">
+          <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+          <div class="card-body">
+            <span class="card-badge">AI News</span>
+            <h3 class="card-title">{{this.title}}</h3>
+            <p class="card-excerpt">{{excerpt this.content 120}}</p>
+            <div class="card-meta"><span>{{formatDate this.createdAt}}</span></div>
+          </div>
+        </a>
+      </article>
+    {{/each}}
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="section-head">
+    <h2>🚀 Latest Space News</h2>
+    <a href="/space-news" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    {{#each spaceNews}}
+      <article class="card">
+        <a href="/space-news/{{this.slug}}" class="card-link">
+          <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+          <div class="card-body">
+            <span class="card-badge">Space</span>
+            <h3 class="card-title">{{this.title}}</h3>
+            <p class="card-excerpt">{{excerpt this.content 120}}</p>
+            <div class="card-meta"><span>{{formatDate this.createdAt}}</span></div>
+          </div>
+        </a>
+      </article>
+    {{/each}}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>📚 Featured Tutorials</h2>
+    <a href="/tutorials" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    {{#each tutorials}}
+      <article class="card">
+        <a href="/tutorials/{{this.slug}}" class="card-link">
+          <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+          <div class="card-body">
+            <span class="card-badge">{{this.level}}</span>
+            <h3 class="card-title">{{this.title}}</h3>
+            <p class="card-excerpt">{{excerpt this.content 120}}</p>
+            <div class="card-meta"><span>{{formatDate this.createdAt}}</span></div>
+          </div>
+        </a>
+      </article>
+    {{/each}}
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="section-head">
+    <h2>Browse every section</h2>
+  </div>
+  <div class="category-grid">
+    {{#each categories}}
+      <a href="{{this.path}}" class="category-card" style="--cat-accent: {{this.accent}}">
+        <span class="category-icon">{{this.icon}}</span>
+        <span class="category-name">{{this.label}}</span>
+        <span class="category-blurb">{{this.blurb}}</span>
+      </a>
+    {{/each}}
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Get the weekly digest</h2>
+    <p>One email every week with the best of AI, space, tech and tutorials. No spam.</p>
+    <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+      <input type="email" placeholder="you@example.com" required>
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+    <p class="newsletter-note" id="newsletter-note"></p>
+  </div>
+</section>
