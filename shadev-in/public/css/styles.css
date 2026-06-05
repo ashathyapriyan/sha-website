@@ -41,31 +41,43 @@ main { min-height: 60vh; }
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 20px;
-  height: 64px;
+  padding: 0 24px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
 }
 .logo {
   font-weight: 800;
   font-size: 22px;
-  color: var(--dark);
+  color: var(--accent);
   letter-spacing: -0.5px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
-.logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.logo span { color: var(--orange, #c07e1a); }
+.nav-links { display: flex; gap: 2px; align-items: center; }
 .nav-links a {
   color: var(--dark);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 7px 10px;
+  padding: 6px 9px;
   border-radius: 8px;
   white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 .nav-links a:hover { background: rgba(15, 122, 82, 0.1); color: var(--accent); }
+.nav-links a.active { background: rgba(15,122,82,.12); color: var(--accent); font-weight: 700; }
+.nav-links a.nav-contact-btn {
+  background: var(--accent);
+  color: #fff !important;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 8px;
+  margin-left: 6px;
+}
+.nav-links a.nav-contact-btn:hover { background: #0a5e3e; }
 .hamburger {
   display: none;
   background: none;
@@ -75,7 +87,9 @@ main { min-height: 60vh; }
   padding: 4px 12px;
   cursor: pointer;
   color: var(--dark);
+  transition: background 0.15s;
 }
+.hamburger:hover { background: rgba(15,122,82,.08); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -384,7 +398,7 @@ main { min-height: 60vh; }
 @media (max-width: 980px) {
   .footer-inner { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .hamburger { display: block; }
   .nav-links { display: none; }
 }
