@@ -27,8 +27,8 @@
 
     /* ── Navbar ─────────────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(248,248,242,0.95); backdrop-filter: blur(12px);
+      position: fixed; top: 0; width: 100%; z-index: 170;
+      background: rgba(248,248,242,0.97); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 14px 5%;
       display: flex; align-items: center; justify-content: space-between;
@@ -44,8 +44,8 @@
       border-radius: 8px; font-weight: 600; font-size: .85rem;
     }
     .nav-cta:hover { background: #0a5e3e; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 24px; height: 2px; background: #444; border-radius: 2px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 200; position: relative; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: #444; border-radius: 2px; transition: .3s; display: block; }
 
     /* ── Hero ───────────────────────────────────────────────── */
     .hero {
@@ -261,27 +261,28 @@
       nav { padding: 14px 4%; }
       .nav-links.open {
         display: flex; flex-direction: column; position: fixed;
-        top: 52px; left: 0; right: 0; bottom: 0;
-        background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
-        padding: 32px 6%; gap: 0;
-        border-bottom: none; z-index: 99;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #ffffff;
+        padding: 80px 6% 120px;
+        gap: 0; z-index: 150;
         overflow-y: auto;
       }
       .nav-links.open a {
-        font-size: 1.3rem; font-weight: 700; color: #111111;
+        font-size: 1.2rem; font-weight: 700; color: #111111;
         padding: 16px 0; border-bottom: 1px solid var(--border);
         letter-spacing: .3px; background: none; border-radius: 0;
+        display: block;
       }
       .nav-links.open a:last-child { border-bottom: none; }
       .nav-links.open a.tool-link {
         color: var(--accent); font-size: 1.1rem;
         background: #0f7a5210; border-radius: 10px;
-        padding: 12px 16px; border: 1px solid #0f7a5225;
-        margin: 4px 0;
+        padding: 14px 16px; border: 1px solid #0f7a5225;
+        margin: 6px 0; border-bottom: 1px solid #0f7a5225;
       }
       .nav-cta.open {
         display: block; position: fixed;
-        bottom: 88px; left: 6%; right: 6%; z-index: 100;
+        bottom: 80px; left: 6%; right: 6%; z-index: 160;
         background: var(--accent); color: #fff;
         text-align: center; padding: 15px; border-radius: 14px;
         font-weight: 800; font-size: 1rem;
