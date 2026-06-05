@@ -258,35 +258,54 @@
       /* Navbar */
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
-      nav { padding: 14px 4%; }
-      .nav-links.open {
-        display: flex; flex-direction: column; position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+      nav { padding: 14px 4%; z-index: 9999; }
+
+      /* Full-screen mobile menu overlay */
+      .mobile-menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         background: #ffffff;
-        padding: 80px 6% 120px;
-        gap: 0; z-index: 150;
+        z-index: 9000;
+        flex-direction: column;
         overflow-y: auto;
       }
-      .nav-links.open a {
-        font-size: 1.2rem; font-weight: 700; color: #111111;
+      .mobile-menu-overlay.open { display: flex; }
+      .mobile-menu-top {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 6%;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+      .mobile-menu-top .logo { font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+      .mobile-menu-top .logo span { color: var(--orange); }
+      .mobile-close-btn {
+        background: none; border: none; font-size: 1.5rem;
+        cursor: pointer; color: #444; padding: 4px 8px;
+        line-height: 1;
+      }
+      .mobile-menu-links { flex: 1; padding: 12px 6%; }
+      .mobile-menu-links a {
+        display: block; font-size: 1.15rem; font-weight: 700; color: #111111;
         padding: 16px 0; border-bottom: 1px solid var(--border);
-        letter-spacing: .3px; background: none; border-radius: 0;
-        display: block;
+        letter-spacing: .2px; text-decoration: none;
       }
-      .nav-links.open a:last-child { border-bottom: none; }
-      .nav-links.open a.tool-link {
-        color: var(--accent); font-size: 1.1rem;
-        background: #0f7a5210; border-radius: 10px;
-        padding: 14px 16px; border: 1px solid #0f7a5225;
-        margin: 6px 0; border-bottom: 1px solid #0f7a5225;
+      .mobile-menu-links a:last-child { border-bottom: none; }
+      .mobile-menu-links a.tool-link {
+        color: var(--accent); background: #0f7a5210;
+        border-radius: 10px; padding: 14px 16px;
+        border: 1px solid #0f7a5225; margin: 6px 0;
       }
-      .nav-cta.open {
-        display: block; position: fixed;
-        bottom: 80px; left: 6%; right: 6%; z-index: 160;
-        background: var(--accent); color: #fff;
+      .mobile-menu-cta {
+        padding: 16px 6% 32px; flex-shrink: 0;
+      }
+      .mobile-menu-cta a {
+        display: block; background: var(--accent); color: #fff;
         text-align: center; padding: 15px; border-radius: 14px;
-        font-weight: 800; font-size: 1rem;
+        font-weight: 800; font-size: 1rem; text-decoration: none;
       }
+      .nav-cta.open { display: none; }
 
       /* Hero */
       .hero { min-height: 100svh; padding: 90px 5% 50px; align-items: flex-start; }
@@ -414,6 +433,28 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
+
+<!-- ── Mobile Full-Screen Menu ──────────────────────────────── -->
+<div class="mobile-menu-overlay" id="mobile-menu">
+  <div class="mobile-menu-top">
+    <div class="logo">sha<span>.</span>dev</div>
+    <button class="mobile-close-btn" onclick="closeMobileMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="#consultation" onclick="closeMobileMenu()">📅 Consultation — ₹199</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#why" onclick="closeMobileMenu()">Why Me</a>
+    <a href="#process" onclick="closeMobileMenu()">Process</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#free-tools" onclick="closeMobileMenu()">🔧 Free Tools</a>
+    <a href="seo-analyzer.html" class="tool-link">🔍 SEO Analyzer</a>
+    <a href="web-dev-interview-questions.html" class="tool-link">📚 Interview Q&A</a>
+  </div>
+  <div class="mobile-menu-cta">
+    <a href="#consultation" onclick="closeMobileMenu()">Book Consultation — ₹199</a>
+  </div>
+</div>
 
 <!-- ── Hero ─────────────────────────────────────────────────── -->
 <section class="hero" id="home">
@@ -822,42 +863,28 @@
 </footer>
 
 <script>
-  // ── Mobile menu toggle (fullscreen) ──────────────────────
-  const navLinks  = document.getElementById("nav-links");
-  const navCta    = document.getElementById("nav-cta");
-  const hamburger = document.getElementById("hamburger");
-  let menuOpen    = false;
+  // ── Mobile menu toggle ───────────────────────────────────
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburger  = document.getElementById("hamburger");
 
   function toggleMenu() {
-    menuOpen = !menuOpen;
-    navLinks.classList.toggle("open",  menuOpen);
-    navCta.classList.toggle("open",    menuOpen);
-    // Animate hamburger → X
+    const isOpen = mobileMenu.classList.toggle("open");
+    document.body.style.overflow = isOpen ? "hidden" : "";
     const bars = hamburger.querySelectorAll("span");
-    if (menuOpen) {
+    if (isOpen) {
       bars[0].style.cssText = "transform:rotate(45deg) translate(5px,5px)";
       bars[1].style.cssText = "opacity:0";
       bars[2].style.cssText = "transform:rotate(-45deg) translate(5px,-5px)";
-      document.body.style.overflow = "hidden";
     } else {
       bars.forEach(b => b.style.cssText = "");
-      document.body.style.overflow = "";
     }
   }
 
-  // Close menu on any nav link click
-  document.querySelectorAll(".nav-links a").forEach(a => {
-    a.addEventListener("click", () => {
-      if (menuOpen) {
-        // For external page links, just reset body overflow immediately
-        document.body.style.overflow = "";
-        menuOpen = false;
-        navLinks.classList.remove("open");
-        navCta.classList.remove("open");
-        hamburger.querySelectorAll("span").forEach(b => b.style.cssText = "");
-      }
-    });
-  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    document.body.style.overflow = "";
+    hamburger.querySelectorAll("span").forEach(b => b.style.cssText = "");
+  }
 
   // Navbar shadow + hide sticky CTA when consultation is visible
   const stickyCta = document.getElementById("sticky-cta");
