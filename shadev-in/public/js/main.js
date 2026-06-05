@@ -1,20 +1,20 @@
 // Mobile nav toggle
 function toggleNav() {
-  var links = document.getElementById('nav-links');
-  if (links) links.classList.toggle('open');
+  var menu = document.getElementById('mob-menu');
+  if (!menu) return;
+  var isOpen = menu.classList.toggle('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  var btn = document.getElementById('hamburger-btn');
+  if (btn) btn.textContent = isOpen ? '✕' : '☰';
 }
 
-// Close mobile nav when a link is clicked
-document.addEventListener('DOMContentLoaded', function () {
-  var links = document.getElementById('nav-links');
-  if (links) {
-    links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        links.classList.remove('open');
-      });
-    });
-  }
-});
+function closeMobileNav() {
+  var menu = document.getElementById('mob-menu');
+  if (menu) menu.classList.remove('open');
+  document.body.style.overflow = '';
+  var btn = document.getElementById('hamburger-btn');
+  if (btn) btn.textContent = '☰';
+}
 
 // Newsletter signup (client-side demo)
 function subscribeNewsletter(event) {
