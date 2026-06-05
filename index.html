@@ -95,6 +95,26 @@
     .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 12px; }
     .section-sub { color: #666; font-size: .9rem; max-width: 540px; }
 
+    /* ── Free Tools Section ─────────────────────────────────── */
+    #free-tools { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 70px 5%; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 36px; }
+    .tool-feature-card {
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 28px; display: flex; flex-direction: column; gap: 14px;
+      transition: .2s; position: relative; overflow: hidden;
+    }
+    .tool-feature-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(15,122,82,.12); }
+    .tool-feature-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 90px; height: 90px; background: var(--accent); opacity: .05; border-radius: 50%; }
+    .tool-feature-card .tool-icon { font-size: 2.2rem; }
+    .tool-feature-card h3 { font-size: 1.15rem; font-weight: 800; color: #111; }
+    .tool-feature-card p { color: #666; font-size: .88rem; line-height: 1.65; flex: 1; }
+    .tool-feature-card .tool-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tool-feature-card .tool-tag { background: #0f7a5210; color: var(--accent); border: 1px solid #0f7a5222; padding: 3px 10px; border-radius: 20px; font-size: .72rem; font-weight: 600; }
+    .tool-feature-card .tool-cta { background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 10px; font-weight: 700; font-size: .88rem; text-align: center; display: inline-block; margin-top: 4px; transition: .2s; }
+    .tool-feature-card .tool-cta:hover { background: #0a5e3e; }
+    .tool-feature-card .tool-cta.secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .tool-feature-card .tool-cta.secondary:hover { background: #0f7a5210; }
+
     /* ── Services ───────────────────────────────────────────── */
     #services { background: #f0f0e8; }
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
@@ -403,12 +423,13 @@
       <p>8 years experience. 50+ websites built across Tamil Nadu. I help local businesses get found online, get more leads, and grow revenue — starting at just ₹500.</p>
       <div class="hero-btns">
         <a href="#consultation" class="btn-primary">Book Consultation — ₹199</a>
-        <a href="#services" class="btn-secondary">View Services ↓</a>
+        <a href="#free-tools" class="btn-secondary">Free Tools ↓</a>
       </div>
       <div class="hero-stats">
         <div class="stat-item"><div class="num">50+</div><div class="lbl">Websites Built</div></div>
         <div class="stat-item"><div class="num">8</div><div class="lbl">Years Experience</div></div>
         <div class="stat-item"><div class="num">300%</div><div class="lbl">Avg Traffic Growth</div></div>
+        <div class="stat-item"><div class="num">200+</div><div class="lbl">Free Resources</div></div>
       </div>
     </div>
 
@@ -431,6 +452,56 @@
       <div class="result-row"><span>Restaurant, T Nagar</span><span class="rval">3× more orders</span></div>
       <div class="result-row"><span>Real Estate, OMR</span><span class="rval">2× leads/month</span></div>
       <div class="result-row"><span>Coaching Centre, Porur</span><span class="rval">₹2L+ revenue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Free Tools & Resources ────────────────────────────────── -->
+<section id="free-tools">
+  <div class="section-wrap">
+    <span class="section-label">100% Free — No Signup</span>
+    <h2 class="section-title">Free Tools & Resources</h2>
+    <p class="section-sub">Professional tools and learning resources built to help developers and business owners grow online.</p>
+    <div class="tools-grid">
+
+      <div class="tool-feature-card">
+        <div class="tool-icon">🔍</div>
+        <h3>SEO Analyzer</h3>
+        <p>Instantly audit any website's SEO — check meta tags, Open Graph, Twitter Cards, schema markup, keyword density, and get an SEO score out of 100.</p>
+        <div class="tool-tags">
+          <span class="tool-tag">Meta Tags</span>
+          <span class="tool-tag">Schema</span>
+          <span class="tool-tag">Keywords</span>
+          <span class="tool-tag">AI Suggestions</span>
+        </div>
+        <a href="seo-analyzer.html" class="tool-cta">Launch SEO Analyzer →</a>
+      </div>
+
+      <div class="tool-feature-card">
+        <div class="tool-icon">📚</div>
+        <h3>Web Dev Interview Course</h3>
+        <p>200 interview questions with full answers and a live code editor — just like W3Schools. Try the code right in your browser. HTML, CSS, JS, React, Node.js and more.</p>
+        <div class="tool-tags">
+          <span class="tool-tag">200 Questions</span>
+          <span class="tool-tag">Live Editor</span>
+          <span class="tool-tag">10 Topics</span>
+          <span class="tool-tag">Free</span>
+        </div>
+        <a href="web-dev-interview-questions.html" class="tool-cta">Start Learning →</a>
+      </div>
+
+      <div class="tool-feature-card">
+        <div class="tool-icon">🤖</div>
+        <h3>AI Agent Workflow</h3>
+        <p>Automate your business with custom AI agents — lead capture, WhatsApp follow-ups, booking systems, and more. See how AI can work for your Tamil Nadu business.</p>
+        <div class="tool-tags">
+          <span class="tool-tag">AI Automation</span>
+          <span class="tool-tag">WhatsApp Bot</span>
+          <span class="tool-tag">Lead Gen</span>
+        </div>
+        <a href="ai-agent.html" class="tool-cta secondary">Learn More →</a>
+      </div>
+
     </div>
   </div>
 </section>
