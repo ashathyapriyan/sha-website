@@ -211,6 +211,7 @@
         try {
           // Try multiple CORS proxies — free proxies are flaky, fall back on failure
           const proxies = [
+            { url: `/api/seo-fetch?url=${encodeURIComponent(targetUrl)}`, json: true },
             { url: `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, json: true },
             { url: `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`, json: false },
             { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, json: false },
