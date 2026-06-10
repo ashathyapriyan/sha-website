@@ -1,0 +1,19 @@
+<section class="cat-hero" style="--accent: {{accent}}">
+  <div class="cat-hero-inner">
+    <span class="cat-hero-label">🔧 Tools</span>
+    <p>{{description}}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="tools-grid">
+    {{#each tools}}
+      <a href="{{this.url}}" class="tool-card">
+        <span class="tool-icon">{{this.icon}}</span>
+        <h3 class="tool-name">{{this.name}}</h3>
+        <p class="tool-desc">{{this.description}}</p>
+        <span class="tool-tag">{{this.tag}}</span>
+      </a>
+    {{/each}}
+  </div>
+</section>

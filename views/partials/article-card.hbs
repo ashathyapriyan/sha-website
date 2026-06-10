@@ -1,0 +1,18 @@
+<article class="card">
+  <a href="{{this.url}}" class="card-link">
+    {{#if this.imageUrl}}
+      <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+    {{else}}
+      <div class="card-image card-image--placeholder">{{this.icon}}</div>
+    {{/if}}
+    <div class="card-body">
+      {{#if this.badge}}<span class="card-badge">{{this.badge}}</span>{{/if}}
+      <h3 class="card-title">{{this.title}}</h3>
+      <p class="card-excerpt">{{excerpt this.content 120}}</p>
+      <div class="card-meta">
+        {{#if this.author}}<span>By {{this.author}}</span>{{/if}}
+        <span>{{formatDate this.createdAt}}</span>
+      </div>
+    </div>
+  </a>
+</article>

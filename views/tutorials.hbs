@@ -1,0 +1,28 @@
+<section class="cat-hero" style="--accent: {{accent}}">
+  <div class="cat-hero-inner">
+    <span class="cat-hero-label">📚 Tutorials</span>
+    <p>{{description}}</p>
+  </div>
+</section>
+
+<section class="section">
+  {{#if tutorials.length}}
+    <div class="card-grid">
+      {{#each tutorials}}
+        <article class="card">
+          <a href="/tutorials/{{this.slug}}" class="card-link">
+            <div class="card-image" style="background-image:url('{{this.imageUrl}}')"></div>
+            <div class="card-body">
+              <span class="card-badge">{{this.level}}</span>
+              <h3 class="card-title">{{this.title}}</h3>
+              <p class="card-excerpt">{{excerpt this.content 140}}</p>
+              <div class="card-meta"><span>{{formatDate this.createdAt}}</span></div>
+            </div>
+          </a>
+        </article>
+      {{/each}}
+    </div>
+  {{else}}
+    <p class="empty-state">No tutorials yet.</p>
+  {{/if}}
+</section>

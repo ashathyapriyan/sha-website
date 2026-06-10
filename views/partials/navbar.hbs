@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="logo">sha<span>dev</span>.in</a>
+    <div class="nav-links" id="nav-links">
+      <a href="/ai-news">AI News</a>
+      <a href="/space-news">Space</a>
+      <a href="/technology">Technology</a>
+      <a href="/web-development">Web Dev</a>
+      <a href="/digital-marketing">Marketing</a>
+      <a href="/tutorials">Tutorials</a>
+      <a href="/tools">Tools</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" class="nav-contact-btn">Contact</a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+
+<!-- Mobile full-screen overlay -->
+<div class="mob-overlay" id="mob-menu">
+  <div class="mob-top">
+    <a href="/" class="mob-logo">sha<span>dev</span>.in</a>
+    <button class="mob-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mob-links">
+    <a href="/ai-news" onclick="closeMobileNav()">🤖 AI News</a>
+    <a href="/space-news" onclick="closeMobileNav()">🚀 Space News</a>
+    <a href="/technology" onclick="closeMobileNav()">💻 Technology</a>
+    <a href="/web-development" onclick="closeMobileNav()">🌐 Web Dev</a>
+    <a href="/digital-marketing" onclick="closeMobileNav()">📈 Marketing</a>
+    <a href="/tutorials" onclick="closeMobileNav()">📚 Tutorials</a>
+    <a href="/tools" onclick="closeMobileNav()">🔧 Tools</a>
+    <a href="/portfolio" onclick="closeMobileNav()">👤 Portfolio</a>
+    <a href="/blog" onclick="closeMobileNav()">✍️ Blog</a>
+    <a href="/contact" onclick="closeMobileNav()">📬 Contact</a>
+  </div>
+</div>

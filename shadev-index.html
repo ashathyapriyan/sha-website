@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shadev.in — Tech News, Tutorials &amp; Tools</title>
+<meta name="description" content="The latest in AI, space, technology, web development and digital marketing — plus hands-on tutorials and free tools, all in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f8f2;--accent:#0f7a52;--orange:#c07e1a;--dark:#111111;--card:#ffffff;--border:#e0e0d4;--muted:#666666;--radius:14px;--shadow:0 2px 8px rgba(17,17,17,.05);--shadow-hover:0 10px 30px rgba(17,17,17,.12);--max:1180px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--dark);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+img{max-width:100%}
+main{min-height:60vh}
+.navbar{position:sticky;top:0;z-index:100;background:rgba(248,248,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:800;font-size:22px;color:var(--accent);letter-spacing:-.5px;text-decoration:none;flex-shrink:0}
+.logo span{color:var(--orange)}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{color:var(--dark);font-size:13px;font-weight:500;padding:6px 9px;border-radius:8px;white-space:nowrap;transition:background .15s,color .15s}
+.nav-links a:hover{background:rgba(15,122,82,.1);color:var(--accent)}
+.nav-links a.active{background:rgba(15,122,82,.12);color:var(--accent);font-weight:700}
+.nav-links a.nav-contact-btn{background:var(--accent);color:#fff!important;font-weight:700;padding:7px 16px;border-radius:8px;margin-left:6px}
+.nav-links a.nav-contact-btn:hover{background:#0a5e3e}
+.hamburger{display:none;background:none;border:1px solid var(--border);border-radius:8px;font-size:20px;padding:4px 12px;cursor:pointer;color:var(--dark);transition:background .15s}
+.hamburger:hover{background:rgba(15,122,82,.08)}
+.btn{display:inline-block;font-weight:600;font-size:15px;padding:11px 22px;border-radius:10px;cursor:pointer;border:1px solid transparent;transition:transform .12s,box-shadow .12s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{box-shadow:0 8px 20px rgba(15,122,82,.3)}
+.btn-ghost{background:transparent;color:var(--dark);border-color:var(--border)}
+.btn-ghost:hover{background:#fff}
+.hero{background:linear-gradient(135deg,#fff 0%,var(--bg) 100%);border-bottom:1px solid var(--border)}
+.hero-inner{max-width:var(--max);margin:0 auto;padding:90px 20px;text-align:center}
+.hero-kicker{display:inline-block;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;font-size:13px;margin-bottom:14px}
+.hero h1{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-1.5px;line-height:1.1}
+.hero p{max-width:640px;margin:20px auto 0;color:var(--muted);font-size:18px}
+.hero-cta{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.section{max-width:var(--max);margin:0 auto;padding:56px 20px}
+.section--alt{background:#fff;max-width:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section--alt>*{max-width:var(--max);margin-left:auto;margin-right:auto}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px}
+.section-head h2{font-size:26px;font-weight:700;letter-spacing:-.5px}
+.see-all{font-weight:600;font-size:15px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.card-link{display:block;color:inherit}
+.card-image{height:180px;background-size:cover;background-position:center;background-color:#ecece0}
+.card-body{padding:18px 20px 22px}
+.card-badge{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);background:rgba(15,122,82,.1);padding:3px 9px;border-radius:6px;margin-bottom:10px}
+.card-title{font-size:19px;font-weight:700;line-height:1.3;letter-spacing:-.3px}
+.card-excerpt{color:var(--muted);font-size:14.5px;margin-top:8px}
+.card-meta{margin-top:14px;display:flex;gap:14px;color:var(--muted);font-size:13px}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.category-card{--cat-accent:var(--accent);display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--cat-accent);border-radius:var(--radius);padding:20px;color:var(--dark);transition:transform .15s,box-shadow .15s}
+.category-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.category-icon{font-size:26px}
+.category-name{font-weight:700;font-size:17px}
+.category-blurb{font-size:13.5px;color:var(--muted)}
+.newsletter{background:var(--dark);color:#fff}
+.newsletter-inner{max-width:640px;margin:0 auto;padding:64px 20px;text-align:center}
+.newsletter-inner h2{font-size:30px;font-weight:800;letter-spacing:-.6px}
+.newsletter-inner p{color:rgba(255,255,255,.7);margin-top:10px}
+.newsletter-form{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.newsletter-form input{flex:1;min-width:220px;max-width:340px;padding:13px 16px;border-radius:10px;border:1px solid #333;background:#1b1b1b;color:#fff;font-size:15px}
+.newsletter-note{margin-top:14px;color:#6cd6a3;font-weight:600;min-height:20px}
+.site-footer{background:#fff;border-top:1px solid var(--border);margin-top:40px}
+.footer-inner{max-width:var(--max);margin:0 auto;padding:56px 20px 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.footer-brand p{color:var(--muted);margin-top:12px;font-size:14px;max-width:300px}
+.footer-col h4{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:12px}
+.footer-col a{display:block;color:var(--dark);font-size:14.5px;padding:4px 0}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--border);text-align:center;padding:20px;color:var(--muted);font-size:13.5px}
+.sha-banner{background:var(--accent);color:#fff;text-align:center;padding:10px 20px;font-size:14px;font-weight:600}
+.sha-banner a{color:#fff;text-decoration:underline}
+.mob-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;z-index:9000;flex-direction:column;overflow-y:auto}
+.mob-overlay.open{display:flex}
+.mob-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);flex-shrink:0}
+.mob-logo{font-size:1.3rem;font-weight:800;color:var(--accent);text-decoration:none}
+.mob-logo span{color:var(--orange)}
+.mob-close{background:none;border:none;font-size:1.6rem;cursor:pointer;color:#333;line-height:1}
+.mob-links{flex:1;padding:8px 0}
+.mob-links a{display:block;padding:15px 24px;font-size:1rem;font-weight:600;color:#333;border-bottom:1px solid var(--border);text-decoration:none}
+.mob-links a:last-child{border-bottom:none}
+.mob-links a:hover{color:var(--accent);background:rgba(15,122,82,.05)}
+@media(max-width:1024px){.hamburger{display:block}.nav-links{display:none}}
+@media(max-width:980px){.footer-inner{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.footer-inner{grid-template-columns:1fr}.hero-inner{padding:60px 20px}.section{padding:40px 20px}}
+</style>
+</head>
+<body>
+<div class="sha-banner">Also visit: <a href="index.html">sha.dev Portfolio →</a></div>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="shadev-index.html" class="logo">sha<span>dev</span>.in</a>
+    <div class="nav-links" id="nav-links">
+      <a href="shadev-ai-news.html">AI News</a>
+      <a href="shadev-space-news.html">Space</a>
+      <a href="shadev-technology.html">Technology</a>
+      <a href="shadev-web-development.html">Web Dev</a>
+      <a href="shadev-digital-marketing.html">Marketing</a>
+      <a href="shadev-tutorials.html">Tutorials</a>
+      <a href="shadev-tools.html">Tools</a>
+      <a href="shadev-portfolio.html">Portfolio</a>
+      <a href="shadev-blog.html">Blog</a>
+      <a href="shadev-contact.html" class="nav-contact-btn">Contact</a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" onclick="toggleNav()" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+<div class="mob-overlay" id="mob-menu">
+  <div class="mob-top">
+    <a href="shadev-index.html" class="mob-logo">sha<span>dev</span>.in</a>
+    <button class="mob-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mob-links">
+    <a href="shadev-ai-news.html" onclick="closeMobileNav()">🤖 AI News</a>
+    <a href="shadev-space-news.html" onclick="closeMobileNav()">🚀 Space News</a>
+    <a href="shadev-technology.html" onclick="closeMobileNav()">💻 Technology</a>
+    <a href="shadev-web-development.html" onclick="closeMobileNav()">🌐 Web Dev</a>
+    <a href="shadev-digital-marketing.html" onclick="closeMobileNav()">📈 Marketing</a>
+    <a href="shadev-tutorials.html" onclick="closeMobileNav()">📚 Tutorials</a>
+    <a href="shadev-tools.html" onclick="closeMobileNav()">🔧 Tools</a>
+    <a href="shadev-portfolio.html" onclick="closeMobileNav()">👤 Portfolio</a>
+    <a href="shadev-blog.html" onclick="closeMobileNav()">✍️ Blog</a>
+    <a href="shadev-contact.html" onclick="closeMobileNav()">📬 Contact</a>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-kicker">shadev.in</span>
+    <h1>Tech News, Tutorials &amp; Tools</h1>
+    <p>The latest in AI, space, technology, web development and digital marketing — plus hands-on tutorials and free tools, all in one place.</p>
+    <div class="hero-cta">
+      <a href="shadev-ai-news.html" class="btn btn-primary">Read the latest</a>
+      <a href="shadev-tools.html" class="btn btn-ghost">Explore tools</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>🤖 Latest AI News</h2>
+    <a href="shadev-ai-news.html" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    <article class="card">
+      <a href="shadev-ai-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?artificial,intelligence')"></div>
+        <div class="card-body">
+          <span class="card-badge">AI News</span>
+          <h3 class="card-title">New Open-Source LLM Rivals Frontier Models on Reasoning</h3>
+          <p class="card-excerpt">A newly released open-weight large language model has matched proprietary frontier systems on several reasoning and coding benchmarks.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-ai-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?robot,automation')"></div>
+        <div class="card-body">
+          <span class="card-badge">AI News</span>
+          <h3 class="card-title">AI Agents Move From Demos to Production Workflows</h3>
+          <p class="card-excerpt">Companies are increasingly wiring autonomous AI agents into real business processes, from customer support triage to automated code review.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-ai-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?law,technology')"></div>
+        <div class="card-body">
+          <span class="card-badge">AI News</span>
+          <h3 class="card-title">Regulators Draft First Rules for Generative AI Transparency</h3>
+          <p class="card-excerpt">Policymakers have published a draft framework requiring generative AI providers to disclose training data sources and label synthetic media.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="section-head">
+    <h2>🚀 Latest Space News</h2>
+    <a href="shadev-space-news.html" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    <article class="card">
+      <a href="shadev-space-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?rocket,launch')"></div>
+        <div class="card-body">
+          <span class="card-badge">Space</span>
+          <h3 class="card-title">Reusable Rocket Completes Record Tenth Flight</h3>
+          <p class="card-excerpt">A first-stage booster has flown and landed for the tenth time, setting a new reusability record and pushing launch costs to historic lows.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-space-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?galaxy,space')"></div>
+        <div class="card-body">
+          <span class="card-badge">Space</span>
+          <h3 class="card-title">New Telescope Captures Sharpest Image of Distant Galaxy</h3>
+          <p class="card-excerpt">Astronomers have released a stunning new image of a galaxy more than twelve billion light-years away, revealing structure that was previously invisible.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-space-news.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?moon,lunar')"></div>
+        <div class="card-body">
+          <span class="card-badge">Space</span>
+          <h3 class="card-title">Lunar Mission Targets South Pole Water Ice</h3>
+          <p class="card-excerpt">An upcoming robotic lander will drill into the Moon's south pole to sample suspected deposits of water ice.</p>
+          <div class="card-meta"><span>Jun 2026</span></div>
+        </div>
+      </a>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>📚 Featured Tutorials</h2>
+    <a href="shadev-tutorials.html" class="see-all">See all →</a>
+  </div>
+  <div class="card-grid">
+    <article class="card">
+      <a href="shadev-tutorials.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?api,backend')"></div>
+        <div class="card-body">
+          <span class="card-badge">Beginner</span>
+          <h3 class="card-title">Build a REST API with NestJS and TypeORM</h3>
+          <p class="card-excerpt">In this tutorial you will scaffold a NestJS project, connect it to a SQLite database with TypeORM, and expose a fully working CRUD REST API.</p>
+          <div class="card-meta"><span>Backend</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-tutorials.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?html,template')"></div>
+        <div class="card-body">
+          <span class="card-badge">Intermediate</span>
+          <h3 class="card-title">Server-Side Rendering with Handlebars in NestJS</h3>
+          <p class="card-excerpt">Single-page apps are not always the answer. In this guide we configure NestJS to render HTML on the server using the Handlebars template engine.</p>
+          <div class="card-meta"><span>Fullstack</span></div>
+        </div>
+      </a>
+    </article>
+    <article class="card">
+      <a href="shadev-tutorials.html" class="card-link">
+        <div class="card-image" style="background-image:url('https://source.unsplash.com/640x360/?server,deploy')"></div>
+        <div class="card-body">
+          <span class="card-badge">Advanced</span>
+          <h3 class="card-title">Deploy a Node.js App with Zero Downtime</h3>
+          <p class="card-excerpt">Shipping updates without dropping requests requires a deliberate deployment strategy. This tutorial covers process managers, health checks, graceful shutdown handling.</p>
+          <div class="card-meta"><span>DevOps</span></div>
+        </div>
+      </a>
+    </article>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="section-head">
+    <h2>Browse every section</h2>
+  </div>
+  <div class="category-grid">
+    <a href="shadev-ai-news.html" class="category-card" style="--cat-accent:#0f7a52">
+      <span class="category-icon">🤖</span>
+      <span class="category-name">AI News</span>
+      <span class="category-blurb">Models, agents, regulation and research</span>
+    </a>
+    <a href="shadev-space-news.html" class="category-card" style="--cat-accent:#3b4a8f">
+      <span class="category-icon">🚀</span>
+      <span class="category-name">Space News</span>
+      <span class="category-blurb">Launches, discoveries and exploration</span>
+    </a>
+    <a href="shadev-technology.html" class="category-card" style="--cat-accent:#7c3aed">
+      <span class="category-icon">💻</span>
+      <span class="category-name">Technology</span>
+      <span class="category-blurb">Hardware, chips and computing trends</span>
+    </a>
+    <a href="shadev-web-development.html" class="category-card" style="--cat-accent:#0e7490">
+      <span class="category-icon">🌐</span>
+      <span class="category-name">Web Dev</span>
+      <span class="category-blurb">Frameworks, standards and best practices</span>
+    </a>
+    <a href="shadev-digital-marketing.html" class="category-card" style="--cat-accent:#c07e1a">
+      <span class="category-icon">📈</span>
+      <span class="category-name">Marketing</span>
+      <span class="category-blurb">SEO, content and growth strategies</span>
+    </a>
+    <a href="shadev-tutorials.html" class="category-card" style="--cat-accent:#0f7a52">
+      <span class="category-icon">📚</span>
+      <span class="category-name">Tutorials</span>
+      <span class="category-blurb">Step-by-step guides for developers</span>
+    </a>
+    <a href="shadev-tools.html" class="category-card" style="--cat-accent:#dc2626">
+      <span class="category-icon">🔧</span>
+      <span class="category-name">Tools</span>
+      <span class="category-blurb">Free utilities built by Sha</span>
+    </a>
+    <a href="shadev-portfolio.html" class="category-card" style="--cat-accent:#0f7a52">
+      <span class="category-icon">👤</span>
+      <span class="category-name">Portfolio</span>
+      <span class="category-blurb">Projects, skills and background</span>
+    </a>
+    <a href="shadev-blog.html" class="category-card" style="--cat-accent:#111111">
+      <span class="category-icon">✍️</span>
+      <span class="category-name">Blog</span>
+      <span class="category-blurb">Opinions and long-form writing</span>
+    </a>
+    <a href="shadev-contact.html" class="category-card" style="--cat-accent:#0f7a52">
+      <span class="category-icon">📬</span>
+      <span class="category-name">Contact</span>
+      <span class="category-blurb">Get in touch with Sha</span>
+    </a>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Get the weekly digest</h2>
+    <p>One email every week with the best of AI, space, tech and tutorials. No spam.</p>
+    <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+      <input type="email" placeholder="you@example.com" required>
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+    <p class="newsletter-note" id="newsletter-note"></p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="shadev-index.html" class="logo">sha<span>dev</span>.in</a>
+      <p>Tech news, tutorials and tools — built and maintained by Sha.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <a href="shadev-ai-news.html">AI News</a>
+      <a href="shadev-space-news.html">Space News</a>
+      <a href="shadev-technology.html">Technology</a>
+      <a href="shadev-web-development.html">Web Development</a>
+      <a href="shadev-digital-marketing.html">Digital Marketing</a>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <a href="shadev-tutorials.html">Tutorials</a>
+      <a href="shadev-tools.html">Tools</a>
+      <a href="shadev-portfolio.html">Portfolio</a>
+      <a href="shadev-blog.html">Blog</a>
+      <a href="shadev-contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sha's Portfolio</h4>
+      <a href="index.html">sha.dev →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 shadev.in — All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){var m=document.getElementById('mob-menu');if(!m)return;var o=m.classList.toggle('open');document.body.style.overflow=o?'hidden':'';var b=document.getElementById('hamburger-btn');if(b)b.textContent=o?'✕':'☰';}
+function closeMobileNav(){var m=document.getElementById('mob-menu');if(m)m.classList.remove('open');document.body.style.overflow='';var b=document.getElementById('hamburger-btn');if(b)b.textContent='☰';}
+function subscribeNewsletter(e){e.preventDefault();var f=e.target;var n=document.getElementById('newsletter-note');var em=f.querySelector('input[type="email"]').value;if(n){n.textContent='Thanks! '+em+' is subscribed to the weekly digest.';}f.reset();return false;}
+</script>
+</body>
+</html>
