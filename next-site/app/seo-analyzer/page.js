@@ -1,0 +1,671 @@
+'use client';
+
+import { useState, useCallback } from 'react';
+import Link from 'next/link';
+
+const COLORS = {
+  bg: '#0a0a0f', surface: '#12121a', card: '#1a1a26', border: '#252535',
+  accent: '#6c63ff', accentGlow: '#6c63ff33', green: '#22c55e', yellow: '#f59e0b',
+  red: '#ef4444', text: '#e2e2f0', muted: '#6b6b8a', white: '#ffffff',
+};
+
+const TAG_CHECKS = [
+  { key: 'title', label: 'Title Tag', critical: true },
+  { key: 'description', label: 'Meta Description', critical: true },
+  { key: 'canonical', label: 'Canonical URL', critical: true },
+  { key: 'og_title', label: 'OG: Title', critical: false },
+  { key: 'og_description', label: 'OG: Description', critical: false },
+  { key: 'og_image', label: 'OG: Image', critical: false },
+  { key: 'og_type', label: 'OG: Type', critical: false },
+  { key: 'og_url', label: 'OG: URL', critical: false },
+  { key: 'twitter_card', label: 'Twitter Card', critical: false },
+  { key: 'twitter_title', label: 'Twitter Title', critical: false },
+  { key: 'twitter_description', label: 'Twitter Description', critical: false },
+  { key: 'twitter_image', label: 'Twitter Image', critical: false },
+  { key: 'robots', label: 'Robots Meta', critical: false },
+  { key: 'viewport', label: 'Viewport', critical: false },
+  { key: 'charset', label: 'Charset', critical: false },
+  { key: 'lang', label: 'HTML lang attr', critical: false },
+  { key: 'h1', label: 'H1 Tag', critical: true },
+];
+
+function Badge({ type, children }) {
+  const colors = {
+    success: { bg: '#22c55e22', color: '#22c55e', border: '#22c55e44' },
+    warning: { bg: '#f59e0b22', color: '#f59e0b', border: '#f59e0b44' },
+    error: { bg: '#ef444422', color: '#ef4444', border: '#ef444444' },
+    info: { bg: '#6c63ff22', color: '#6c63ff', border: '#6c63ff44' },
+    muted: { bg: '#ffffff11', color: '#6b6b8a', border: '#ffffff22' },
+  };
+  const c = colors[type] || colors.muted;
+  return (
+    <span style={{
+      background: c.bg, color: c.color, border: `1px solid ${c.border}`,
+      borderRadius: 6, padding: '2px 10px', fontSize: 11, fontWeight: 600,
+      letterSpacing: '0.05em', textTransform: 'uppercase',
+    }}>{children}</span>
+  );
+}
+
+function ScoreRing({ score }) {
+  const r = 42, circ = 2 * Math.PI * r;
+  const dash = (score / 100) * circ;
+  const color = score >= 80 ? COLORS.green : score >= 50 ? COLORS.yellow : COLORS.red;
+  return (
+    <svg width={100} height={100} viewBox="0 0 100 100">
+      <circle cx={50} cy={50} r={r} fill="none" stroke={COLORS.border} strokeWidth={8} />
+      <circle cx={50} cy={50} r={r} fill="none" stroke={color} strokeWidth={8}
+        strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
+        transform="rotate(-90 50 50)" style={{ transition: 'stroke-dasharray 1s ease' }} />
+      <text x={50} y={50} textAnchor="middle" dominantBaseline="central"
+        fill={color} fontSize={20} fontWeight={700} fontFamily="monospace">{score}</text>
+      <text x={50} y={67} textAnchor="middle" fill={COLORS.muted} fontSize={9} fontFamily="monospace">/100</text>
+    </svg>
+  );
+}
+
+function Spinner() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: COLORS.muted, fontSize: 13 }}>
+      <div style={{
+        width: 18, height: 18, border: `2px solid ${COLORS.border}`,
+        borderTop: `2px solid ${COLORS.accent}`, borderRadius: '50%',
+        animation: 'spin 0.7s linear infinite',
+      }} />
+      Analyzing with AI...
+    </div>
+  );
+}
+
+function TagRow({ label, value, critical }) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '160px 1fr 80px', alignItems: 'center',
+      gap: 12, padding: '10px 16px', borderBottom: `1px solid ${COLORS.border}`,
+    }}>
+      <span style={{ fontSize: 12, color: COLORS.muted, fontFamily: 'monospace' }}>
+        {critical && <span style={{ color: COLORS.red, marginRight: 4 }}>*</span>}
+        {label}
+      </span>
+      <span style={{
+        fontSize: 12, color: value ? COLORS.text : COLORS.muted,
+        fontFamily: 'monospace', wordBreak: 'break-all',
+        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      }}>
+        {value || '—'}
+      </span>
+      <Badge type={value ? 'success' : critical ? 'error' : 'warning'}>
+        {value ? 'Found' : critical ? 'Missing' : 'None'}
+      </Badge>
+    </div>
+  );
+}
+
+function Section({ title, icon, children }) {
+  return (
+    <div style={{
+      background: COLORS.card, border: `1px solid ${COLORS.border}`,
+      borderRadius: 12, overflow: 'hidden', marginBottom: 16,
+    }}>
+      <div style={{
+        padding: '14px 20px', borderBottom: `1px solid ${COLORS.border}`,
+        display: 'flex', alignItems: 'center', gap: 10,
+        background: `${COLORS.surface}88`,
+      }}>
+        <span style={{ fontSize: 16 }}>{icon}</span>
+        <span style={{ fontSize: 13, fontWeight: 700, color: COLORS.text, letterSpacing: '0.04em' }}>{title}</span>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function SEOAnalyzer() {
+  const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState(null);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResult, setAiResult] = useState(null);
+
+  const triggerAI = useCallback(async (data) => {
+    setAiLoading(true);
+    try {
+      const apiKey = window.prompt('Enter your Anthropic API key (get one free at console.anthropic.com):');
+      if (!apiKey) {
+        setAiResult({
+          summary: 'API key required for AI analysis',
+          critical_issues: [], quick_wins: [], keyword_opportunities: [],
+          meta_title_suggestion: '', meta_description_suggestion: '',
+          schema_recommendations: [], content_gaps: [],
+        });
+        setAiLoading(false);
+        return;
+      }
+
+      const aiPrompt = `You are an expert SEO consultant. Analyze the following SEO data for "${data.url}" and return ONLY a JSON object (no markdown) with this exact structure:
+{
+  "summary": "2-3 sentence executive summary",
+  "critical_issues": ["issue1", "issue2"],
+  "quick_wins": ["win1", "win2"],
+  "keyword_opportunities": ["kw1", "kw2", "kw3"],
+  "meta_title_suggestion": "optimized title under 60 chars",
+  "meta_description_suggestion": "optimized description under 160 chars",
+  "schema_recommendations": [{"type": "SchemaType", "reason": "why"}],
+  "content_gaps": ["gap1", "gap2"]
+}
+
+SEO Data:
+- Title: ${data.tags.title || 'MISSING'}
+- Description: ${data.tags.description || 'MISSING'}
+- H1: ${data.tags.h1 || 'MISSING'}
+- Canonical: ${data.tags.canonical || 'MISSING'}
+- Detected Schemas: ${data.detectedSchemas.join(', ') || 'NONE'}
+- Top Keywords: ${data.keywords.slice(0, 10).map(([w, c]) => `${w}(${c})`).join(', ')}`;
+
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: aiPrompt }],
+        }),
+      });
+      const json = await resp.json();
+      if (!resp.ok) throw new Error(json.error?.message || 'API error');
+      const text = json.content?.[0]?.text || '{}';
+      const clean = text.replace(/```json|```/g, '').trim();
+      setAiResult(JSON.parse(clean));
+    } catch (e) {
+      setAiResult({
+        summary: 'AI analysis unavailable: ' + e.message,
+        critical_issues: [], quick_wins: [], keyword_opportunities: [],
+        meta_title_suggestion: '', meta_description_suggestion: '',
+        schema_recommendations: [], content_gaps: [],
+      });
+    } finally {
+      setAiLoading(false);
+    }
+  }, []);
+
+  const analyze = useCallback(async () => {
+    if (!url.trim()) return;
+    let targetUrl = url.trim();
+    if (!/^https?:\/\//i.test(targetUrl)) targetUrl = 'https://' + targetUrl;
+
+    setLoading(true);
+    setError('');
+    setResult(null);
+    setAiResult(null);
+
+    try {
+      // Try multiple CORS proxies — free proxies are flaky, fall back on failure
+      const proxies = [
+        { url: `/api/seo-fetch?url=${encodeURIComponent(targetUrl)}`, json: true },
+        { url: `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, json: true },
+        { url: `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`, json: false },
+        { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, json: false },
+      ];
+
+      let html = '';
+      for (const p of proxies) {
+        try {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 15000);
+          const resp = await fetch(p.url, { signal: controller.signal });
+          clearTimeout(timer);
+          if (!resp.ok) throw new Error(`Proxy returned ${resp.status}`);
+          if (p.json) {
+            const data = await resp.json();
+            html = data.contents || '';
+          } else {
+            html = await resp.text();
+          }
+          if (html && html.length > 100) break;
+          html = '';
+        } catch (e) { /* try next proxy */ }
+      }
+
+      if (!html) throw new Error('Could not fetch the page — the site may block crawlers, or try again in a minute.');
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      const getMeta = (name) =>
+        doc.querySelector(`meta[name="${name}"]`)?.getAttribute('content') ||
+        doc.querySelector(`meta[property="${name}"]`)?.getAttribute('content') || '';
+
+      const tags = {
+        title: doc.querySelector('title')?.textContent?.trim() || '',
+        description: getMeta('description'),
+        canonical: doc.querySelector('link[rel="canonical"]')?.getAttribute('href') || '',
+        og_title: getMeta('og:title'),
+        og_description: getMeta('og:description'),
+        og_image: getMeta('og:image'),
+        og_type: getMeta('og:type'),
+        og_url: getMeta('og:url'),
+        twitter_card: getMeta('twitter:card'),
+        twitter_title: getMeta('twitter:title'),
+        twitter_description: getMeta('twitter:description'),
+        twitter_image: getMeta('twitter:image'),
+        robots: getMeta('robots'),
+        viewport: getMeta('viewport'),
+        charset: doc.querySelector('meta[charset]')?.getAttribute('charset') || '',
+        lang: doc.documentElement?.getAttribute('lang') || '',
+        h1: doc.querySelector('h1')?.textContent?.trim() || '',
+      };
+
+      const schemaScripts = [...doc.querySelectorAll('script[type="application/ld+json"]')];
+      const detectedSchemas = [];
+      schemaScripts.forEach((s) => {
+        try {
+          const parsed = JSON.parse(s.textContent);
+          const types = Array.isArray(parsed) ? parsed.map((p) => p['@type']).flat() : [parsed['@type']];
+          detectedSchemas.push(...types.filter(Boolean));
+        } catch {}
+      });
+
+      const bodyText = doc.body?.innerText || doc.body?.textContent || '';
+      const words = bodyText.toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length > 3);
+      const stopWords = new Set(['this', 'that', 'with', 'from', 'they', 'have', 'been', 'will', 'your', 'more', 'about', 'also', 'into', 'some', 'than', 'when', 'which', 'their', 'there', 'were', 'what', 'each', 'then', 'these', 'those', 'such', 'even', 'both', 'only', 'very', 'just', 'over']);
+      const freq = {};
+      words.forEach((w) => { if (!stopWords.has(w)) freq[w] = (freq[w] || 0) + 1; });
+      const keywords = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 30);
+
+      const criticalFields = ['title', 'description', 'canonical', 'h1'];
+      const allFields = Object.keys(tags);
+      const present = allFields.filter((k) => tags[k]);
+      const critPresent = criticalFields.filter((k) => tags[k]);
+      const schemaBonus = detectedSchemas.length > 0 ? 10 : 0;
+      const score = Math.min(100, Math.round(
+        (critPresent.length / criticalFields.length) * 50 +
+        (present.length / allFields.length) * 40 +
+        schemaBonus
+      ));
+
+      const suggestedSchemas = [];
+      if (!detectedSchemas.includes('Organization') && !detectedSchemas.includes('LocalBusiness'))
+        suggestedSchemas.push('Organization');
+      if (doc.querySelector('article') && !detectedSchemas.includes('Article'))
+        suggestedSchemas.push('Article');
+      if (!detectedSchemas.includes('WebPage')) suggestedSchemas.push('WebPage');
+      if (!detectedSchemas.includes('BreadcrumbList')) suggestedSchemas.push('BreadcrumbList');
+
+      setResult({ tags, detectedSchemas, suggestedSchemas, keywords, score, url: targetUrl });
+      setActiveTab('overview');
+
+      triggerAI({ tags, detectedSchemas, suggestedSchemas, keywords, score, url: targetUrl });
+    } catch (e) {
+      setError(e.message || 'Failed to fetch URL. Check URL and try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [url, triggerAI]);
+
+  const tabs = [
+    { id: 'overview', label: 'Overview', icon: '◎' },
+    { id: 'tags', label: 'SEO Tags', icon: '⟨⟩' },
+    { id: 'schema', label: 'Schema', icon: '⬡' },
+    { id: 'keywords', label: 'Keywords', icon: '#' },
+    { id: 'ai', label: 'AI Suggestions', icon: '✦' },
+  ];
+
+  return (
+    <div style={{
+      minHeight: '100vh', background: COLORS.bg, color: COLORS.text,
+      fontFamily: "'DM Mono', 'Fira Code', 'Courier New', monospace",
+      padding: '32px 24px',
+    }}>
+      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+        <div style={{ marginBottom: 32, animation: 'fadeIn 0.4s ease' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+            <div style={{
+              width: 36, height: 36, background: COLORS.accentGlow,
+              border: `1px solid ${COLORS.accent}`, borderRadius: 8,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
+            }}>⟁</div>
+            <div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: COLORS.white, letterSpacing: '-0.02em' }}>
+                SEO Analyzer
+              </div>
+              <div style={{ fontSize: 11, color: COLORS.muted }}>
+                Free audit: Tags · Schema · Keywords · AI Recommendations
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+          display: 'flex', gap: 10, marginBottom: 28,
+          background: COLORS.surface, border: `1px solid ${COLORS.border}`,
+          borderRadius: 12, padding: 6, animation: 'fadeIn 0.5s ease',
+        }}>
+          <input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && analyze()}
+            placeholder="https://example.com"
+            style={{
+              flex: 1, background: 'transparent', border: 'none', outline: 'none',
+              color: COLORS.text, fontSize: 13, padding: '10px 14px', fontFamily: 'inherit',
+            }}
+          />
+          <button
+            onClick={analyze}
+            disabled={loading}
+            style={{
+              background: COLORS.accent, color: '#fff', border: 'none',
+              borderRadius: 8, padding: '10px 22px', fontSize: 12,
+              fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer',
+              letterSpacing: '0.06em', transition: 'all 0.2s', opacity: loading ? 0.7 : 1,
+            }}
+          >
+            {loading ? 'SCANNING...' : 'ANALYZE →'}
+          </button>
+        </div>
+
+        {error && (
+          <div style={{
+            background: '#ef444411', border: '1px solid #ef444433',
+            borderRadius: 10, padding: '12px 16px', fontSize: 12,
+            color: COLORS.red, marginBottom: 20,
+          }}>{error}</div>
+        )}
+
+        {result && (
+          <div style={{ animation: 'fadeIn 0.4s ease' }}>
+            <div style={{
+              display: 'flex', gap: 4, marginBottom: 20,
+              background: COLORS.surface, border: `1px solid ${COLORS.border}`,
+              borderRadius: 10, padding: 4,
+            }}>
+              {tabs.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setActiveTab(t.id)}
+                  style={{
+                    flex: 1, background: activeTab === t.id ? COLORS.accent : 'transparent',
+                    color: activeTab === t.id ? '#fff' : COLORS.muted,
+                    border: 'none', borderRadius: 7, padding: '8px 4px',
+                    fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                    transition: 'all 0.2s', letterSpacing: '0.04em', fontFamily: 'inherit',
+                  }}
+                >
+                  {t.icon} {t.label}
+                </button>
+              ))}
+            </div>
+
+            {activeTab === 'overview' && (
+              <div style={{ animation: 'fadeIn 0.3s ease' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 16, marginBottom: 16 }}>
+                  <div style={{
+                    background: COLORS.card, border: `1px solid ${COLORS.border}`,
+                    borderRadius: 12, padding: 16, display: 'flex',
+                    alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <ScoreRing score={result.score} />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
+                    {[
+                      { label: 'Critical Tags', val: ['title', 'description', 'canonical', 'h1'].filter((k) => result.tags[k]).length + '/4', color: COLORS.green },
+                      { label: 'Schema Types', val: result.detectedSchemas.length, color: COLORS.accent },
+                      { label: 'Missing Tags', val: TAG_CHECKS.filter((t) => !result.tags[t.key]).length, color: COLORS.yellow },
+                    ].map((s) => (
+                      <div key={s.label} style={{
+                        background: COLORS.card, border: `1px solid ${COLORS.border}`,
+                        borderRadius: 12, padding: '14px 16px',
+                      }}>
+                        <div style={{ fontSize: 24, fontWeight: 700, color: s.color, marginBottom: 4 }}>{s.val}</div>
+                        <div style={{ fontSize: 11, color: COLORS.muted }}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Section title="Analyzed URL" icon="🔗">
+                  <div style={{ padding: '12px 16px', fontSize: 12, color: COLORS.accent, wordBreak: 'break-all' }}>
+                    {result.url}
+                  </div>
+                </Section>
+
+                <Section title="Critical Tag Status" icon="⚠️">
+                  {['title', 'description', 'canonical', 'h1'].map((k) => (
+                    <TagRow key={k} label={k.toUpperCase()} value={result.tags[k]} critical={true} />
+                  ))}
+                </Section>
+
+                <Section title="Schema Detected" icon="⬡">
+                  <div style={{ padding: '16px' }}>
+                    {result.detectedSchemas.length > 0 ? (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                        {result.detectedSchemas.map((s) => <Badge key={s} type="success">{s}</Badge>)}
+                      </div>
+                    ) : (
+                      <div style={{ color: COLORS.red, fontSize: 12 }}>⚠ No schema detected</div>
+                    )}
+                  </div>
+                </Section>
+              </div>
+            )}
+
+            {activeTab === 'tags' && (
+              <Section title="All SEO Meta Tags" icon="⟨⟩">
+                {TAG_CHECKS.map((t) => (
+                  <TagRow key={t.key} label={t.label} value={result.tags[t.key]} critical={t.critical} />
+                ))}
+              </Section>
+            )}
+
+            {activeTab === 'schema' && (
+              <div>
+                <Section title="Detected Schemas" icon="✅">
+                  <div style={{ padding: 16 }}>
+                    {result.detectedSchemas.length > 0 ? (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                        {result.detectedSchemas.map((s) => <Badge key={s} type="success">{s}</Badge>)}
+                      </div>
+                    ) : <span style={{ color: COLORS.muted, fontSize: 12 }}>None detected</span>}
+                  </div>
+                </Section>
+
+                <Section title="Recommended Schemas" icon="➕">
+                  <div style={{ padding: 16, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                    {result.suggestedSchemas.map((s) => <Badge key={s} type="warning">{s}</Badge>)}
+                  </div>
+                </Section>
+              </div>
+            )}
+
+            {activeTab === 'keywords' && (
+              <div>
+                <Section title="Top Keywords" icon="#">
+                  <div style={{ padding: 16, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                    {result.keywords.map(([word, count]) => (
+                      <span key={word} style={{
+                        background: `${COLORS.accent}22`, border: `1px solid ${COLORS.border}`,
+                        color: COLORS.text, borderRadius: 6,
+                        padding: '5px 12px', fontSize: 12,
+                      }}>
+                        {word} <span style={{ color: COLORS.muted }}>×{count}</span>
+                      </span>
+                    ))}
+                  </div>
+                </Section>
+
+                <Section title="Keyword Density" icon="▦">
+                  <div style={{ padding: 16 }}>
+                    {result.keywords.slice(0, 15).map(([word, count]) => {
+                      const max = result.keywords[0]?.[1] || 1;
+                      const pct = Math.round((count / max) * 100);
+                      return (
+                        <div key={word} style={{ marginBottom: 8 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                            <span style={{ fontSize: 11, color: COLORS.muted }}>{word}</span>
+                            <span style={{ fontSize: 11, color: COLORS.accent }}>{count}×</span>
+                          </div>
+                          <div style={{ background: COLORS.border, borderRadius: 4, height: 6 }}>
+                            <div style={{
+                              width: `${pct}%`, background: COLORS.accent,
+                              borderRadius: 4, height: 6, transition: 'width 0.5s ease',
+                            }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Section>
+              </div>
+            )}
+
+            {activeTab === 'ai' && (
+              <div>
+                {aiLoading && (
+                  <div style={{
+                    background: COLORS.card, border: `1px solid ${COLORS.border}`,
+                    borderRadius: 12, padding: 24, display: 'flex', gap: 12,
+                  }}>
+                    <Spinner />
+                  </div>
+                )}
+
+                {aiResult && !aiLoading && (
+                  <>
+                    <Section title="Summary" icon="✦">
+                      <div style={{ padding: 16, fontSize: 13, color: COLORS.text, lineHeight: 1.7 }}>
+                        {aiResult.summary}
+                      </div>
+                    </Section>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+                      <Section title="Critical Issues" icon="🔴">
+                        <div style={{ padding: 16 }}>
+                          {(aiResult.critical_issues || []).map((issue, i) => (
+                            <div key={i} style={{
+                              padding: '8px 12px', borderLeft: `2px solid ${COLORS.red}`,
+                              marginBottom: 8, fontSize: 12, color: COLORS.text,
+                              background: '#ef444408', borderRadius: '0 6px 6px 0',
+                            }}>{issue}</div>
+                          ))}
+                        </div>
+                      </Section>
+
+                      <Section title="Quick Wins" icon="🟢">
+                        <div style={{ padding: 16 }}>
+                          {(aiResult.quick_wins || []).map((win, i) => (
+                            <div key={i} style={{
+                              padding: '8px 12px', borderLeft: `2px solid ${COLORS.green}`,
+                              marginBottom: 8, fontSize: 12, color: COLORS.text,
+                              background: '#22c55e08', borderRadius: '0 6px 6px 0',
+                            }}>{win}</div>
+                          ))}
+                        </div>
+                      </Section>
+                    </div>
+
+                    <Section title="Optimized Title Suggestion" icon="✏️">
+                      <div style={{
+                        padding: 16, fontSize: 13, color: COLORS.accent,
+                        fontFamily: 'monospace', background: '#6c63ff0a',
+                      }}>
+                        {aiResult.meta_title_suggestion}{' '}
+                        <span style={{ color: COLORS.muted, fontSize: 11 }}>({aiResult.meta_title_suggestion?.length || 0} chars)</span>
+                      </div>
+                    </Section>
+
+                    <Section title="Optimized Meta Description" icon="✏️">
+                      <div style={{ padding: 16, fontSize: 13, color: COLORS.text, background: '#6c63ff0a' }}>
+                        {aiResult.meta_description_suggestion}{' '}
+                        <span style={{ color: COLORS.muted, fontSize: 11 }}>({aiResult.meta_description_suggestion?.length || 0} chars)</span>
+                      </div>
+                    </Section>
+
+                    <Section title="Keyword Opportunities" icon="#">
+                      <div style={{ padding: 16, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                        {(aiResult.keyword_opportunities || []).map((kw, i) => (
+                          <Badge key={i} type="info">{kw}</Badge>
+                        ))}
+                      </div>
+                    </Section>
+                  </>
+                )}
+
+                {!aiLoading && !aiResult && (
+                  <div style={{
+                    background: COLORS.card, border: `1px solid ${COLORS.border}`,
+                    borderRadius: 12, padding: 32, textAlign: 'center', color: COLORS.muted, fontSize: 13,
+                  }}>
+                    AI analysis will appear here after you scan a URL
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {!result && !loading && (
+          <div style={{
+            background: COLORS.surface, border: `1px dashed ${COLORS.border}`,
+            borderRadius: 12, padding: 40, textAlign: 'center', animation: 'fadeIn 0.5s ease',
+          }}>
+            <div style={{ fontSize: 32, marginBottom: 12 }}>⟁</div>
+            <div style={{ fontSize: 13, color: COLORS.muted, marginBottom: 8 }}>
+              Enter any website URL to audit
+            </div>
+            <div style={{ fontSize: 11, color: COLORS.border }}>
+              Free SEO audit tool — no sign-up required
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function SeoAnalyzerPage() {
+  const [mobOpen, setMobOpen] = useState(false);
+  const close = () => setMobOpen(false);
+
+  return (
+    <>
+      <nav className="site-topbar">
+        <Link href="/" className="logo">sha<span>.</span>dev</Link>
+        <Link href="/">🏠 Home</Link>
+        <Link href="/#services" className="tb-hide">Services</Link>
+        <Link href="/seo-analyzer" className="active">🔍 SEO Analyzer</Link>
+        <Link href="/interview-course" className="tb-hide">📚 Interview Course</Link>
+        <Link href="/ai-agent" className="tb-hide">🤖 AI Agent</Link>
+        <span className="tb-spacer"></span>
+        <Link href="/#contact" className="tb-cta">Contact</Link>
+        <button className="tb-hamburger" onClick={() => setMobOpen(true)}>☰</button>
+      </nav>
+      <div className={'mob-overlay' + (mobOpen ? ' open' : '')}>
+        <div className="mob-top">
+          <div className="mob-logo">sha<span>.</span>dev</div>
+          <button className="mob-close" onClick={close}>✕</button>
+        </div>
+        <div className="mob-links">
+          <Link href="/" onClick={close}>🏠 Home</Link>
+          <Link href="/#services" onClick={close}>⚙️ Services</Link>
+          <Link href="/seo-analyzer" onClick={close} style={{ color: '#0f7a52', fontWeight: 700 }}>🔍 SEO Analyzer</Link>
+          <Link href="/interview-course" onClick={close}>📚 Interview Course</Link>
+          <Link href="/ai-agent" onClick={close}>🤖 AI Agent</Link>
+        </div>
+        <div className="mob-cta">
+          <Link href="/#contact" onClick={close}>Contact Us →</Link>
+        </div>
+      </div>
+      <SEOAnalyzer />
+    </>
+  );
+}
