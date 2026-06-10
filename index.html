@@ -1000,13 +1000,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, business_type: biz, message: msg }),
       });
-    } catch(_) { /* silent — still open WhatsApp below */ }
-
-    // Also open WhatsApp
-    const text = encodeURIComponent(
-      `Hi Sha! I found your website.\n\nName: ${name}\nPhone: ${phone}\nBusiness: ${biz || "Not specified"}\n\nMessage: ${msg || "I'd like to book a consultation."}`
-    );
-    window.open(`https://wa.me/919XXXXXXXXX?text=${text}`, "_blank");
+    } catch(_) { /* silent */ }
 
     document.getElementById("form-success").style.display = "block";
     document.getElementById("contact-form").reset();
