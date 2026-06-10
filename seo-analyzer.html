@@ -209,12 +209,34 @@
         setAiResult(null);
 
         try {
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-          const resp = await fetch(proxyUrl);
-          const data = await resp.json();
-          const html = data.contents;
+          // Try multiple CORS proxies — free proxies are flaky, fall back on failure
+          const proxies = [
+            { url: `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`, json: true },
+            { url: `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`, json: false },
+            { url: `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`, json: false },
+          ];
 
-          if (!html) throw new Error("Could not fetch the page. Try another URL.");
+          let html = "";
+          let lastErr = null;
+          for (const p of proxies) {
+            try {
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort(), 15000);
+              const resp = await fetch(p.url, { signal: controller.signal });
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error(`Proxy returned ${resp.status}`);
+              if (p.json) {
+                const data = await resp.json();
+                html = data.contents || "";
+              } else {
+                html = await resp.text();
+              }
+              if (html && html.length > 100) break;
+              html = "";
+            } catch (e) { lastErr = e; }
+          }
+
+          if (!html) throw new Error("Could not fetch the page — the site may block crawlers, or try again in a minute. " + (lastErr ? "" : ""));
 
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, "text/html");
