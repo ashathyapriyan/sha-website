@@ -213,19 +213,21 @@
     .footer-links { display: flex; gap: 20px; font-size: .8rem; color: #888; }
     .footer-links a:hover { color: var(--accent); }
 
+    /* Full-screen mobile menu overlay — always hidden until .open */
+    .mobile-menu-overlay {
+      display: none; position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #fff; z-index: 10000;
+      flex-direction: column; overflow-y: auto;
+    }
+    .mobile-menu-overlay.open { display: flex; }
+
     /* ── Mobile ─────────────────────────────────────────────── */
     @media (max-width: 768px) {
       /* Nav */
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       nav { padding: 14px 4%; z-index: 9999; }
-      .mobile-menu-overlay {
-        display: none; position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: #fff; z-index: 9000;
-        flex-direction: column; overflow-y: auto;
-      }
-      .mobile-menu-overlay.open { display: flex; }
       .mobile-menu-top {
         display: flex; align-items: center; justify-content: space-between;
         padding: 16px 6%; border-bottom: 1px solid var(--border); flex-shrink: 0;

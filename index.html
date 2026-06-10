@@ -255,7 +255,7 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: #ffffff;
-      z-index: 9000;
+      z-index: 10000;
       flex-direction: column;
       overflow-y: auto;
     }
@@ -307,7 +307,6 @@
         text-align: center; padding: 15px; border-radius: 14px;
         font-weight: 800; font-size: 1rem; text-decoration: none;
       }
-      .nav-cta.open { display: none; }
 
       /* Hero */
       .hero { min-height: 100svh; padding: 90px 5% 50px; align-items: flex-start; }
@@ -896,7 +895,7 @@
 
   window.addEventListener("scroll", () => {
     document.getElementById("navbar").style.boxShadow =
-      window.scrollY > 10 ? "0 2px 20px rgba(0,0,0,.4)" : "none";
+      window.scrollY > 10 ? "0 2px 20px rgba(0,0,0,.06)" : "none";
 
     // Hide sticky CTA when user can already see the consultation card
     if (stickyCta && consultSection) {
